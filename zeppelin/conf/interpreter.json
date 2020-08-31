@@ -1085,7 +1085,7 @@
           "description": "Show short types instead of full, e.g. List\u003cString\u003e or kotlin.collections.List\u003ckotlin.String\u003e"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "spark",

@@ -1,0 +1,107 @@
+{
+  "paragraphs": [
+    {
+      "text": "val musicDf \u003d Seq(\n      (12, \"John Bonham\", \"Drums\"),\n      (19, \"John Mayer\", \"Guitar\"),\n      (32, \"John Scofield\", \"Guitar\"),\n      (15, \"John Butler\", \"Guitar\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"ErrorIfExists\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
+      "user": "anonymous",
+      "dateUpdated": "2020-08-31 12:22:35.768",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [experience: int, name: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598874400391_-1735147610",
+      "id": "paragraph_1598874400391_-1735147610",
+      "dateCreated": "2020-08-31 11:46:40.391",
+      "dateStarted": "2020-08-31 12:22:35.787",
+      "dateFinished": "2020-08-31 12:22:36.515",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.labels\", \"Musician\")\n    .option(\"relationship.target.labels\", \"Instrument\")\n    .load\n    \ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-08-31 12:22:38.408",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|\u003crel.id\u003e|\u003crel.type\u003e|\u003csource.id\u003e|\u003csource.labels\u003e|  source.name|\u003ctarget.id\u003e|\u003ctarget.labels\u003e|target.name|rel.experience|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|       0|     PLAYS|          0|     [Musician]|  John Bonham|          4|   [Instrument]|      Drums|            12|\n|       0|     PLAYS|          3|     [Musician]|  John Butler|          5|   [Instrument]|     Guitar|            15|\n|       0|     PLAYS|          2|     [Musician]|John Scofield|          5|   [Instrument]|     Guitar|            32|\n|       0|     PLAYS|          1|     [Musician]|   John Mayer|          5|   [Instrument]|     Guitar|            19|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003crel.id\u003e: bigint, \u003crel.type\u003e: string ... 7 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598875482374_1668988098",
+      "id": "paragraph_1598875482374_1668988098",
+      "dateCreated": "2020-08-31 12:04:42.375",
+      "dateStarted": "2020-08-31 12:22:38.421",
+      "dateFinished": "2020-08-31 12:22:38.893",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598876007886_-515192145",
+      "id": "paragraph_1598876007886_-515192145",
+      "dateCreated": "2020-08-31 12:13:27.886",
+      "status": "READY"
+    }
+  ],
+  "name": "Writing",
+  "id": "2FHU38B34",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
