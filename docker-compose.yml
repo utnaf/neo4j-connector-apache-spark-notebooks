@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+  neo4j:
+    image: neo4j
+    networks:
+      - host
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/zeppelin
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_unmanagedExtensionClasses=semantics.extension=/rdf
+    volumes:
+      - ./neo4j/plugins:/plugins
+      - ./neo4j/data:/data
+
+  zeppelin:
+    image: apache/zeppelin:0.9.0
+    networks:
+      - host
+    ports:
+      - 8080:8080
+    volumes:
+      - ./zeppelin/notebook:/zeppelin/notebook
+      - ./zeppelin/conf:/zeppelin/conf
+      - ./zeppelin/data:/zeppelin/spark-warehouse
+      - ./zeppelin/jars:/jars
+
+networks:
+  host:
