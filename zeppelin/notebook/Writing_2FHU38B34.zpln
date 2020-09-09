@@ -3,7 +3,7 @@
     {
       "text": "val musicDf \u003d Seq(\n      (12, \"John Bonham\", \"Drums\"),\n      (19, \"John Mayer\", \"Guitar\"),\n      (32, \"John Scofield\", \"Guitar\"),\n      (15, \"John Butler\", \"Guitar\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"ErrorIfExists\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
       "user": "anonymous",
-      "dateUpdated": "2020-08-31 12:22:35.768",
+      "dateUpdated": "2020-09-09 14:12:45.073",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -35,14 +35,14 @@
       "jobName": "paragraph_1598874400391_-1735147610",
       "id": "paragraph_1598874400391_-1735147610",
       "dateCreated": "2020-08-31 11:46:40.391",
-      "dateStarted": "2020-08-31 12:22:35.787",
-      "dateFinished": "2020-08-31 12:22:36.515",
+      "dateStarted": "2020-09-09 14:12:45.101",
+      "dateFinished": "2020-09-09 14:12:49.615",
       "status": "FINISHED"
     },
     {
       "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.labels\", \"Musician\")\n    .option(\"relationship.target.labels\", \"Instrument\")\n    .load\n    \ndf.show()",
       "user": "anonymous",
-      "dateUpdated": "2020-08-31 12:22:38.408",
+      "dateUpdated": "2020-09-01 12:48:34.469",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -65,7 +65,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|\u003crel.id\u003e|\u003crel.type\u003e|\u003csource.id\u003e|\u003csource.labels\u003e|  source.name|\u003ctarget.id\u003e|\u003ctarget.labels\u003e|target.name|rel.experience|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|       0|     PLAYS|          0|     [Musician]|  John Bonham|          4|   [Instrument]|      Drums|            12|\n|       0|     PLAYS|          3|     [Musician]|  John Butler|          5|   [Instrument]|     Guitar|            15|\n|       0|     PLAYS|          2|     [Musician]|John Scofield|          5|   [Instrument]|     Guitar|            32|\n|       0|     PLAYS|          1|     [Musician]|   John Mayer|          5|   [Instrument]|     Guitar|            19|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003crel.id\u003e: bigint, \u003crel.type\u003e: string ... 7 more fields]\n"
+            "data": "+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|\u003crel.id\u003e|\u003crel.type\u003e|\u003csource.id\u003e|\u003csource.labels\u003e|  source.name|\u003ctarget.id\u003e|\u003ctarget.labels\u003e|target.name|rel.experience|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n|       0|     PLAYS|          8|     [Musician]|  John Bonham|         12|   [Instrument]|      Drums|            12|\n|       0|     PLAYS|          9|     [Musician]|   John Mayer|         13|   [Instrument]|     Guitar|            19|\n|       0|     PLAYS|         10|     [Musician]|John Scofield|         13|   [Instrument]|     Guitar|            32|\n|       0|     PLAYS|         11|     [Musician]|  John Butler|         13|   [Instrument]|     Guitar|            15|\n+--------+----------+-----------+---------------+-------------+-----------+---------------+-----------+--------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003crel.id\u003e: bigint, \u003crel.type\u003e: string ... 7 more fields]\n"
           }
         ]
       },
@@ -74,23 +74,76 @@
       "jobName": "paragraph_1598875482374_1668988098",
       "id": "paragraph_1598875482374_1668988098",
       "dateCreated": "2020-08-31 12:04:42.375",
-      "dateStarted": "2020-08-31 12:22:38.421",
-      "dateFinished": "2020-08-31 12:22:38.893",
+      "dateStarted": "2020-09-01 12:48:34.505",
+      "dateFinished": "2020-09-01 12:48:36.833",
       "status": "FINISHED"
     },
     {
+      "text": "val musicDf \u003d Seq(\n      (12, \"John Bonham\", \"Drums\", \"f``````oo\"),\n      (19, \"John Mayer\", \"Guitar\", \"bar\"),\n      (32, \"John Scofield\", \"Guitar\", \"ba` z\"),\n      (15, \"John Butler\", \"Guitar\", \"qu   ux\")\n    ).toDF(\"experience\", \"name\", \"instrument\", \"fi``(╯°□°)╯︵ ┻━┻eld\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.properties\", \"field\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .save()",
       "user": "anonymous",
-      "config": {},
+      "dateUpdated": "2020-09-02 16:13:32.103",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [experience: int, name: string ... 2 more fields]\n"
+          }
+        ]
       },
       "apps": [],
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598876007886_-515192145",
       "id": "paragraph_1598876007886_-515192145",
       "dateCreated": "2020-08-31 12:13:27.886",
-      "status": "READY"
+      "dateStarted": "2020-09-02 16:13:32.190",
+      "dateFinished": "2020-09-02 16:13:53.761",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val musicDf \u003d Seq(\n      (1, \"John Bonham\", \"Guitar\"),\n      (8, \"John Bonham\", \"Congas\"),\n      (3, \"John Butler\", \"Double Bass\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n\n\n    .mode(\"Overwrite\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-02 15:17:31.310",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598962718901_-250731872",
+      "id": "paragraph_1598962718901_-250731872",
+      "dateCreated": "2020-09-01 12:18:38.901",
+      "status": "FINISHED"
     }
   ],
   "name": "Writing",

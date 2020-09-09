@@ -948,7 +948,7 @@
         },
         "spark.jars": {
           "name": "spark.jars",
-          "value": "/jars/neo4j-spark-connector-full-4.0.0.jar",
+          "value": "/jars/neo4j-spark-connector.jar",
           "type": "string",
           "description": "Comma-separated list of jars to include on the driver and executor classpaths. Globs are allowed."
         },
@@ -1178,7 +1178,7 @@
       ],
       "dependencies": [
         {
-          "groupArtifactVersion": "/jars/neo4j-spark-connector-full-4.0.0.jar",
+          "groupArtifactVersion": "/jars/neo4j-spark-connector.jar",
           "local": false
         }
       ],

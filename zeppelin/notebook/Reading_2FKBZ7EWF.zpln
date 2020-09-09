@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"labels\", \"Movie\")\n    .load\n    \ndf.show()",
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"labels\", \"Instrument\")\n    .load\n    \ndf.show()",
       "user": "anonymous",
-      "dateUpdated": "2020-08-31 12:04:12.446",
+      "dateUpdated": "2020-09-09 14:18:40.766",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -22,11 +22,11 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u003cconsole\u003e:45: \u001b[31merror: \u001b[0mvalue zip is not a member of org.apache.spark.sql.DataFrame\n       val df \u003d sc.parallelize(dfMovies zip dfPeople).show()\n                                        ^\n"
+            "data": "+----+------------+------+\n|\u003cid\u003e|    \u003clabels\u003e|  name|\n+----+------------+------+\n|   4|[Instrument]| Drums|\n|   5|[Instrument]|Guitar|\n+----+------------+------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003cid\u003e: bigint, \u003clabels\u003e: array\u003cstring\u003e ... 1 more field]\n"
           }
         ]
       },
@@ -35,9 +35,9 @@
       "jobName": "paragraph_1598858554521_1265987943",
       "id": "paragraph_1598858554521_1265987943",
       "dateCreated": "2020-08-31 07:22:34.522",
-      "dateStarted": "2020-08-31 12:02:44.253",
-      "dateFinished": "2020-08-31 12:02:44.381",
-      "status": "ERROR"
+      "dateStarted": "2020-09-09 14:18:40.780",
+      "dateFinished": "2020-09-09 14:18:42.140",
+      "status": "FINISHED"
     },
     {
       "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"DIRECTED\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.show()",
