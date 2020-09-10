@@ -1,0 +1,205 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n# In this loading example, we\u0027ll take a simple CSV file of world cities, and write nodes/relationships\n# to a graph, in this pattern:   \n#\n# (:City { named: \"New York\" })-[:IN]-\u003e(:Country { iso2: \"US\" })\n#\n# BEFORE YOU BEGIN, recommend opening Neo4j browser on this host and creating 2 indexes to speed the load:\n#\n# CREATE INDEX :City(name)\n# CREATE INDEX :Country(iso2)\n#\n# This is an example of \"Normalized Loading\", which is taking a dataframe, breaking it down into many individual\n# node and relationship dataframes, and then writing each of these in turn.\n#\n# For more information, see the documentation / architecture section.",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:37:56.865",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741340789_-770138947",
+      "id": "paragraph_1599741340789_-770138947",
+      "dateCreated": "2020-09-10 12:35:40.789",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n\nimport requests\n\nsource_data \u003d \u0027https://storage.googleapis.com/meetup-data/worldcities.csv\u0027\nr \u003d requests.get(source_data, allow_redirects\u003dTrue)\nopen(\u0027worldcities.csv\u0027, \u0027wb\u0027).write(r.content)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 11:34:53.360",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1374845\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599737427364_-761028930",
+      "id": "paragraph_1599737427364_-761028930",
+      "dateCreated": "2020-09-10 11:30:27.364",
+      "dateStarted": "2020-09-10 11:34:53.382",
+      "dateFinished": "2020-09-10 11:35:03.943",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\ndf \u003d spark.read.option(\"header\",True).csv(\"worldcities.csv\")\ndf.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 11:40:07.233",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\n|       city| city_ascii|    lat|    lng|country|iso2|iso3| admin_name|capital|population|        id|\n+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\n|  Malishevë|  Malisheve|42.4822|20.7458| Kosovo|  XK| XKS|  Malishevë|  admin|      null|1901597212|\n|    Prizren|    Prizren|42.2139|20.7397| Kosovo|  XK| XKS|    Prizren|  admin|      null|1901360309|\n|Zubin Potok|Zubin Potok|42.9144|20.6897| Kosovo|  XK| XKS|Zubin Potok|  admin|      null|1901608808|\n|   Kamenicë|   Kamenice|42.5781|21.5803| Kosovo|  XK| XKS|   Kamenicë|  admin|      null|1901851592|\n|       Viti|       Viti|42.3214|21.3583| Kosovo|  XK| XKS|       Viti|  admin|      null|1901328795|\n+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599737434389_-12149004",
+      "id": "paragraph_1599737434389_-12149004",
+      "dateCreated": "2020-09-10 11:30:34.390",
+      "dateStarted": "2020-09-10 11:40:07.250",
+      "dateFinished": "2020-09-10 11:40:07.666",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n\n# We want to refactor the dataframe into 2 nodes:  (:City) and (:Country) and one relationship table -[:IN]-\u003e.\n# We will omit some attributes just for simplicity\n#\n# This is the \"Normalize\" phase where we break up a dataframe.  This is a good place to do your selections, projections,\n# and data quality fixes (note that some countries may have a null iso2, we\u0027re throwing those out, since it will be our Country key)\nnode_city \u003d df.select(\u0027city\u0027, \u0027city_ascii\u0027, \u0027lat\u0027, \u0027lng\u0027)\nnode_country \u003d df.select(\u0027country\u0027, \u0027iso2\u0027, \u0027iso3\u0027) \\\n    .where(col(\"iso2\").isNotNull()) \\\n    .dropDuplicates([\u0027iso2\u0027, \u0027iso3\u0027])\n\ncity_in_country_relationship \u003d df.select(\u0027city\u0027, \u0027iso2\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:22:52.712",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599737639175_-1168003973",
+      "id": "paragraph_1599737639175_-1168003973",
+      "dateCreated": "2020-09-10 11:33:59.175",
+      "dateStarted": "2020-09-10 12:22:52.732",
+      "dateFinished": "2020-09-10 12:22:52.822",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\n# Now we will simply write each node and relationship table.\n# This will go faster if you create indexes in Neo4j ahead of time:\n# CREATE INDEX ON :City(name);\n\ndef write_node_batch(df, label, keys):\n    # repartition(4) to take advantage of 4 cores on the database leader.  See architecture docs.\n    return df.repartition(1).write \\\n      .format(\"org.neo4j.spark.DataSource\") \\\n      .mode(\u0027Overwrite\u0027) \\\n      .option(\"url\", \"bolt://neo4j:7687\") \\\n      .option(\"authentication.basic.username\", \"neo4j\") \\\n      .option(\"authentication.basic.password\", \"zeppelin\") \\\n      .option(\"labels\", label) \\\n      .option(\"node.keys\", keys) \\\n      .save()\n\n# Note the alias of the \u0027city\u0027 property in the dataframe to the \u0027name\u0027 property in the graph\nwrite_node_batch(node_city, \u0027City\u0027, \u0027city:name\u0027)\nwrite_node_batch(node_country, \u0027Country\u0027, \u0027iso2\u0027)\n\n# Now write the relationships....\n# Always repartition 1 when writing relationships to avoid lock errors in neo4j\ncity_in_country_relationship.repartition(1).write \\\n  .format(\"org.neo4j.spark.DataSource\") \\\n  .option(\"url\", \"bolt://neo4j:7687\") \\\n  .option(\"authentication.basic.username\", \"neo4j\") \\\n  .option(\"authentication.basic.password\", \"zeppelin\") \\\n  .option(\"relationship\", \"IN\") \\\n  .option(\"relationship.save.strategy\", \"keys\") \\\n  .option(\"relationship.source.labels\", \":City\") \\\n  .option(\"relationship.source.save.mode\", \"Overwrite\") \\\n  .option(\"relationship.source.node.keys\", \"city:name\") \\\n  .option(\"relationship.target.labels\", \":Country\") \\\n  .option(\"relationship.target.save.mode\", \"Overwrite\") \\\n  .option(\"relationship.target.node.keys\", \"iso2\") \\\n  .save()\n\n  \n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:33:58.730",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599738074248_-2008362014",
+      "id": "paragraph_1599738074248_-2008362014",
+      "dateCreated": "2020-09-10 11:41:14.248",
+      "dateStarted": "2020-09-10 12:33:58.748",
+      "dateFinished": "2020-09-10 12:36:03.304",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 11:43:52.869",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599738232869_-1893381723",
+      "id": "paragraph_1599738232869_-1893381723",
+      "dateCreated": "2020-09-10 11:43:52.869",
+      "status": "READY"
+    }
+  ],
+  "name": "Python - Normalized Loading Example",
+  "id": "2FJECG677",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
