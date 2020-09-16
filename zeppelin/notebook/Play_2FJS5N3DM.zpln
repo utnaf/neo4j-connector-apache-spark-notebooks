@@ -1,0 +1,265 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"zeppelin\") \\\n    .option(\"labels\", \"Airline\") \\\n    .option(\"relationship.nodes.map\", True) \\\n    .load() \\\n    .show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 18:41:52.759",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+---------+---------+--------------------+\n|\u003cid\u003e| \u003clabels\u003e|IATA_CODE|             AIRLINE|\n+----+---------+---------+--------------------+\n| 322|[Airline]|       B6|     JetBlue Airways|\n| 323|[Airline]|       NK|    Spirit Air Lines|\n| 324|[Airline]|       WN|Southwest Airline...|\n| 325|[Airline]|       MQ|American Eagle Ai...|\n| 326|[Airline]|       AA|American Airlines...|\n| 327|[Airline]|       DL|Delta Air Lines Inc.|\n| 328|[Airline]|       HA|Hawaiian Airlines...|\n| 329|[Airline]|       US|     US Airways Inc.|\n| 330|[Airline]|       F9|Frontier Airlines...|\n| 331|[Airline]|       UA|United Air Lines ...|\n| 332|[Airline]|       AS|Alaska Airlines Inc.|\n| 333|[Airline]|       OO|Skywest Airlines ...|\n| 334|[Airline]|       VX|      Virgin America|\n| 335|[Airline]|       EV|Atlantic Southeas...|\n+----+---------+---------+--------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599763172605_-1148619340",
+      "id": "paragraph_1599763172605_-1148619340",
+      "dateCreated": "2020-09-10 18:39:32.605",
+      "dateStarted": "2020-09-10 18:41:52.800",
+      "dateFinished": "2020-09-10 18:41:53.794",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"zeppelin\") \\\n    .option(\"relationship\", \"FROM\") \\\n    .option(\"relationship.nodes.map\", False) \\\n    .option(\"relationship.source.labels\", \"Flight\") \\\n    .option(\"relationship.target.labels\", \"Airport\") \\\n    .load().show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 18:44:39.687",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+-----------+---------------+---------------+-----------+------------------+--------------------------+------------+--------------------+---------------+---------------------+----------------------+----------+----------------+--------------------------+--------------------+--------------+-----------+---------------+------------+----------------+---------------+----------------+--------------+-----------+--------------------+\n|\u003crel.id\u003e|\u003crel.type\u003e|\u003csource.id\u003e|\u003csource.labels\u003e|      source.id|source.YEAR|source.TAIL_NUMBER|source.SCHEDULED_DEPARTURE|source.MONTH|source.FLIGHT_NUMBER|source.DIVERTED|source.DEPARTURE_TIME|source.DEPARTURE_DELAY|source.DAY|source.CANCELLED|source.CANCELLATION_REASON|source.ARRIVAL_DELAY|source.AIRLINE|\u003ctarget.id\u003e|\u003ctarget.labels\u003e|target.STATE|target.LONGITUDE|target.LATITUDE|target.IATA_CODE|target.COUNTRY|target.CITY|      target.AIRPORT|\n+--------+----------+-----------+---------------+---------------+-----------+------------------+--------------------------+------------+--------------------+---------------+---------------------+----------------------+----------+----------------+--------------------------+--------------------+--------------+-----------+---------------+------------+----------------+---------------+----------------+--------------+-----------+--------------------+\n|   17163|      FROM|     491777|       [Flight]|201511EV5997LBB|       2015|            N16183|                      1401|           1|                5997|              0|                 1632|                   151|         1|               0|                      null|                 152|            EV|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   19565|      FROM|     496512|       [Flight]|201511EV4435LBB|       2015|            N11164|                      1637|           1|                4435|              0|                 1722|                    45|         1|               0|                      null|                  35|            EV|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   12747|      FROM|     496544|       [Flight]| 201511WN929LBB|       2015|            N514SW|                       920|           1|                 929|              0|                 null|                  null|         1|               1|                         B|                null|            WN|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   13103|      FROM|     493831|       [Flight]|201511MQ3200LBB|       2015|            N8EGMQ|                       945|           1|                3200|              0|                 1234|                   169|         1|               0|                      null|                 181|            MQ|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   17770|      FROM|     494353|       [Flight]|201511WN1664LBB|       2015|            N514SW|                      1445|           1|                1664|              0|                 1441|                    -4|         1|               0|                      null|                   1|            WN|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   15621|      FROM|     493628|       [Flight]|201511MQ2989LBB|       2015|            N521MQ|                      1225|           1|                2989|              0|                 1307|                    42|         1|               0|                      null|                  54|            MQ|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   14858|      FROM|     492893|       [Flight]|201511WN3214LBB|       2015|            N279WN|                      1140|           1|                3214|              0|                 1131|                    -9|         1|               0|                      null|                 -12|            WN|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   12080|      FROM|      75594|       [Flight]|201511EV6184LBB|       2015|            N25134|                       831|           1|                6184|              0|                  836|                     5|         1|               0|                      null|                  20|            EV|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   11281|      FROM|     492829|       [Flight]|201511EV4432LBB|       2015|            N14203|                       730|           1|                4432|              0|                  729|                    -1|         1|               0|                      null|                  10|            EV|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   19739|      FROM|     496099|       [Flight]|201511MQ3354LBB|       2015|            N521MQ|                      1650|           1|                3354|              0|                 1709|                    19|         1|               0|                      null|                  22|            MQ|          0|      [Airport]|          TX|      -101.82278|       33.66364|             LBB|           USA|    Lubbock|Lubbock Preston S...|\n|   13735|      FROM|     493424|       [Flight]|201511MQ2944FSM|       2015|            N680MQ|                      1025|           1|                2944|              0|                 1017|                    -8|         1|               0|                      null|                  -7|            MQ|          1|      [Airport]|          AR|       -94.36744|       35.33659|             FSM|           USA| Fort Smith|Fort Smith Region...|\n|   19804|      FROM|     495058|       [Flight]|201511EV5336FSM|       2015|            N926EV|                      1655|           1|                5336|              0|                 1647|                    -8|         1|               0|                      null|                  -6|            EV|          1|      [Airport]|          AR|       -94.36744|       35.33659|             FSM|           USA| Fort Smith|Fort Smith Region...|\n|   17575|      FROM|     494299|       [Flight]|201511MQ3182FSM|       2015|            N646MQ|                      1430|           1|                3182|              0|                 null|                  null|         1|               1|                         B|                null|            MQ|          1|      [Airport]|          AR|       -94.36744|       35.33659|             FSM|           USA| Fort Smith|Fort Smith Region...|\n|   10407|      FROM|     494953|       [Flight]|201511MQ2881FSM|       2015|            N907MQ|                       605|           1|                2881|              0|                 null|                  null|         1|               1|                         B|                null|            MQ|          1|      [Airport]|          AR|       -94.36744|       35.33659|             FSM|           USA| Fort Smith|Fort Smith Region...|\n|   16331|      FROM|      22659|       [Flight]|201511DL1331JAC|       2015|            N353NB|                      1314|           1|                1331|              0|                 1325|                    11|         1|               0|                      null|                   0|            DL|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n|   14570|      FROM|     173057|       [Flight]|201511DL2421JAC|       2015|            N321NB|                      1122|           1|                2421|              0|                 1116|                    -6|         1|               0|                      null|                 -17|            DL|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n|   15350|      FROM|     128126|       [Flight]|201511OO4597JAC|       2015|            N606SK|                      1209|           1|                4597|              0|                 1204|                    -5|         1|               0|                      null|                 -20|            OO|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n|   18075|      FROM|     493029|       [Flight]|201511OO4488JAC|       2015|            N611SK|                      1500|           1|                4488|              0|                 1459|                    -1|         1|               0|                      null|                 -10|            OO|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n|   16977|      FROM|     391886|       [Flight]|201511OO5499JAC|       2015|            N746SK|                      1351|           1|                5499|              0|                 1350|                    -1|         1|               0|                      null|                  14|            OO|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n|   11605|      FROM|     162153|       [Flight]|201511AA2287JAC|       2015|            N004AA|                       800|           1|                2287|              0|                  756|                    -4|         1|               0|                      null|                  21|            AA|          2|      [Airport]|          WY|      -110.73774|       43.60732|             JAC|           USA|    Jackson|Jackson Hole Airport|\n+--------+----------+-----------+---------------+---------------+-----------+------------------+--------------------------+------------+--------------------+---------------+---------------------+----------------------+----------+----------------+--------------------------+--------------------+--------------+-----------+---------------+------------+----------------+---------------+----------------+--------------+-----------+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599763245615_-1237631911",
+      "id": "paragraph_1599763245615_-1237631911",
+      "dateCreated": "2020-09-10 18:40:45.615",
+      "dateStarted": "2020-09-10 18:44:39.754",
+      "dateFinished": "2020-09-10 18:44:42.155",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n.option(\"url\", \"bolt://neo4j:7687\") \\\n.option(\"authentication.basic.username\", \"neo4j\") \\\n.option(\"authentication.basic.password\", \"zeppelin\") \\\n.option(\"partitions\", 4) \\\n.option(\"query\", \"MATCH (f:Flight)-[:FROM]-\u003e(a:Airport) RETURN f.id, a.IATA_CODE\") \\\n.option(\"count\", \"MATCH (f:Flight)-[:FROM]-\u003e(a:Airport) RETURN count(f.id) as count\") \\\n.load() \\\n.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 18:59:38.079",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+-----------+\n|           f.id|a.IATA_CODE|\n+---------------+-----------+\n|201511EV5997LBB|        LBB|\n|201511EV4435LBB|        LBB|\n| 201511WN929LBB|        LBB|\n|201511MQ3200LBB|        LBB|\n|201511WN1664LBB|        LBB|\n|201511MQ2989LBB|        LBB|\n|201511WN3214LBB|        LBB|\n|201511EV6184LBB|        LBB|\n|201511EV4432LBB|        LBB|\n|201511MQ3354LBB|        LBB|\n|201511MQ2944FSM|        FSM|\n|201511EV5336FSM|        FSM|\n|201511MQ3182FSM|        FSM|\n|201511MQ2881FSM|        FSM|\n|201511DL1331JAC|        JAC|\n|201511DL2421JAC|        JAC|\n|201511OO4597JAC|        JAC|\n|201511OO4488JAC|        JAC|\n|201511OO5499JAC|        JAC|\n|201511AA2287JAC|        JAC|\n+---------------+-----------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599763448511_-291326924",
+      "id": "paragraph_1599763448511_-291326924",
+      "dateCreated": "2020-09-10 18:44:08.511",
+      "dateStarted": "2020-09-10 18:59:38.134",
+      "dateFinished": "2020-09-10 18:59:39.588",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"zeppelin\") \\\n    .option(\"labels\", \"Types\") \\\n    .load()\n    \ndf.printSchema()\ndf.show()\ndf.select(\"bool\", \"tm\", \"ldt\", \"dt\", \"dt_t\", \"lt\").show(5, False)\n\ndf.select(\"ldt\").where(col(\"ldt\").isNotNull()).show(20, False)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-16 15:00:11.480",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- \u003cid\u003e: long (nullable \u003d false)\n |-- \u003clabels\u003e: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- tmA: array (nullable \u003d true)\n |    |-- element: struct (containsNull \u003d true)\n |    |    |-- type: string (nullable \u003d false)\n |    |    |-- value: string (nullable \u003d false)\n |-- tm: struct (nullable \u003d true)\n |    |-- type: string (nullable \u003d false)\n |    |-- value: string (nullable \u003d false)\n |-- strA: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- str: string (nullable \u003d true)\n |-- ptA: array (nullable \u003d true)\n |    |-- element: struct (containsNull \u003d true)\n |    |    |-- type: string (nullable \u003d false)\n |    |    |-- srid: integer (nullable \u003d false)\n |    |    |-- x: double (nullable \u003d false)\n |    |    |-- y: double (nullable \u003d false)\n |    |    |-- z: double (nullable \u003d true)\n |-- pt: struct (nullable \u003d true)\n |    |-- type: string (nullable \u003d false)\n |    |-- srid: integer (nullable \u003d false)\n |    |-- x: double (nullable \u003d false)\n |    |-- y: double (nullable \u003d false)\n |    |-- z: double (nullable \u003d true)\n |-- lt: struct (nullable \u003d true)\n |    |-- type: string (nullable \u003d false)\n |    |-- value: string (nullable \u003d false)\n |-- ldtA: array (nullable \u003d true)\n |    |-- element: timestamp (containsNull \u003d true)\n |-- ldt: timestamp (nullable \u003d true)\n |-- inteA: array (nullable \u003d true)\n |    |-- element: long (containsNull \u003d true)\n |-- inte: long (nullable \u003d true)\n |-- floA: array (nullable \u003d true)\n |    |-- element: double (containsNull \u003d true)\n |-- flo: double (nullable \u003d true)\n |-- dur: struct (nullable \u003d true)\n |    |-- type: string (nullable \u003d false)\n |    |-- months: long (nullable \u003d false)\n |    |-- days: long (nullable \u003d false)\n |    |-- seconds: long (nullable \u003d false)\n |    |-- nanoseconds: integer (nullable \u003d false)\n |    |-- value: string (nullable \u003d false)\n |-- dt_t: timestamp (nullable \u003d true)\n |-- dtA: array (nullable \u003d true)\n |    |-- element: date (containsNull \u003d true)\n |-- dt: date (nullable \u003d true)\n |-- boolA: array (nullable \u003d true)\n |    |-- element: boolean (containsNull \u003d true)\n |-- bool: boolean (nullable \u003d true)\n\n+------+--------+--------------------+--------------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+-----+----+------+----+--------------------+--------------------+------------+----------+------+----+\n|  \u003cid\u003e|\u003clabels\u003e|                 tmA|                  tm|   strA|  str|                 ptA|                  pt|                  lt|                ldtA|                 ldt|inteA|inte|  floA| flo|                 dur|                dt_t|         dtA|        dt| boolA|bool|\n+------+--------+--------------------+--------------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+-----+----+------+----+--------------------+--------------------+------------+----------+------+----+\n|496999| [Types]|                null|                null|   null|Hello|                null|[point-2d, 4326, ...|                null|                null|                null| null|   4|  null|3.14|                null|                null|        null|      null|  null|true|\n|497000| [Types]|                null|[offset-time, 12:...|[Hello]| null|[[point-2d, 4326,...|                null|                null|                null|                null|  [4]|null|[3.14]|null|                null|                null|        null|2020-09-11|[true]|null|\n|497001| [Types]|[[offset-time, 12...|[offset-time, 12:...|[Hello]| null|[[point-2d, 4326,...|                null|                null|[2020-09-11 12:14...|2020-09-11 12:14:...|  [4]|null|[3.14]|null|                null|                null|[2020-09-11]|2020-09-11|[true]|null|\n|497002| [Types]|[[offset-time, 12...|[offset-time, 12:...|[Hello]| null|[[point-2d, 4326,...|                null|                null|[2020-09-11 12:17...|2020-09-11 12:17:...|  [4]|null|[3.14]|null|                null|2020-09-11 12:17:...|[2020-09-11]|2020-09-11|[true]|null|\n|497003| [Types]|[[offset-time, 12...|[offset-time, 12:...|[Hello]| null|[[point-2d, 4326,...|                null|[local-time, 12:1...|[2020-09-11 12:18...|2020-09-11 12:18:...|  [4]|null|[3.14]|null|                null|2020-09-11 12:18:...|[2020-09-11]|2020-09-11|[true]|null|\n|497004| [Types]|[[offset-time, 12...|[offset-time, 12:...|[Hello]| null|[[point-2d, 4326,...|                null|[local-time, 12:2...|[2020-09-11 12:23...|2020-09-11 12:23:...|  [4]|null|[3.14]|null|[duration, 0, 0, ...|2020-09-11 12:23:...|[2020-09-11]|2020-09-11|[true]|null|\n+------+--------+--------------------+--------------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+-----+----+------+----+--------------------+--------------------+------------+----------+------+----+\n\n+----+----------------------------+-----------------------+----------+-----------------------+--------------------------+\n|bool|tm                          |ldt                    |dt        |dt_t                   |lt                        |\n+----+----------------------------+-----------------------+----------+-----------------------+--------------------------+\n|true|null                        |null                   |null      |null                   |null                      |\n|null|[offset-time, 12:14:08.209Z]|null                   |2020-09-11|null                   |null                      |\n|null|[offset-time, 12:14:49.081Z]|2020-09-11 12:14:49.081|2020-09-11|null                   |null                      |\n|null|[offset-time, 12:17:39.192Z]|2020-09-11 12:17:39.192|2020-09-11|2020-09-11 12:17:39.192|null                      |\n|null|[offset-time, 12:18:11.628Z]|2020-09-11 12:18:11.628|2020-09-11|2020-09-11 12:18:11.628|[local-time, 12:18:11.628]|\n+----+----------------------------+-----------------------+----------+-----------------------+--------------------------+\nonly showing top 5 rows\n\n+-----------------------+\n|ldt                    |\n+-----------------------+\n|2020-09-11 12:14:49.081|\n|2020-09-11 12:17:39.192|\n|2020-09-11 12:18:11.628|\n|2020-09-11 12:23:48.781|\n+-----------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599764231190_-2084790655",
+      "id": "paragraph_1599764231190_-2084790655",
+      "dateCreated": "2020-09-10 18:57:11.191",
+      "dateStarted": "2020-09-16 15:00:11.793",
+      "dateFinished": "2020-09-16 15:00:41.193",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"zeppelin\") \\\n    .option(\"query\", \"MATCH p\u003d(a:Airline)-[r]-(f:Flight) RETURN p limit 10\") \\\n    .load()\ndf.printSchema()\ndf.show(20, False)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-11 12:33:22.803",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- p: string (nullable \u003d true)\n\n+---------------------------------------+\n|p                                      |\n+---------------------------------------+\n|\"path[(322)\u003c-[20280:AIRLINE]-(33510)]\" |\n|\"path[(322)\u003c-[24720:AIRLINE]-(153715)]\"|\n|\"path[(322)\u003c-[27076:AIRLINE]-(494060)]\"|\n|\"path[(322)\u003c-[22823:AIRLINE]-(492942)]\"|\n|\"path[(322)\u003c-[20905:AIRLINE]-(491768)]\"|\n|\"path[(322)\u003c-[21536:AIRLINE]-(352422)]\"|\n|\"path[(322)\u003c-[27819:AIRLINE]-(148174)]\"|\n|\"path[(322)\u003c-[20723:AIRLINE]-(493033)]\"|\n|\"path[(322)\u003c-[21626:AIRLINE]-(491719)]\"|\n|\"path[(322)\u003c-[21013:AIRLINE]-(491301)]\"|\n+---------------------------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599827105555_-2104462681",
+      "id": "paragraph_1599827105555_-2104462681",
+      "dateCreated": "2020-09-11 12:25:05.556",
+      "dateStarted": "2020-09-11 12:33:22.831",
+      "dateFinished": "2020-09-11 12:33:24.068",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"zeppelin\") \\\n    .option(\"query\", \"MATCH (t:Types) RETURN t\") \\\n    .load()\n\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-16 15:38:11.872",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Py4JJavaError: An error occurred while calling o69.showString.\n: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0, localhost, executor driver): java.lang.ClassCastException: org.apache.spark.sql.catalyst.util.GenericArrayData cannot be cast to java.lang.Long\n\tat scala.runtime.BoxesRunTime.unboxToLong(BoxesRunTime.java:105)\n\tat org.apache.spark.sql.catalyst.expressions.BaseGenericInternalRow$class.getLong(rows.scala:42)\n\tat org.apache.spark.sql.catalyst.expressions.GenericInternalRow.getLong(rows.scala:195)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.project_fieldToString_1_10$(Unknown Source)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)\n\tat org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)\n\tat org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$13$$anon$1.hasNext(WholeStageCodegenExec.scala:636)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$2.apply(SparkPlan.scala:255)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$2.apply(SparkPlan.scala:247)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$24.apply(RDD.scala:836)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$24.apply(RDD.scala:836)\n\tat org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)\n\tat org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:324)\n\tat org.apache.spark.rdd.RDD.iterator(RDD.scala:288)\n\tat org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)\n\tat org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:324)\n\tat org.apache.spark.rdd.RDD.iterator(RDD.scala:288)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:123)\n\tat org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n\nDriver stacktrace:\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1889)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1877)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1876)\n\tat scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)\n\tat scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1876)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)\n\tat scala.Option.foreach(Option.scala:257)\n\tat org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:926)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2110)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2059)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2048)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:737)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2061)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2082)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2101)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:365)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:38)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collectFromPlan(Dataset.scala:3389)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset$$anonfun$52.apply(Dataset.scala:3370)\n\tat org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:78)\n\tat org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:125)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:73)\n\tat org.apache.spark.sql.Dataset.withAction(Dataset.scala:3369)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2764)\n\tat org.apache.spark.sql.Dataset.getRows(Dataset.scala:254)\n\tat org.apache.spark.sql.Dataset.showString(Dataset.scala:291)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: java.lang.ClassCastException: org.apache.spark.sql.catalyst.util.GenericArrayData cannot be cast to java.lang.Long\n\tat scala.runtime.BoxesRunTime.unboxToLong(BoxesRunTime.java:105)\n\tat org.apache.spark.sql.catalyst.expressions.BaseGenericInternalRow$class.getLong(rows.scala:42)\n\tat org.apache.spark.sql.catalyst.expressions.GenericInternalRow.getLong(rows.scala:195)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.project_fieldToString_1_10$(Unknown Source)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)\n\tat org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)\n\tat org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$13$$anon$1.hasNext(WholeStageCodegenExec.scala:636)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$2.apply(SparkPlan.scala:255)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$2.apply(SparkPlan.scala:247)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$24.apply(RDD.scala:836)\n\tat org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$24.apply(RDD.scala:836)\n\tat org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)\n\tat org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:324)\n\tat org.apache.spark.rdd.RDD.iterator(RDD.scala:288)\n\tat org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)\n\tat org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:324)\n\tat org.apache.spark.rdd.RDD.iterator(RDD.scala:288)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:123)\n\tat org.apache.spark.executor.Executor$TaskRunner$$anonfun$10.apply(Executor.scala:408)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1360)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:414)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\t... 1 more\n\n(\u003cclass \u0027py4j.protocol.Py4JJavaError\u0027\u003e, Py4JJavaError(\u0027An error occurred while calling o69.showString.\\n\u0027, JavaObject id\u003do70), \u003ctraceback object at 0x7fc0c05af908\u003e)"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599826128052_-276399151",
+      "id": "paragraph_1599826128052_-276399151",
+      "dateCreated": "2020-09-11 12:08:48.052",
+      "dateStarted": "2020-09-16 15:38:12.042",
+      "dateFinished": "2020-09-16 15:38:34.286",
+      "status": "ERROR"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-16 15:38:12.035",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1600270692034_1035446805",
+      "id": "paragraph_1600270692034_1035446805",
+      "dateCreated": "2020-09-16 15:38:12.035",
+      "status": "READY"
+    }
+  ],
+  "name": "Play",
+  "id": "2FJS5N3DM",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

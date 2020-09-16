@@ -1,0 +1,244 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n# BEFORE BEGINNING\n# Open up your Neo4j instance using browser and create the following indexes:\n#\n# CREATE INDEX ON :Airport(IATA_CODE);\n# CREATE INDEX ON :Airline(IATA_CODE);\n# CREATE INDEX ON :Flight(id);",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 15:59:45.285",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599751483351_625024297",
+      "id": "paragraph_1599751483351_625024297",
+      "dateCreated": "2020-09-10 15:24:43.351",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\n\nimport requests\n\n# Download some CSV data we will need\n\nfiles \u003d [\u0027flights.csv\u0027, \u0027airlines.csv\u0027, \u0027airports.csv\u0027]\n\nfor file in files:\n    url \u003d \u0027https://storage.googleapis.com/meetup-data/flights/%s\u0027 % file\n    print(\"Fetching %s...\" % file)\n    r \u003d requests.get(url, allow_redirects\u003dTrue)\n    open(file, \u0027wb\u0027).write(r.content)\n\n\n# Print basic details about the dataset.\nprint(\"%s\" % requests.get(\"https://storage.googleapis.com/meetup-data/flights/README.txt\", allow_redirects\u003dTrue).content)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 15:59:08.237",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Fetching flights.csv...\nFetching airlines.csv...\nFetching airports.csv...\nb\"Context\\n\\nThe U.S. Department of Transportation\u0027s (DOT) Bureau of Transportation Statistics tracks the on-time performance of domestic flights operated by large air carriers. Summary information on the number of on-time, delayed, canceled, and diverted flights is published in DOT\u0027s monthly Air Travel Consumer Report and in this dataset of 2015 flight delays and cancellations.\\n\\nOriginal source: https://www.kaggle.com/usdot/flight-delays?select\u003dflights.csv\\n\"\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599751047350_1171201140",
+      "id": "paragraph_1599751047350_1171201140",
+      "dateCreated": "2020-09-10 15:17:27.351",
+      "dateStarted": "2020-09-10 15:59:08.393",
+      "dateFinished": "2020-09-10 15:59:57.100",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, concat\n\nflights \u003d spark.read.option(\"header\",True).option(\"inferSchema\", \"true\").csv(\"flights.csv\") \\\n    .withColumn(\"id\", concat(col(\"YEAR\"), col(\"MONTH\"), col(\"DAY\"), col(\"AIRLINE\"), col(\"FLIGHT_NUMBER\"), col(\"ORIGIN_AIRPORT\"))) \\\n    # To avoid the runtime getting out of hand, we\u0027ll use a sample of the first 10k\n    .limit(10000)\n    \nflights.createOrReplaceTempView(\"flights\")\n\nairlines \u003d spark.read.option(\"header\",True).csv(\"airlines.csv\")\nairports \u003d spark.read.option(\"header\",True).csv(\"airports.csv\")\n\n# Cut down to a smaller number of fields\nflights \u003d spark.sql(\"SELECT id, YEAR, MONTH, DAY, AIRLINE, FLIGHT_NUMBER, TAIL_NUMBER, SCHEDULED_DEPARTURE, DEPARTURE_TIME, DEPARTURE_DELAY, ARRIVAL_DELAY, DIVERTED, CANCELLED, CANCELLATION_REASON FROM flights\")\n\nflight_to_airport \u003d spark.sql(\"SELECT id, DESTINATION_AIRPORT as airport FROM flights\").dropDuplicates()\nflight_from_airport \u003d spark.sql(\"SELECT id, ORIGIN_AIRPORT as airport FROM flights\").dropDuplicates()\nflight_airline \u003d spark.sql(\"SELECT id, AIRLINE FROM flights\").dropDuplicates()\n\nflights.show(5)\n# airlines.show(5)\n# airports.show(5)\n\n# flight_to_airport.show(5)\n# flight_from_airport.show(5)\n# flight_airline.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 16:03:38.173",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+----+-----+---+-------+-------------+-----------+-------------------+--------------+---------------+-------------+--------+---------+-------------------+\n|             id|YEAR|MONTH|DAY|AIRLINE|FLIGHT_NUMBER|TAIL_NUMBER|SCHEDULED_DEPARTURE|DEPARTURE_TIME|DEPARTURE_DELAY|ARRIVAL_DELAY|DIVERTED|CANCELLED|CANCELLATION_REASON|\n+---------------+----+-----+---+-------+-------------+-----------+-------------------+--------------+---------------+-------------+--------+---------+-------------------+\n|  201511AS98ANC|2015|    1|  1|     AS|           98|     N407AS|                  5|          2354|            -11|          -22|       0|        0|               null|\n|201511AA2336LAX|2015|    1|  1|     AA|         2336|     N3KUAA|                 10|             2|             -8|           -9|       0|        0|               null|\n| 201511US840SFO|2015|    1|  1|     US|          840|     N171US|                 20|            18|             -2|            5|       0|        0|               null|\n| 201511AA258LAX|2015|    1|  1|     AA|          258|     N3HYAA|                 20|            15|             -5|           -9|       0|        0|               null|\n| 201511AS135SEA|2015|    1|  1|     AS|          135|     N527AS|                 25|            24|             -1|          -21|       0|        0|               null|\n+---------------+----+-----+---+-------+-------------+-----------+-------------------+--------------+---------------+-------------+--------+---------+-------------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599751142317_-770705346",
+      "id": "paragraph_1599751142317_-770705346",
+      "dateCreated": "2020-09-10 15:19:02.317",
+      "dateStarted": "2020-09-10 16:02:33.592",
+      "dateFinished": "2020-09-10 16:03:17.871",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\n\ndef write_node_batch(df, label, keys):\n    return df.repartition(3).write \\\n      .format(\"org.neo4j.spark.DataSource\") \\\n      .mode(\u0027Overwrite\u0027) \\\n      .option(\"batch.size\", 10000) \\\n      .option(\"url\", \"bolt://neo4j:7687\") \\\n      .option(\"authentication.basic.username\", \"neo4j\") \\\n      .option(\"authentication.basic.password\", \"zeppelin\") \\\n      .option(\"labels\", label) \\\n      .option(\"node.keys\", keys) \\\n      .save()\n      \nwrite_node_batch(airports, \"Airport\", \"IATA_CODE\")\nwrite_node_batch(airlines, \"Airline\", \"IATA_CODE\")\nwrite_node_batch(flights, \"Flight\", \"id\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 16:03:38.283",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599751398542_588129191",
+      "id": "paragraph_1599751398542_588129191",
+      "dateCreated": "2020-09-10 15:23:18.542",
+      "dateStarted": "2020-09-10 16:03:38.306",
+      "dateFinished": "2020-09-10 16:04:00.499",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\ndef write_rel_batch(df, from_label, from_key, rel_type, to_label, to_key):\n   return df.repartition(1).write \\\n      .format(\"org.neo4j.spark.DataSource\") \\\n      .option(\"url\", \"bolt://neo4j:7687\") \\\n      .option(\"batch.size\", 10000) \\\n      .option(\"authentication.basic.username\", \"neo4j\") \\\n      .option(\"authentication.basic.password\", \"zeppelin\") \\\n      .option(\"relationship\", rel_type) \\\n      .option(\"relationship.save.strategy\", \"keys\") \\\n      .option(\"relationship.source.labels\", from_label) \\\n      .option(\"relationship.source.save.mode\", \"Overwrite\") \\\n      .option(\"relationship.source.node.keys\", from_key) \\\n      .option(\"relationship.target.labels\", to_label) \\\n      .option(\"relationship.target.save.mode\", \"Overwrite\") \\\n      .option(\"relationship.target.node.keys\", to_key) \\\n      .save()\n      \n# Create (:Flight)-[:FROM]-\u003e(:Airport)\nwrite_rel_batch(flight_to_airport, \u0027Flight\u0027, \u0027id\u0027, \u0027TO\u0027, \u0027Airport\u0027, \u0027airport:IATA_CODE\u0027)\n\n# Create (:Flight)-[:TO]-\u003e(:Airport)\nwrite_rel_batch(flight_from_airport, \u0027Flight\u0027, \u0027id\u0027, \u0027FROM\u0027, \u0027Airport\u0027, \u0027airport:IATA_CODE\u0027)\n\n# Create (:Flight)-[:AIRLINE]-\u003e(:Airline)\nwrite_rel_batch(flight_airline, \u0027Flight\u0027, \u0027id\u0027, \u0027AIRLINE\u0027, \u0027Airline\u0027, \u0027AIRLINE:IATA_CODE\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 16:04:15.483",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599751922874_844383687",
+      "id": "paragraph_1599751922874_844383687",
+      "dateCreated": "2020-09-10 15:32:02.874",
+      "dateStarted": "2020-09-10 16:04:15.504",
+      "dateFinished": "2020-09-10 16:05:11.665",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\n# Now let\u0027s create a Neo4j Graph Data Science in-memory graph from this data!\n# Docs for how this works: https://neo4j.com/docs/graph-data-science/current/introduction/#introduction-catalog\n\ndef run_cypher(cypher):\n    return spark.read.format(\"org.neo4j.spark.DataSource\") \\\n      .option(\"url\", \"bolt://neo4j:7687\") \\\n      .option(\"authentication.basic.username\", \"neo4j\") \\\n      .option(\"authentication.basic.password\", \"zeppelin\") \\\n      .option(\"schema.strategy\", \"string\") \\\n      .option(\"query\", cypher) \\\n      .load()\n\n#run_cypher(\"CALL gds.graph.list() YIELD graphName, memoryUsage, sizeInBytes, modificationTime, schema RETURN graphName, memoryUsage, sizeInBytes, modificationTime, schema\")\nrun_cypher(\"CALL gds.graph.list()\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 16:41:52.318",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Py4JJavaError: An error occurred while calling o101.load.\n: org.neo4j.driver.exceptions.ClientException: CALL subquery cannot conclude with CALL (must be RETURN) (line 1, column 8 (offset: 7))\n\"CALL { CALL gds.graph.list() }\"\n        ^\n\tat org.neo4j.driver.internal.util.Futures.blockingGet(Futures.java:143)\n\tat org.neo4j.driver.internal.InternalResult.blockingGet(InternalResult.java:128)\n\tat org.neo4j.driver.internal.InternalResult.list(InternalResult.java:105)\n\tat org.neo4j.spark.service.SchemaService.retrieveSchema(SchemaService.scala:74)\n\tat org.neo4j.spark.service.SchemaService.structForQuery(SchemaService.scala:160)\n\tat org.neo4j.spark.service.SchemaService.struct(SchemaService.scala:168)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$readSchema$1.apply(Neo4jDataSourceReader.scala:26)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$readSchema$1.apply(Neo4jDataSourceReader.scala:25)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.callSchemaService(Neo4jDataSourceReader.scala:33)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.readSchema(Neo4jDataSourceReader.scala:25)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2Relation$.create(DataSourceV2Relation.scala:175)\n\tat org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:204)\n\tat org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:167)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\n\tSuppressed: org.neo4j.driver.internal.util.ErrorUtil$InternalExceptionCause\n\t\tat org.neo4j.driver.internal.util.ErrorUtil.newNeo4jError(ErrorUtil.java:80)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher.handleFailureMessage(InboundMessageDispatcher.java:105)\n\t\tat org.neo4j.driver.internal.messaging.v1.MessageReaderV1.unpackFailureMessage(MessageReaderV1.java:83)\n\t\tat org.neo4j.driver.internal.messaging.v1.MessageReaderV1.read(MessageReaderV1.java:59)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageHandler.channelRead0(InboundMessageHandler.java:83)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageHandler.channelRead0(InboundMessageHandler.java:35)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:99)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296)\n\t\tat org.neo4j.driver.internal.async.inbound.MessageDecoder.channelRead(MessageDecoder.java:47)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:311)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:425)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:276)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:714)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\t\t... 1 more\n\n(\u003cclass \u0027py4j.protocol.Py4JJavaError\u0027\u003e, Py4JJavaError(\u0027An error occurred while calling o101.load.\\n\u0027, JavaObject id\u003do102), \u003ctraceback object at 0x7ff1abea8948\u003e)"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599753855504_620567347",
+      "id": "paragraph_1599753855504_620567347",
+      "dateCreated": "2020-09-10 16:04:15.505",
+      "dateStarted": "2020-09-10 16:41:52.350",
+      "dateFinished": "2020-09-10 16:41:53.180",
+      "status": "ERROR"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 16:30:53.865",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599755453865_751890727",
+      "id": "paragraph_1599755453865_751890727",
+      "dateCreated": "2020-09-10 16:30:53.865",
+      "status": "READY"
+    }
+  ],
+  "name": "Python - Graph Data Science",
+  "id": "2FK332EWC",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
