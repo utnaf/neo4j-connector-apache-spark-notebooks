@@ -1,0 +1,177 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n# In this loading example, we\u0027ll take a simple CSV file of world cities, and write nodes/relationships\n# to a graph, in this pattern:   \n#\n# (:City { named: \"New York\" })-[:IN]-\u003e(:Country { iso2: \"US\" })\n#\n# BEFORE YOU BEGIN, recommend opening Neo4j browser on this host and creating 2 indexes to speed the load:\n#\n# CREATE INDEX :City(name)\n# CREATE INDEX :Country(iso2)\n#\n# This is an example of \"Cypher Destructuring Pattern\", which is taking a dataframe, and processes\n# it using Cypher.  This is not necessarily the best way to do this, but is provided as an example.\n#\n# For more information, see the documentation / architecture section.",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:39:02.417",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741485135_-1476262482",
+      "id": "paragraph_1599741340789_-770138947",
+      "dateCreated": "2020-09-10 12:38:05.135",
+      "dateStarted": "2020-09-10 12:39:02.434",
+      "dateFinished": "2020-09-10 12:39:02.457",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nimport requests\n\nsource_data \u003d \u0027https://storage.googleapis.com/meetup-data/worldcities.csv\u0027\nr \u003d requests.get(source_data, allow_redirects\u003dTrue)\nopen(\u0027worldcities.csv\u0027, \u0027wb\u0027).write(r.content)",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:39:04.746",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1374845\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741485136_-200640055",
+      "id": "paragraph_1599737427364_-761028930",
+      "dateCreated": "2020-09-10 12:38:05.136",
+      "dateStarted": "2020-09-10 12:39:04.769",
+      "dateFinished": "2020-09-10 12:39:05.238",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nfrom pyspark.functions import col\n\ndf \u003d spark.read.option(\"header\",True).csv(\"worldcities.csv\")\ndf.show(5)\n\n# Do a short cleanup step: get rid of null country identifiers.\ncleaned_data \u003d df.where(col(\"iso2\").isNotNull())",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:41:56.502",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\n|       city| city_ascii|    lat|    lng|country|iso2|iso3| admin_name|capital|population|        id|\n+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\n|  Malishevë|  Malisheve|42.4822|20.7458| Kosovo|  XK| XKS|  Malishevë|  admin|      null|1901597212|\n|    Prizren|    Prizren|42.2139|20.7397| Kosovo|  XK| XKS|    Prizren|  admin|      null|1901360309|\n|Zubin Potok|Zubin Potok|42.9144|20.6897| Kosovo|  XK| XKS|Zubin Potok|  admin|      null|1901608808|\n|   Kamenicë|   Kamenice|42.5781|21.5803| Kosovo|  XK| XKS|   Kamenicë|  admin|      null|1901851592|\n|       Viti|       Viti|42.3214|21.3583| Kosovo|  XK| XKS|       Viti|  admin|      null|1901328795|\n+-----------+-----------+-------+-------+-------+----+----+-----------+-------+----------+----------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741485137_1970506373",
+      "id": "paragraph_1599737434389_-12149004",
+      "dateCreated": "2020-09-10 12:38:05.137",
+      "dateStarted": "2020-09-10 12:39:06.514",
+      "dateFinished": "2020-09-10 12:39:06.834",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\n# When using cypher queries, the content of the dataframe row is always bound to \u0027event\u0027 in cypher\n# So \"event.city\" refers to the city column of the dataframe we\u0027re saving.\nmy_cypher_query \u003d \"\"\"\n    MERGE (city:City { name: event.city })\n       ON CREATE SET \n        city.city_ascii \u003d event.city_ascii,\n        city.lat \u003d toFloat(event.lat),\n        city.lon \u003d toFloat(event.lng)\n    \n    WITH city, event\n    MERGE (co:Country { iso2: event.iso2 })\n       ON CREATE SET\n        co.iso3 \u003d event.iso3,\n        co.name \u003d event.country\n    MERGE (city)-[:IN]-\u003e(co)\n\"\"\"\n\n# Always use repartition(1) when writing with Cypher unless you know what you\u0027re doing.\n# The reason why is that writing relationships locks the nodes on either end; if you do \n# very parallel writes in this kind of scenario, you can get deadlocks \u0026 write failures.\ndf.repartition(1).write \\\n  .format(\"org.neo4j.spark.DataSource\") \\\n  .option(\"url\", \"bolt://neo4j:7687\") \\\n  .option(\"authentication.basic.username\", \"neo4j\") \\\n  .option(\"authentication.basic.password\", \"zeppelin\") \\\n  .option(\"query\", my_cypher_query) \\\n  .save()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:45:30.218",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741485137_-1881493655",
+      "id": "paragraph_1599738232869_-1893381723",
+      "dateCreated": "2020-09-10 12:38:05.137",
+      "dateStarted": "2020-09-10 12:45:30.239",
+      "dateFinished": "2020-09-10 12:45:31.513",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-09-10 12:43:49.317",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1599741829317_-1414054860",
+      "id": "paragraph_1599741829317_-1414054860",
+      "dateCreated": "2020-09-10 12:43:49.317",
+      "status": "READY"
+    }
+  ],
+  "name": "Python - Cypher Destructuring Example",
+  "id": "2FJ81EG3V",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
