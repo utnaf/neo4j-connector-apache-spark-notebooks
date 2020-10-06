@@ -1,0 +1,171 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\n# This example is intended to be run against a Neo4j Sandbox instance of the \"Graph Data Science\" example dataset.\n#\n# Before running this code, create your own GDS sandbox here: \n#\n# https://sandbox.neo4j.com/\n# \n# *And make sure to adjust your host, username, and port to your sandbox*\n#\n# By using a sandbox, we can skip over the data loading \u0026 GDS installation steps.",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:53:31.950",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601992256462_-109224611",
+      "id": "paragraph_1601992256462_-109224611",
+      "dateCreated": "2020-10-06 13:50:56.463",
+      "status": "READY"
+    },
+    {
+      "text": "%pyspark\nhost\u003d\"bolt://100.26.227.192:36133\"\nuser\u003d\"neo4j\"\npassword\u003d\"pastes-cures-thunder\"",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 15:19:22.217",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601992351821_954320774",
+      "id": "paragraph_1601992351821_954320774",
+      "dateCreated": "2020-10-06 13:52:31.821",
+      "dateStarted": "2020-10-06 15:19:22.425",
+      "dateFinished": "2020-10-06 15:19:46.365",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n# Let\u0027s create a virtual GDS graph.\n\nquery \u003d \"\"\"\n    CALL gds.graph.create(\u0027got-interactions\u0027, \u0027Person\u0027, {\n      INTERACTS: {\n        orientation: \u0027UNDIRECTED\u0027\n      }\n    })\n    YIELD graphName\n    RETURN graphName\n\"\"\"\n\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", host) \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", user) \\\n    .option(\"authentication.basic.password\", password) \\\n    .option(\"query\", query) \\\n    .option(\"partitions\", \"1\") \\\n    .load()\n\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 15:20:05.377",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Py4JJavaError: An error occurred while calling o74.showString.\n: org.neo4j.driver.exceptions.ClientException: Failed to invoke procedure `gds.graph.create`: Caused by: java.lang.IllegalArgumentException: A graph with name \u0027got-interactions\u0027 already exists.\n\tat org.neo4j.driver.internal.util.Futures.blockingGet(Futures.java:143)\n\tat org.neo4j.driver.internal.InternalResult.blockingGet(InternalResult.java:128)\n\tat org.neo4j.driver.internal.InternalResult.list(InternalResult.java:105)\n\tat org.neo4j.spark.service.SchemaService.retrieveSchema(SchemaService.scala:86)\n\tat org.neo4j.spark.service.SchemaService.structForQuery(SchemaService.scala:182)\n\tat org.neo4j.spark.service.SchemaService.struct(SchemaService.scala:190)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$readSchema$1.apply(Neo4jDataSourceReader.scala:26)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$readSchema$1.apply(Neo4jDataSourceReader.scala:25)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.callSchemaService(Neo4jDataSourceReader.scala:33)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.readSchema(Neo4jDataSourceReader.scala:25)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.planInputPartitions(Neo4jDataSourceReader.scala:49)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.planInputPartitions(Neo4jDataSourceReader.scala:16)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2ScanExec.partitions$lzycompute(DataSourceV2ScanExec.scala:76)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2ScanExec.partitions(DataSourceV2ScanExec.scala:75)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2ScanExec.outputPartitioning(DataSourceV2ScanExec.scala:65)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements$$anonfun$org$apache$spark$sql$execution$exchange$EnsureRequirements$$ensureDistributionAndOrdering$1.apply(EnsureRequirements.scala:149)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements$$anonfun$org$apache$spark$sql$execution$exchange$EnsureRequirements$$ensureDistributionAndOrdering$1.apply(EnsureRequirements.scala:148)\n\tat scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)\n\tat scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)\n\tat scala.collection.immutable.List.foreach(List.scala:392)\n\tat scala.collection.TraversableLike$class.map(TraversableLike.scala:234)\n\tat scala.collection.immutable.List.map(List.scala:296)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements.org$apache$spark$sql$execution$exchange$EnsureRequirements$$ensureDistributionAndOrdering(EnsureRequirements.scala:148)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements$$anonfun$apply$1.applyOrElse(EnsureRequirements.scala:312)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements$$anonfun$apply$1.applyOrElse(EnsureRequirements.scala:304)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:281)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:281)\n\tat org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:280)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:278)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:278)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:329)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:327)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:278)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements.apply(EnsureRequirements.scala:304)\n\tat org.apache.spark.sql.execution.exchange.EnsureRequirements.apply(EnsureRequirements.scala:37)\n\tat org.apache.spark.sql.execution.QueryExecution$$anonfun$prepareForExecution$1.apply(QueryExecution.scala:87)\n\tat org.apache.spark.sql.execution.QueryExecution$$anonfun$prepareForExecution$1.apply(QueryExecution.scala:87)\n\tat scala.collection.LinearSeqOptimized$class.foldLeft(LinearSeqOptimized.scala:124)\n\tat scala.collection.immutable.List.foldLeft(List.scala:84)\n\tat org.apache.spark.sql.execution.QueryExecution.prepareForExecution(QueryExecution.scala:87)\n\tat org.apache.spark.sql.execution.QueryExecution.executedPlan$lzycompute(QueryExecution.scala:77)\n\tat org.apache.spark.sql.execution.QueryExecution.executedPlan(QueryExecution.scala:77)\n\tat org.apache.spark.sql.Dataset.withAction(Dataset.scala:3365)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:2550)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2764)\n\tat org.apache.spark.sql.Dataset.getRows(Dataset.scala:254)\n\tat org.apache.spark.sql.Dataset.showString(Dataset.scala:291)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\n\tSuppressed: org.neo4j.driver.internal.util.ErrorUtil$InternalExceptionCause\n\t\tat org.neo4j.driver.internal.util.ErrorUtil.newNeo4jError(ErrorUtil.java:80)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher.handleFailureMessage(InboundMessageDispatcher.java:105)\n\t\tat org.neo4j.driver.internal.messaging.v1.MessageReaderV1.unpackFailureMessage(MessageReaderV1.java:83)\n\t\tat org.neo4j.driver.internal.messaging.v1.MessageReaderV1.read(MessageReaderV1.java:59)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageHandler.channelRead0(InboundMessageHandler.java:83)\n\t\tat org.neo4j.driver.internal.async.inbound.InboundMessageHandler.channelRead0(InboundMessageHandler.java:35)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:99)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296)\n\t\tat org.neo4j.driver.internal.async.inbound.MessageDecoder.channelRead(MessageDecoder.java:47)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:311)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:425)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:276)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:714)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\t\t... 1 more\n\n(\u003cclass \u0027py4j.protocol.Py4JJavaError\u0027\u003e, Py4JJavaError(\u0027An error occurred while calling o74.showString.\\n\u0027, JavaObject id\u003do75), \u003ctraceback object at 0x7f1062454dc8\u003e)"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601993382895_1120574972",
+      "id": "paragraph_1601993382895_1120574972",
+      "dateCreated": "2020-10-06 14:09:42.896",
+      "dateStarted": "2020-10-06 15:20:05.407",
+      "dateFinished": "2020-10-06 15:20:10.843",
+      "status": "ERROR"
+    },
+    {
+      "text": "%pyspark\n\nquery \u003d \"\"\"\nCALL gds.pageRank.stream(\u0027got-interactions\u0027) YIELD nodeId, score\nRETURN gds.util.asNode(nodeId).name AS name, score\n\"\"\"\n\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", host) \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", user) \\\n    .option(\"authentication.basic.password\", password) \\\n    .option(\"query\", query) \\\n    .option(\"partitions\", \"1\") \\\n    .load()\n\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 15:20:33.833",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-------------------+\n|                name|              score|\n+--------------------+-------------------+\n| Gunthor son of Gurn| 0.2155574555537896|\n|High Septon (fat_...| 0.3390608486835846|\n|     Jaime Lannister| 13.522417121008036|\n|      Gregor Clegane|  4.224368686974048|\n|         Andros Brax|0.15000000000000002|\n|        Roose Bolton| 2.9989159699529404|\n|      Wylis Manderly| 0.2766475385229569|\n|       Medger Cerwyn|0.15000000000000002|\n|    Harrion Karstark|0.15000000000000002|\n|      Halys Hornwood|0.22117681563831867|\n|          Robb Stark| 10.819953513145444|\n|       Brynden Tully|   2.34719781531021|\n|     Tytos Blackwood| 0.5989176101633349|\n|   Victarion Greyjoy|   4.77652440359816|\n|        Asha Greyjoy| 4.0371349356137225|\n|       Theon Greyjoy|  9.386687170155348|\n|       Rodrik Cassel| 3.1201196020469064|\n|         Cley Cerwyn| 0.3871685551595873|\n|     Dagmer Cleftjaw|0.15000000000000002|\n|         Ramsay Snow| 2.8007921248674394|\n+--------------------+-------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601992586562_1919175203",
+      "id": "paragraph_1601992586562_1919175203",
+      "dateCreated": "2020-10-06 13:56:26.562",
+      "dateStarted": "2020-10-06 15:20:33.874",
+      "dateFinished": "2020-10-06 15:20:38.520",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 15:20:18.703",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601997618703_-686996120",
+      "id": "paragraph_1601997618703_-686996120",
+      "dateCreated": "2020-10-06 15:20:18.703",
+      "status": "READY"
+    }
+  ],
+  "name": "Graph Data Science Example",
+  "id": "2FKW1STP7",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
