@@ -2,7 +2,7 @@ version: "2"
 
 services:
   neo4j:
-    image: neo4j:4.0.8-enterprise
+    image: neo4j:4.1.2
     networks:
       - host
     ports:
@@ -29,6 +29,7 @@ services:
       - ./zeppelin/conf:/zeppelin/conf
       - ./zeppelin/data:/zeppelin/spark-warehouse
       - ./zeppelin/jars:/jars
+      - ./zeppelin/interpreter/neo4j:/zeppelin/interpreter/neo4j
 
 networks:
   host:
