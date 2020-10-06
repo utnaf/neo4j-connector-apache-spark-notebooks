@@ -1,0 +1,436 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n# Reading with Neo4j Connector for Apache Spark\n\nDocs [here](http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/reading.html).\n\nFor this example we will use the Neo4j Movie Database. ",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:49:02.287",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eReading with Neo4j Connector for Apache Spark\u003c/h1\u003e\n\u003cp\u003eDocs \u003ca href\u003d\"http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/reading.html\"\u003ehere\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eFor this example we will use the Neo4j Movie Database.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601971235853_1500745997",
+      "id": "paragraph_1601971235853_1500745997",
+      "dateCreated": "2020-10-06 08:00:35.853",
+      "dateStarted": "2020-10-06 12:27:21.846",
+      "dateFinished": "2020-10-06 12:27:21.866",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%neo4j\n\nCREATE (TheMatrix:Movie {title:\u0027The Matrix\u0027, released:1999, tagline:\u0027Welcome to the Real World\u0027})\nCREATE (Keanu:Person {name:\u0027Keanu Reeves\u0027, born:1964})\nCREATE (Carrie:Person {name:\u0027Carrie-Anne Moss\u0027, born:1967})\nCREATE (Laurence:Person {name:\u0027Laurence Fishburne\u0027, born:1961})\nCREATE (Hugo:Person {name:\u0027Hugo Weaving\u0027, born:1960})\nCREATE (LillyW:Person {name:\u0027Lilly Wachowski\u0027, born:1967})\nCREATE (LanaW:Person {name:\u0027Lana Wachowski\u0027, born:1965})\nCREATE (JoelS:Person {name:\u0027Joel Silver\u0027, born:1952})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Neo\u0027]}]-\u003e(TheMatrix),\n(Carrie)-[:ACTED_IN {roles:[\u0027Trinity\u0027]}]-\u003e(TheMatrix),\n(Laurence)-[:ACTED_IN {roles:[\u0027Morpheus\u0027]}]-\u003e(TheMatrix),\n(Hugo)-[:ACTED_IN {roles:[\u0027Agent Smith\u0027]}]-\u003e(TheMatrix),\n(LillyW)-[:DIRECTED]-\u003e(TheMatrix),\n(LanaW)-[:DIRECTED]-\u003e(TheMatrix),\n(JoelS)-[:PRODUCED]-\u003e(TheMatrix)\n\nCREATE (Emil:Person {name:\"Emil Eifrem\", born:1978})\nCREATE (Emil)-[:ACTED_IN {roles:[\"Emil\"]}]-\u003e(TheMatrix)\n\nCREATE (TheMatrixReloaded:Movie {title:\u0027The Matrix Reloaded\u0027, released:2003, tagline:\u0027Free your mind\u0027})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Neo\u0027]}]-\u003e(TheMatrixReloaded),\n(Carrie)-[:ACTED_IN {roles:[\u0027Trinity\u0027]}]-\u003e(TheMatrixReloaded),\n(Laurence)-[:ACTED_IN {roles:[\u0027Morpheus\u0027]}]-\u003e(TheMatrixReloaded),\n(Hugo)-[:ACTED_IN {roles:[\u0027Agent Smith\u0027]}]-\u003e(TheMatrixReloaded),\n(LillyW)-[:DIRECTED]-\u003e(TheMatrixReloaded),\n(LanaW)-[:DIRECTED]-\u003e(TheMatrixReloaded),\n(JoelS)-[:PRODUCED]-\u003e(TheMatrixReloaded)\n\nCREATE (TheMatrixRevolutions:Movie {title:\u0027The Matrix Revolutions\u0027, released:2003, tagline:\u0027Everything that has a beginning has an end\u0027})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Neo\u0027]}]-\u003e(TheMatrixRevolutions),\n(Carrie)-[:ACTED_IN {roles:[\u0027Trinity\u0027]}]-\u003e(TheMatrixRevolutions),\n(Laurence)-[:ACTED_IN {roles:[\u0027Morpheus\u0027]}]-\u003e(TheMatrixRevolutions),\n(Hugo)-[:ACTED_IN {roles:[\u0027Agent Smith\u0027]}]-\u003e(TheMatrixRevolutions),\n(LillyW)-[:DIRECTED]-\u003e(TheMatrixRevolutions),\n(LanaW)-[:DIRECTED]-\u003e(TheMatrixRevolutions),\n(JoelS)-[:PRODUCED]-\u003e(TheMatrixRevolutions)\n\nCREATE (TheDevilsAdvocate:Movie {title:\"The Devil\u0027s Advocate\", released:1997, tagline:\u0027Evil has its winning ways\u0027})\nCREATE (Charlize:Person {name:\u0027Charlize Theron\u0027, born:1975})\nCREATE (Al:Person {name:\u0027Al Pacino\u0027, born:1940})\nCREATE (Taylor:Person {name:\u0027Taylor Hackford\u0027, born:1944})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Kevin Lomax\u0027]}]-\u003e(TheDevilsAdvocate),\n(Charlize)-[:ACTED_IN {roles:[\u0027Mary Ann Lomax\u0027]}]-\u003e(TheDevilsAdvocate),\n(Al)-[:ACTED_IN {roles:[\u0027John Milton\u0027]}]-\u003e(TheDevilsAdvocate),\n(Taylor)-[:DIRECTED]-\u003e(TheDevilsAdvocate)\n\nCREATE (AFewGoodMen:Movie {title:\"A Few Good Men\", released:1992, tagline:\"In the heart of the nation\u0027s capital, in a courthouse of the U.S. government, one man will stop at nothing to keep his honor, and one will stop at nothing to find the truth.\"})\nCREATE (TomC:Person {name:\u0027Tom Cruise\u0027, born:1962})\nCREATE (JackN:Person {name:\u0027Jack Nicholson\u0027, born:1937})\nCREATE (DemiM:Person {name:\u0027Demi Moore\u0027, born:1962})\nCREATE (KevinB:Person {name:\u0027Kevin Bacon\u0027, born:1958})\nCREATE (KieferS:Person {name:\u0027Kiefer Sutherland\u0027, born:1966})\nCREATE (NoahW:Person {name:\u0027Noah Wyle\u0027, born:1971})\nCREATE (CubaG:Person {name:\u0027Cuba Gooding Jr.\u0027, born:1968})\nCREATE (KevinP:Person {name:\u0027Kevin Pollak\u0027, born:1957})\nCREATE (JTW:Person {name:\u0027J.T. Walsh\u0027, born:1943})\nCREATE (JamesM:Person {name:\u0027James Marshall\u0027, born:1967})\nCREATE (ChristopherG:Person {name:\u0027Christopher Guest\u0027, born:1948})\nCREATE (RobR:Person {name:\u0027Rob Reiner\u0027, born:1947})\nCREATE (AaronS:Person {name:\u0027Aaron Sorkin\u0027, born:1961})\nCREATE\n(TomC)-[:ACTED_IN {roles:[\u0027Lt. Daniel Kaffee\u0027]}]-\u003e(AFewGoodMen),\n(JackN)-[:ACTED_IN {roles:[\u0027Col. Nathan R. Jessup\u0027]}]-\u003e(AFewGoodMen),\n(DemiM)-[:ACTED_IN {roles:[\u0027Lt. Cdr. JoAnne Galloway\u0027]}]-\u003e(AFewGoodMen),\n(KevinB)-[:ACTED_IN {roles:[\u0027Capt. Jack Ross\u0027]}]-\u003e(AFewGoodMen),\n(KieferS)-[:ACTED_IN {roles:[\u0027Lt. Jonathan Kendrick\u0027]}]-\u003e(AFewGoodMen),\n(NoahW)-[:ACTED_IN {roles:[\u0027Cpl. Jeffrey Barnes\u0027]}]-\u003e(AFewGoodMen),\n(CubaG)-[:ACTED_IN {roles:[\u0027Cpl. Carl Hammaker\u0027]}]-\u003e(AFewGoodMen),\n(KevinP)-[:ACTED_IN {roles:[\u0027Lt. Sam Weinberg\u0027]}]-\u003e(AFewGoodMen),\n(JTW)-[:ACTED_IN {roles:[\u0027Lt. Col. Matthew Andrew Markinson\u0027]}]-\u003e(AFewGoodMen),\n(JamesM)-[:ACTED_IN {roles:[\u0027Pfc. Louden Downey\u0027]}]-\u003e(AFewGoodMen),\n(ChristopherG)-[:ACTED_IN {roles:[\u0027Dr. Stone\u0027]}]-\u003e(AFewGoodMen),\n(AaronS)-[:ACTED_IN {roles:[\u0027Man in Bar\u0027]}]-\u003e(AFewGoodMen),\n(RobR)-[:DIRECTED]-\u003e(AFewGoodMen),\n(AaronS)-[:WROTE]-\u003e(AFewGoodMen)\n\nCREATE (TopGun:Movie {title:\"Top Gun\", released:1986, tagline:\u0027I feel the need, the need for speed.\u0027})\nCREATE (KellyM:Person {name:\u0027Kelly McGillis\u0027, born:1957})\nCREATE (ValK:Person {name:\u0027Val Kilmer\u0027, born:1959})\nCREATE (AnthonyE:Person {name:\u0027Anthony Edwards\u0027, born:1962})\nCREATE (TomS:Person {name:\u0027Tom Skerritt\u0027, born:1933})\nCREATE (MegR:Person {name:\u0027Meg Ryan\u0027, born:1961})\nCREATE (TonyS:Person {name:\u0027Tony Scott\u0027, born:1944})\nCREATE (JimC:Person {name:\u0027Jim Cash\u0027, born:1941})\nCREATE\n(TomC)-[:ACTED_IN {roles:[\u0027Maverick\u0027]}]-\u003e(TopGun),\n(KellyM)-[:ACTED_IN {roles:[\u0027Charlie\u0027]}]-\u003e(TopGun),\n(ValK)-[:ACTED_IN {roles:[\u0027Iceman\u0027]}]-\u003e(TopGun),\n(AnthonyE)-[:ACTED_IN {roles:[\u0027Goose\u0027]}]-\u003e(TopGun),\n(TomS)-[:ACTED_IN {roles:[\u0027Viper\u0027]}]-\u003e(TopGun),\n(MegR)-[:ACTED_IN {roles:[\u0027Carole\u0027]}]-\u003e(TopGun),\n(TonyS)-[:DIRECTED]-\u003e(TopGun),\n(JimC)-[:WROTE]-\u003e(TopGun)\n\nCREATE (JerryMaguire:Movie {title:\u0027Jerry Maguire\u0027, released:2000, tagline:\u0027The rest of his life begins now.\u0027})\nCREATE (ReneeZ:Person {name:\u0027Renee Zellweger\u0027, born:1969})\nCREATE (KellyP:Person {name:\u0027Kelly Preston\u0027, born:1962})\nCREATE (JerryO:Person {name:\"Jerry O\u0027Connell\", born:1974})\nCREATE (JayM:Person {name:\u0027Jay Mohr\u0027, born:1970})\nCREATE (BonnieH:Person {name:\u0027Bonnie Hunt\u0027, born:1961})\nCREATE (ReginaK:Person {name:\u0027Regina King\u0027, born:1971})\nCREATE (JonathanL:Person {name:\u0027Jonathan Lipnicki\u0027, born:1996})\nCREATE (CameronC:Person {name:\u0027Cameron Crowe\u0027, born:1957})\nCREATE\n(TomC)-[:ACTED_IN {roles:[\u0027Jerry Maguire\u0027]}]-\u003e(JerryMaguire),\n(CubaG)-[:ACTED_IN {roles:[\u0027Rod Tidwell\u0027]}]-\u003e(JerryMaguire),\n(ReneeZ)-[:ACTED_IN {roles:[\u0027Dorothy Boyd\u0027]}]-\u003e(JerryMaguire),\n(KellyP)-[:ACTED_IN {roles:[\u0027Avery Bishop\u0027]}]-\u003e(JerryMaguire),\n(JerryO)-[:ACTED_IN {roles:[\u0027Frank Cushman\u0027]}]-\u003e(JerryMaguire),\n(JayM)-[:ACTED_IN {roles:[\u0027Bob Sugar\u0027]}]-\u003e(JerryMaguire),\n(BonnieH)-[:ACTED_IN {roles:[\u0027Laurel Boyd\u0027]}]-\u003e(JerryMaguire),\n(ReginaK)-[:ACTED_IN {roles:[\u0027Marcee Tidwell\u0027]}]-\u003e(JerryMaguire),\n(JonathanL)-[:ACTED_IN {roles:[\u0027Ray Boyd\u0027]}]-\u003e(JerryMaguire),\n(CameronC)-[:DIRECTED]-\u003e(JerryMaguire),\n(CameronC)-[:PRODUCED]-\u003e(JerryMaguire),\n(CameronC)-[:WROTE]-\u003e(JerryMaguire)\n\nCREATE (StandByMe:Movie {title:\"Stand By Me\", released:1986, tagline:\"For some, it\u0027s the last real taste of innocence, and the first real taste of life. But for everyone, it\u0027s the time that memories are made of.\"})\nCREATE (RiverP:Person {name:\u0027River Phoenix\u0027, born:1970})\nCREATE (CoreyF:Person {name:\u0027Corey Feldman\u0027, born:1971})\nCREATE (WilW:Person {name:\u0027Wil Wheaton\u0027, born:1972})\nCREATE (JohnC:Person {name:\u0027John Cusack\u0027, born:1966})\nCREATE (MarshallB:Person {name:\u0027Marshall Bell\u0027, born:1942})\nCREATE\n(WilW)-[:ACTED_IN {roles:[\u0027Gordie Lachance\u0027]}]-\u003e(StandByMe),\n(RiverP)-[:ACTED_IN {roles:[\u0027Chris Chambers\u0027]}]-\u003e(StandByMe),\n(JerryO)-[:ACTED_IN {roles:[\u0027Vern Tessio\u0027]}]-\u003e(StandByMe),\n(CoreyF)-[:ACTED_IN {roles:[\u0027Teddy Duchamp\u0027]}]-\u003e(StandByMe),\n(JohnC)-[:ACTED_IN {roles:[\u0027Denny Lachance\u0027]}]-\u003e(StandByMe),\n(KieferS)-[:ACTED_IN {roles:[\u0027Ace Merrill\u0027]}]-\u003e(StandByMe),\n(MarshallB)-[:ACTED_IN {roles:[\u0027Mr. Lachance\u0027]}]-\u003e(StandByMe),\n(RobR)-[:DIRECTED]-\u003e(StandByMe)\n\nCREATE (AsGoodAsItGets:Movie {title:\u0027As Good as It Gets\u0027, released:1997, tagline:\u0027A comedy from the heart that goes for the throat.\u0027})\nCREATE (HelenH:Person {name:\u0027Helen Hunt\u0027, born:1963})\nCREATE (GregK:Person {name:\u0027Greg Kinnear\u0027, born:1963})\nCREATE (JamesB:Person {name:\u0027James L. Brooks\u0027, born:1940})\nCREATE\n(JackN)-[:ACTED_IN {roles:[\u0027Melvin Udall\u0027]}]-\u003e(AsGoodAsItGets),\n(HelenH)-[:ACTED_IN {roles:[\u0027Carol Connelly\u0027]}]-\u003e(AsGoodAsItGets),\n(GregK)-[:ACTED_IN {roles:[\u0027Simon Bishop\u0027]}]-\u003e(AsGoodAsItGets),\n(CubaG)-[:ACTED_IN {roles:[\u0027Frank Sachs\u0027]}]-\u003e(AsGoodAsItGets),\n(JamesB)-[:DIRECTED]-\u003e(AsGoodAsItGets)\n\nCREATE (WhatDreamsMayCome:Movie {title:\u0027What Dreams May Come\u0027, released:1998, tagline:\u0027After life there is more. The end is just the beginning.\u0027})\nCREATE (AnnabellaS:Person {name:\u0027Annabella Sciorra\u0027, born:1960})\nCREATE (MaxS:Person {name:\u0027Max von Sydow\u0027, born:1929})\nCREATE (WernerH:Person {name:\u0027Werner Herzog\u0027, born:1942})\nCREATE (Robin:Person {name:\u0027Robin Williams\u0027, born:1951})\nCREATE (VincentW:Person {name:\u0027Vincent Ward\u0027, born:1956})\nCREATE\n(Robin)-[:ACTED_IN {roles:[\u0027Chris Nielsen\u0027]}]-\u003e(WhatDreamsMayCome),\n(CubaG)-[:ACTED_IN {roles:[\u0027Albert Lewis\u0027]}]-\u003e(WhatDreamsMayCome),\n(AnnabellaS)-[:ACTED_IN {roles:[\u0027Annie Collins-Nielsen\u0027]}]-\u003e(WhatDreamsMayCome),\n(MaxS)-[:ACTED_IN {roles:[\u0027The Tracker\u0027]}]-\u003e(WhatDreamsMayCome),\n(WernerH)-[:ACTED_IN {roles:[\u0027The Face\u0027]}]-\u003e(WhatDreamsMayCome),\n(VincentW)-[:DIRECTED]-\u003e(WhatDreamsMayCome)\n\nCREATE (SnowFallingonCedars:Movie {title:\u0027Snow Falling on Cedars\u0027, released:1999, tagline:\u0027First loves last. Forever.\u0027})\nCREATE (EthanH:Person {name:\u0027Ethan Hawke\u0027, born:1970})\nCREATE (RickY:Person {name:\u0027Rick Yune\u0027, born:1971})\nCREATE (JamesC:Person {name:\u0027James Cromwell\u0027, born:1940})\nCREATE (ScottH:Person {name:\u0027Scott Hicks\u0027, born:1953})\nCREATE\n(EthanH)-[:ACTED_IN {roles:[\u0027Ishmael Chambers\u0027]}]-\u003e(SnowFallingonCedars),\n(RickY)-[:ACTED_IN {roles:[\u0027Kazuo Miyamoto\u0027]}]-\u003e(SnowFallingonCedars),\n(MaxS)-[:ACTED_IN {roles:[\u0027Nels Gudmundsson\u0027]}]-\u003e(SnowFallingonCedars),\n(JamesC)-[:ACTED_IN {roles:[\u0027Judge Fielding\u0027]}]-\u003e(SnowFallingonCedars),\n(ScottH)-[:DIRECTED]-\u003e(SnowFallingonCedars)\n\nCREATE (YouveGotMail:Movie {title:\"You\u0027ve Got Mail\", released:1998, tagline:\u0027At odds in life... in love on-line.\u0027})\nCREATE (ParkerP:Person {name:\u0027Parker Posey\u0027, born:1968})\nCREATE (DaveC:Person {name:\u0027Dave Chappelle\u0027, born:1973})\nCREATE (SteveZ:Person {name:\u0027Steve Zahn\u0027, born:1967})\nCREATE (TomH:Person {name:\u0027Tom Hanks\u0027, born:1956})\nCREATE (NoraE:Person {name:\u0027Nora Ephron\u0027, born:1941})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Joe Fox\u0027]}]-\u003e(YouveGotMail),\n(MegR)-[:ACTED_IN {roles:[\u0027Kathleen Kelly\u0027]}]-\u003e(YouveGotMail),\n(GregK)-[:ACTED_IN {roles:[\u0027Frank Navasky\u0027]}]-\u003e(YouveGotMail),\n(ParkerP)-[:ACTED_IN {roles:[\u0027Patricia Eden\u0027]}]-\u003e(YouveGotMail),\n(DaveC)-[:ACTED_IN {roles:[\u0027Kevin Jackson\u0027]}]-\u003e(YouveGotMail),\n(SteveZ)-[:ACTED_IN {roles:[\u0027George Pappas\u0027]}]-\u003e(YouveGotMail),\n(NoraE)-[:DIRECTED]-\u003e(YouveGotMail)\n\nCREATE (SleeplessInSeattle:Movie {title:\u0027Sleepless in Seattle\u0027, released:1993, tagline:\u0027What if someone you never met, someone you never saw, someone you never knew was the only someone for you?\u0027})\nCREATE (RitaW:Person {name:\u0027Rita Wilson\u0027, born:1956})\nCREATE (BillPull:Person {name:\u0027Bill Pullman\u0027, born:1953})\nCREATE (VictorG:Person {name:\u0027Victor Garber\u0027, born:1949})\nCREATE (RosieO:Person {name:\"Rosie O\u0027Donnell\", born:1962})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Sam Baldwin\u0027]}]-\u003e(SleeplessInSeattle),\n(MegR)-[:ACTED_IN {roles:[\u0027Annie Reed\u0027]}]-\u003e(SleeplessInSeattle),\n(RitaW)-[:ACTED_IN {roles:[\u0027Suzy\u0027]}]-\u003e(SleeplessInSeattle),\n(BillPull)-[:ACTED_IN {roles:[\u0027Walter\u0027]}]-\u003e(SleeplessInSeattle),\n(VictorG)-[:ACTED_IN {roles:[\u0027Greg\u0027]}]-\u003e(SleeplessInSeattle),\n(RosieO)-[:ACTED_IN {roles:[\u0027Becky\u0027]}]-\u003e(SleeplessInSeattle),\n(NoraE)-[:DIRECTED]-\u003e(SleeplessInSeattle)\n\nCREATE (JoeVersustheVolcano:Movie {title:\u0027Joe Versus the Volcano\u0027, released:1990, tagline:\u0027A story of love, lava and burning desire.\u0027})\nCREATE (JohnS:Person {name:\u0027John Patrick Stanley\u0027, born:1950})\nCREATE (Nathan:Person {name:\u0027Nathan Lane\u0027, born:1956})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Joe Banks\u0027]}]-\u003e(JoeVersustheVolcano),\n(MegR)-[:ACTED_IN {roles:[\u0027DeDe\u0027, \u0027Angelica Graynamore\u0027, \u0027Patricia Graynamore\u0027]}]-\u003e(JoeVersustheVolcano),\n(Nathan)-[:ACTED_IN {roles:[\u0027Baw\u0027]}]-\u003e(JoeVersustheVolcano),\n(JohnS)-[:DIRECTED]-\u003e(JoeVersustheVolcano)\n\nCREATE (WhenHarryMetSally:Movie {title:\u0027When Harry Met Sally\u0027, released:1998, tagline:\u0027Can two friends sleep together and still love each other in the morning?\u0027})\nCREATE (BillyC:Person {name:\u0027Billy Crystal\u0027, born:1948})\nCREATE (CarrieF:Person {name:\u0027Carrie Fisher\u0027, born:1956})\nCREATE (BrunoK:Person {name:\u0027Bruno Kirby\u0027, born:1949})\nCREATE\n(BillyC)-[:ACTED_IN {roles:[\u0027Harry Burns\u0027]}]-\u003e(WhenHarryMetSally),\n(MegR)-[:ACTED_IN {roles:[\u0027Sally Albright\u0027]}]-\u003e(WhenHarryMetSally),\n(CarrieF)-[:ACTED_IN {roles:[\u0027Marie\u0027]}]-\u003e(WhenHarryMetSally),\n(BrunoK)-[:ACTED_IN {roles:[\u0027Jess\u0027]}]-\u003e(WhenHarryMetSally),\n(RobR)-[:DIRECTED]-\u003e(WhenHarryMetSally),\n(RobR)-[:PRODUCED]-\u003e(WhenHarryMetSally),\n(NoraE)-[:PRODUCED]-\u003e(WhenHarryMetSally),\n(NoraE)-[:WROTE]-\u003e(WhenHarryMetSally)\n\nCREATE (ThatThingYouDo:Movie {title:\u0027That Thing You Do\u0027, released:1996, tagline:\u0027In every life there comes a time when that thing you dream becomes that thing you do\u0027})\nCREATE (LivT:Person {name:\u0027Liv Tyler\u0027, born:1977})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Mr. White\u0027]}]-\u003e(ThatThingYouDo),\n(LivT)-[:ACTED_IN {roles:[\u0027Faye Dolan\u0027]}]-\u003e(ThatThingYouDo),\n(Charlize)-[:ACTED_IN {roles:[\u0027Tina\u0027]}]-\u003e(ThatThingYouDo),\n(TomH)-[:DIRECTED]-\u003e(ThatThingYouDo)\n\nCREATE (TheReplacements:Movie {title:\u0027The Replacements\u0027, released:2000, tagline:\u0027Pain heals, Chicks dig scars... Glory lasts forever\u0027})\nCREATE (Brooke:Person {name:\u0027Brooke Langton\u0027, born:1970})\nCREATE (Gene:Person {name:\u0027Gene Hackman\u0027, born:1930})\nCREATE (Orlando:Person {name:\u0027Orlando Jones\u0027, born:1968})\nCREATE (Howard:Person {name:\u0027Howard Deutch\u0027, born:1950})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Shane Falco\u0027]}]-\u003e(TheReplacements),\n(Brooke)-[:ACTED_IN {roles:[\u0027Annabelle Farrell\u0027]}]-\u003e(TheReplacements),\n(Gene)-[:ACTED_IN {roles:[\u0027Jimmy McGinty\u0027]}]-\u003e(TheReplacements),\n(Orlando)-[:ACTED_IN {roles:[\u0027Clifford Franklin\u0027]}]-\u003e(TheReplacements),\n(Howard)-[:DIRECTED]-\u003e(TheReplacements)\n\nCREATE (RescueDawn:Movie {title:\u0027RescueDawn\u0027, released:2006, tagline:\"Based on the extraordinary true story of one man\u0027s fight for freedom\"})\nCREATE (ChristianB:Person {name:\u0027Christian Bale\u0027, born:1974})\nCREATE (ZachG:Person {name:\u0027Zach Grenier\u0027, born:1954})\nCREATE\n(MarshallB)-[:ACTED_IN {roles:[\u0027Admiral\u0027]}]-\u003e(RescueDawn),\n(ChristianB)-[:ACTED_IN {roles:[\u0027Dieter Dengler\u0027]}]-\u003e(RescueDawn),\n(ZachG)-[:ACTED_IN {roles:[\u0027Squad Leader\u0027]}]-\u003e(RescueDawn),\n(SteveZ)-[:ACTED_IN {roles:[\u0027Duane\u0027]}]-\u003e(RescueDawn),\n(WernerH)-[:DIRECTED]-\u003e(RescueDawn)\n\nCREATE (TheBirdcage:Movie {title:\u0027The Birdcage\u0027, released:1996, tagline:\u0027Come as you are\u0027})\nCREATE (MikeN:Person {name:\u0027Mike Nichols\u0027, born:1931})\nCREATE\n(Robin)-[:ACTED_IN {roles:[\u0027Armand Goldman\u0027]}]-\u003e(TheBirdcage),\n(Nathan)-[:ACTED_IN {roles:[\u0027Albert Goldman\u0027]}]-\u003e(TheBirdcage),\n(Gene)-[:ACTED_IN {roles:[\u0027Sen. Kevin Keeley\u0027]}]-\u003e(TheBirdcage),\n(MikeN)-[:DIRECTED]-\u003e(TheBirdcage)\n\nCREATE (Unforgiven:Movie {title:\u0027Unforgiven\u0027, released:1992, tagline:\"It\u0027s a hell of a thing, killing a man\"})\nCREATE (RichardH:Person {name:\u0027Richard Harris\u0027, born:1930})\nCREATE (ClintE:Person {name:\u0027Clint Eastwood\u0027, born:1930})\nCREATE\n(RichardH)-[:ACTED_IN {roles:[\u0027English Bob\u0027]}]-\u003e(Unforgiven),\n(ClintE)-[:ACTED_IN {roles:[\u0027Bill Munny\u0027]}]-\u003e(Unforgiven),\n(Gene)-[:ACTED_IN {roles:[\u0027Little Bill Daggett\u0027]}]-\u003e(Unforgiven),\n(ClintE)-[:DIRECTED]-\u003e(Unforgiven)\n\nCREATE (JohnnyMnemonic:Movie {title:\u0027Johnny Mnemonic\u0027, released:1995, tagline:\u0027The hottest data on earth. In the coolest head in town\u0027})\nCREATE (Takeshi:Person {name:\u0027Takeshi Kitano\u0027, born:1947})\nCREATE (Dina:Person {name:\u0027Dina Meyer\u0027, born:1968})\nCREATE (IceT:Person {name:\u0027Ice-T\u0027, born:1958})\nCREATE (RobertL:Person {name:\u0027Robert Longo\u0027, born:1953})\nCREATE\n(Keanu)-[:ACTED_IN {roles:[\u0027Johnny Mnemonic\u0027]}]-\u003e(JohnnyMnemonic),\n(Takeshi)-[:ACTED_IN {roles:[\u0027Takahashi\u0027]}]-\u003e(JohnnyMnemonic),\n(Dina)-[:ACTED_IN {roles:[\u0027Jane\u0027]}]-\u003e(JohnnyMnemonic),\n(IceT)-[:ACTED_IN {roles:[\u0027J-Bone\u0027]}]-\u003e(JohnnyMnemonic),\n(RobertL)-[:DIRECTED]-\u003e(JohnnyMnemonic)\n\nCREATE (CloudAtlas:Movie {title:\u0027Cloud Atlas\u0027, released:2012, tagline:\u0027Everything is connected\u0027})\nCREATE (HalleB:Person {name:\u0027Halle Berry\u0027, born:1966})\nCREATE (JimB:Person {name:\u0027Jim Broadbent\u0027, born:1949})\nCREATE (TomT:Person {name:\u0027Tom Tykwer\u0027, born:1965})\nCREATE (DavidMitchell:Person {name:\u0027David Mitchell\u0027, born:1969})\nCREATE (StefanArndt:Person {name:\u0027Stefan Arndt\u0027, born:1961})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Zachry\u0027, \u0027Dr. Henry Goose\u0027, \u0027Isaac Sachs\u0027, \u0027Dermot Hoggins\u0027]}]-\u003e(CloudAtlas),\n(Hugo)-[:ACTED_IN {roles:[\u0027Bill Smoke\u0027, \u0027Haskell Moore\u0027, \u0027Tadeusz Kesselring\u0027, \u0027Nurse Noakes\u0027, \u0027Boardman Mephi\u0027, \u0027Old Georgie\u0027]}]-\u003e(CloudAtlas),\n(HalleB)-[:ACTED_IN {roles:[\u0027Luisa Rey\u0027, \u0027Jocasta Ayrs\u0027, \u0027Ovid\u0027, \u0027Meronym\u0027]}]-\u003e(CloudAtlas),\n(JimB)-[:ACTED_IN {roles:[\u0027Vyvyan Ayrs\u0027, \u0027Captain Molyneux\u0027, \u0027Timothy Cavendish\u0027]}]-\u003e(CloudAtlas),\n(TomT)-[:DIRECTED]-\u003e(CloudAtlas),\n(LillyW)-[:DIRECTED]-\u003e(CloudAtlas),\n(LanaW)-[:DIRECTED]-\u003e(CloudAtlas),\n(DavidMitchell)-[:WROTE]-\u003e(CloudAtlas),\n(StefanArndt)-[:PRODUCED]-\u003e(CloudAtlas)\n\nCREATE (TheDaVinciCode:Movie {title:\u0027The Da Vinci Code\u0027, released:2006, tagline:\u0027Break The Codes\u0027})\nCREATE (IanM:Person {name:\u0027Ian McKellen\u0027, born:1939})\nCREATE (AudreyT:Person {name:\u0027Audrey Tautou\u0027, born:1976})\nCREATE (PaulB:Person {name:\u0027Paul Bettany\u0027, born:1971})\nCREATE (RonH:Person {name:\u0027Ron Howard\u0027, born:1954})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Dr. Robert Langdon\u0027]}]-\u003e(TheDaVinciCode),\n(IanM)-[:ACTED_IN {roles:[\u0027Sir Leight Teabing\u0027]}]-\u003e(TheDaVinciCode),\n(AudreyT)-[:ACTED_IN {roles:[\u0027Sophie Neveu\u0027]}]-\u003e(TheDaVinciCode),\n(PaulB)-[:ACTED_IN {roles:[\u0027Silas\u0027]}]-\u003e(TheDaVinciCode),\n(RonH)-[:DIRECTED]-\u003e(TheDaVinciCode)\n\nCREATE (VforVendetta:Movie {title:\u0027V for Vendetta\u0027, released:2006, tagline:\u0027Freedom! Forever!\u0027})\nCREATE (NatalieP:Person {name:\u0027Natalie Portman\u0027, born:1981})\nCREATE (StephenR:Person {name:\u0027Stephen Rea\u0027, born:1946})\nCREATE (JohnH:Person {name:\u0027John Hurt\u0027, born:1940})\nCREATE (BenM:Person {name: \u0027Ben Miles\u0027, born:1967})\nCREATE\n(Hugo)-[:ACTED_IN {roles:[\u0027V\u0027]}]-\u003e(VforVendetta),\n(NatalieP)-[:ACTED_IN {roles:[\u0027Evey Hammond\u0027]}]-\u003e(VforVendetta),\n(StephenR)-[:ACTED_IN {roles:[\u0027Eric Finch\u0027]}]-\u003e(VforVendetta),\n(JohnH)-[:ACTED_IN {roles:[\u0027High Chancellor Adam Sutler\u0027]}]-\u003e(VforVendetta),\n(BenM)-[:ACTED_IN {roles:[\u0027Dascomb\u0027]}]-\u003e(VforVendetta),\n(JamesM)-[:DIRECTED]-\u003e(VforVendetta),\n(LillyW)-[:PRODUCED]-\u003e(VforVendetta),\n(LanaW)-[:PRODUCED]-\u003e(VforVendetta),\n(JoelS)-[:PRODUCED]-\u003e(VforVendetta),\n(LillyW)-[:WROTE]-\u003e(VforVendetta),\n(LanaW)-[:WROTE]-\u003e(VforVendetta)\n\nCREATE (SpeedRacer:Movie {title:\u0027Speed Racer\u0027, released:2008, tagline:\u0027Speed has no limits\u0027})\nCREATE (EmileH:Person {name:\u0027Emile Hirsch\u0027, born:1985})\nCREATE (JohnG:Person {name:\u0027John Goodman\u0027, born:1960})\nCREATE (SusanS:Person {name:\u0027Susan Sarandon\u0027, born:1946})\nCREATE (MatthewF:Person {name:\u0027Matthew Fox\u0027, born:1966})\nCREATE (ChristinaR:Person {name:\u0027Christina Ricci\u0027, born:1980})\nCREATE (Rain:Person {name:\u0027Rain\u0027, born:1982})\nCREATE\n(EmileH)-[:ACTED_IN {roles:[\u0027Speed Racer\u0027]}]-\u003e(SpeedRacer),\n(JohnG)-[:ACTED_IN {roles:[\u0027Pops\u0027]}]-\u003e(SpeedRacer),\n(SusanS)-[:ACTED_IN {roles:[\u0027Mom\u0027]}]-\u003e(SpeedRacer),\n(MatthewF)-[:ACTED_IN {roles:[\u0027Racer X\u0027]}]-\u003e(SpeedRacer),\n(ChristinaR)-[:ACTED_IN {roles:[\u0027Trixie\u0027]}]-\u003e(SpeedRacer),\n(Rain)-[:ACTED_IN {roles:[\u0027Taejo Togokahn\u0027]}]-\u003e(SpeedRacer),\n(BenM)-[:ACTED_IN {roles:[\u0027Cass Jones\u0027]}]-\u003e(SpeedRacer),\n(LillyW)-[:DIRECTED]-\u003e(SpeedRacer),\n(LanaW)-[:DIRECTED]-\u003e(SpeedRacer),\n(LillyW)-[:WROTE]-\u003e(SpeedRacer),\n(LanaW)-[:WROTE]-\u003e(SpeedRacer),\n(JoelS)-[:PRODUCED]-\u003e(SpeedRacer)\n\nCREATE (NinjaAssassin:Movie {title:\u0027Ninja Assassin\u0027, released:2009, tagline:\u0027Prepare to enter a secret world of assassins\u0027})\nCREATE (NaomieH:Person {name:\u0027Naomie Harris\u0027})\nCREATE\n(Rain)-[:ACTED_IN {roles:[\u0027Raizo\u0027]}]-\u003e(NinjaAssassin),\n(NaomieH)-[:ACTED_IN {roles:[\u0027Mika Coretti\u0027]}]-\u003e(NinjaAssassin),\n(RickY)-[:ACTED_IN {roles:[\u0027Takeshi\u0027]}]-\u003e(NinjaAssassin),\n(BenM)-[:ACTED_IN {roles:[\u0027Ryan Maslow\u0027]}]-\u003e(NinjaAssassin),\n(JamesM)-[:DIRECTED]-\u003e(NinjaAssassin),\n(LillyW)-[:PRODUCED]-\u003e(NinjaAssassin),\n(LanaW)-[:PRODUCED]-\u003e(NinjaAssassin),\n(JoelS)-[:PRODUCED]-\u003e(NinjaAssassin)\n\nCREATE (TheGreenMile:Movie {title:\u0027The Green Mile\u0027, released:1999, tagline:\"Walk a mile you\u0027ll never forget.\"})\nCREATE (MichaelD:Person {name:\u0027Michael Clarke Duncan\u0027, born:1957})\nCREATE (DavidM:Person {name:\u0027David Morse\u0027, born:1953})\nCREATE (SamR:Person {name:\u0027Sam Rockwell\u0027, born:1968})\nCREATE (GaryS:Person {name:\u0027Gary Sinise\u0027, born:1955})\nCREATE (PatriciaC:Person {name:\u0027Patricia Clarkson\u0027, born:1959})\nCREATE (FrankD:Person {name:\u0027Frank Darabont\u0027, born:1959})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Paul Edgecomb\u0027]}]-\u003e(TheGreenMile),\n(MichaelD)-[:ACTED_IN {roles:[\u0027John Coffey\u0027]}]-\u003e(TheGreenMile),\n(DavidM)-[:ACTED_IN {roles:[\u0027Brutus \"Brutal\" Howell\u0027]}]-\u003e(TheGreenMile),\n(BonnieH)-[:ACTED_IN {roles:[\u0027Jan Edgecomb\u0027]}]-\u003e(TheGreenMile),\n(JamesC)-[:ACTED_IN {roles:[\u0027Warden Hal Moores\u0027]}]-\u003e(TheGreenMile),\n(SamR)-[:ACTED_IN {roles:[\u0027\"Wild Bill\" Wharton\u0027]}]-\u003e(TheGreenMile),\n(GaryS)-[:ACTED_IN {roles:[\u0027Burt Hammersmith\u0027]}]-\u003e(TheGreenMile),\n(PatriciaC)-[:ACTED_IN {roles:[\u0027Melinda Moores\u0027]}]-\u003e(TheGreenMile),\n(FrankD)-[:DIRECTED]-\u003e(TheGreenMile)\n\nCREATE (FrostNixon:Movie {title:\u0027Frost/Nixon\u0027, released:2008, tagline:\u0027400 million people were waiting for the truth.\u0027})\nCREATE (FrankL:Person {name:\u0027Frank Langella\u0027, born:1938})\nCREATE (MichaelS:Person {name:\u0027Michael Sheen\u0027, born:1969})\nCREATE (OliverP:Person {name:\u0027Oliver Platt\u0027, born:1960})\nCREATE\n(FrankL)-[:ACTED_IN {roles:[\u0027Richard Nixon\u0027]}]-\u003e(FrostNixon),\n(MichaelS)-[:ACTED_IN {roles:[\u0027David Frost\u0027]}]-\u003e(FrostNixon),\n(KevinB)-[:ACTED_IN {roles:[\u0027Jack Brennan\u0027]}]-\u003e(FrostNixon),\n(OliverP)-[:ACTED_IN {roles:[\u0027Bob Zelnick\u0027]}]-\u003e(FrostNixon),\n(SamR)-[:ACTED_IN {roles:[\u0027James Reston, Jr.\u0027]}]-\u003e(FrostNixon),\n(RonH)-[:DIRECTED]-\u003e(FrostNixon)\n\nCREATE (Hoffa:Movie {title:\u0027Hoffa\u0027, released:1992, tagline:\"He didn\u0027t want law. He wanted justice.\"})\nCREATE (DannyD:Person {name:\u0027Danny DeVito\u0027, born:1944})\nCREATE (JohnR:Person {name:\u0027John C. Reilly\u0027, born:1965})\nCREATE\n(JackN)-[:ACTED_IN {roles:[\u0027Hoffa\u0027]}]-\u003e(Hoffa),\n(DannyD)-[:ACTED_IN {roles:[\u0027Robert \"Bobby\" Ciaro\u0027]}]-\u003e(Hoffa),\n(JTW)-[:ACTED_IN {roles:[\u0027Frank Fitzsimmons\u0027]}]-\u003e(Hoffa),\n(JohnR)-[:ACTED_IN {roles:[\u0027Peter \"Pete\" Connelly\u0027]}]-\u003e(Hoffa),\n(DannyD)-[:DIRECTED]-\u003e(Hoffa)\n\nCREATE (Apollo13:Movie {title:\u0027Apollo 13\u0027, released:1995, tagline:\u0027Houston, we have a problem.\u0027})\nCREATE (EdH:Person {name:\u0027Ed Harris\u0027, born:1950})\nCREATE (BillPax:Person {name:\u0027Bill Paxton\u0027, born:1955})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Jim Lovell\u0027]}]-\u003e(Apollo13),\n(KevinB)-[:ACTED_IN {roles:[\u0027Jack Swigert\u0027]}]-\u003e(Apollo13),\n(EdH)-[:ACTED_IN {roles:[\u0027Gene Kranz\u0027]}]-\u003e(Apollo13),\n(BillPax)-[:ACTED_IN {roles:[\u0027Fred Haise\u0027]}]-\u003e(Apollo13),\n(GaryS)-[:ACTED_IN {roles:[\u0027Ken Mattingly\u0027]}]-\u003e(Apollo13),\n(RonH)-[:DIRECTED]-\u003e(Apollo13)\n\nCREATE (Twister:Movie {title:\u0027Twister\u0027, released:1996, tagline:\"Don\u0027t Breathe. Don\u0027t Look Back.\"})\nCREATE (PhilipH:Person {name:\u0027Philip Seymour Hoffman\u0027, born:1967})\nCREATE (JanB:Person {name:\u0027Jan de Bont\u0027, born:1943})\nCREATE\n(BillPax)-[:ACTED_IN {roles:[\u0027Bill Harding\u0027]}]-\u003e(Twister),\n(HelenH)-[:ACTED_IN {roles:[\u0027Dr. Jo Harding\u0027]}]-\u003e(Twister),\n(ZachG)-[:ACTED_IN {roles:[\u0027Eddie\u0027]}]-\u003e(Twister),\n(PhilipH)-[:ACTED_IN {roles:[\u0027Dustin \"Dusty\" Davis\u0027]}]-\u003e(Twister),\n(JanB)-[:DIRECTED]-\u003e(Twister)\n\nCREATE (CastAway:Movie {title:\u0027Cast Away\u0027, released:2000, tagline:\u0027At the edge of the world, his journey begins.\u0027})\nCREATE (RobertZ:Person {name:\u0027Robert Zemeckis\u0027, born:1951})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Chuck Noland\u0027]}]-\u003e(CastAway),\n(HelenH)-[:ACTED_IN {roles:[\u0027Kelly Frears\u0027]}]-\u003e(CastAway),\n(RobertZ)-[:DIRECTED]-\u003e(CastAway)\n\nCREATE (OneFlewOvertheCuckoosNest:Movie {title:\"One Flew Over the Cuckoo\u0027s Nest\", released:1975, tagline:\"If he\u0027s crazy, what does that make you?\"})\nCREATE (MilosF:Person {name:\u0027Milos Forman\u0027, born:1932})\nCREATE\n(JackN)-[:ACTED_IN {roles:[\u0027Randle McMurphy\u0027]}]-\u003e(OneFlewOvertheCuckoosNest),\n(DannyD)-[:ACTED_IN {roles:[\u0027Martini\u0027]}]-\u003e(OneFlewOvertheCuckoosNest),\n(MilosF)-[:DIRECTED]-\u003e(OneFlewOvertheCuckoosNest)\n\nCREATE (SomethingsGottaGive:Movie {title:\"Something\u0027s Gotta Give\", released:2003})\nCREATE (DianeK:Person {name:\u0027Diane Keaton\u0027, born:1946})\nCREATE (NancyM:Person {name:\u0027Nancy Meyers\u0027, born:1949})\nCREATE\n(JackN)-[:ACTED_IN {roles:[\u0027Harry Sanborn\u0027]}]-\u003e(SomethingsGottaGive),\n(DianeK)-[:ACTED_IN {roles:[\u0027Erica Barry\u0027]}]-\u003e(SomethingsGottaGive),\n(Keanu)-[:ACTED_IN {roles:[\u0027Julian Mercer\u0027]}]-\u003e(SomethingsGottaGive),\n(NancyM)-[:DIRECTED]-\u003e(SomethingsGottaGive),\n(NancyM)-[:PRODUCED]-\u003e(SomethingsGottaGive),\n(NancyM)-[:WROTE]-\u003e(SomethingsGottaGive)\n\nCREATE (BicentennialMan:Movie {title:\u0027Bicentennial Man\u0027, released:1999, tagline:\"One robot\u0027s 200 year journey to become an ordinary man.\"})\nCREATE (ChrisC:Person {name:\u0027Chris Columbus\u0027, born:1958})\nCREATE\n(Robin)-[:ACTED_IN {roles:[\u0027Andrew Marin\u0027]}]-\u003e(BicentennialMan),\n(OliverP)-[:ACTED_IN {roles:[\u0027Rupert Burns\u0027]}]-\u003e(BicentennialMan),\n(ChrisC)-[:DIRECTED]-\u003e(BicentennialMan)\n\nCREATE (CharlieWilsonsWar:Movie {title:\"Charlie Wilson\u0027s War\", released:2007, tagline:\"A stiff drink. A little mascara. A lot of nerve. Who said they couldn\u0027t bring down the Soviet empire.\"})\nCREATE (JuliaR:Person {name:\u0027Julia Roberts\u0027, born:1967})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Rep. Charlie Wilson\u0027]}]-\u003e(CharlieWilsonsWar),\n(JuliaR)-[:ACTED_IN {roles:[\u0027Joanne Herring\u0027]}]-\u003e(CharlieWilsonsWar),\n(PhilipH)-[:ACTED_IN {roles:[\u0027Gust Avrakotos\u0027]}]-\u003e(CharlieWilsonsWar),\n(MikeN)-[:DIRECTED]-\u003e(CharlieWilsonsWar)\n\nCREATE (ThePolarExpress:Movie {title:\u0027The Polar Express\u0027, released:2004, tagline:\u0027This Holiday Season… Believe\u0027})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Hero Boy\u0027, \u0027Father\u0027, \u0027Conductor\u0027, \u0027Hobo\u0027, \u0027Scrooge\u0027, \u0027Santa Claus\u0027]}]-\u003e(ThePolarExpress),\n(RobertZ)-[:DIRECTED]-\u003e(ThePolarExpress)\n\nCREATE (ALeagueofTheirOwn:Movie {title:\u0027A League of Their Own\u0027, released:1992, tagline:\u0027Once in a lifetime you get a chance to do something different.\u0027})\nCREATE (Madonna:Person {name:\u0027Madonna\u0027, born:1954})\nCREATE (GeenaD:Person {name:\u0027Geena Davis\u0027, born:1956})\nCREATE (LoriP:Person {name:\u0027Lori Petty\u0027, born:1963})\nCREATE (PennyM:Person {name:\u0027Penny Marshall\u0027, born:1943})\nCREATE\n(TomH)-[:ACTED_IN {roles:[\u0027Jimmy Dugan\u0027]}]-\u003e(ALeagueofTheirOwn),\n(GeenaD)-[:ACTED_IN {roles:[\u0027Dottie Hinson\u0027]}]-\u003e(ALeagueofTheirOwn),\n(LoriP)-[:ACTED_IN {roles:[\u0027Kit Keller\u0027]}]-\u003e(ALeagueofTheirOwn),\n(RosieO)-[:ACTED_IN {roles:[\u0027Doris Murphy\u0027]}]-\u003e(ALeagueofTheirOwn),\n(Madonna)-[:ACTED_IN {roles:[\u0027\"All the Way\" Mae Mordabito\u0027]}]-\u003e(ALeagueofTheirOwn),\n(BillPax)-[:ACTED_IN {roles:[\u0027Bob Hinson\u0027]}]-\u003e(ALeagueofTheirOwn),\n(PennyM)-[:DIRECTED]-\u003e(ALeagueofTheirOwn)\n\nCREATE (PaulBlythe:Person {name:\u0027Paul Blythe\u0027})\nCREATE (AngelaScope:Person {name:\u0027Angela Scope\u0027})\nCREATE (JessicaThompson:Person {name:\u0027Jessica Thompson\u0027})\nCREATE (JamesThompson:Person {name:\u0027James Thompson\u0027})\n\nCREATE\n(JamesThompson)-[:FOLLOWS]-\u003e(JessicaThompson),\n(AngelaScope)-[:FOLLOWS]-\u003e(JessicaThompson),\n(PaulBlythe)-[:FOLLOWS]-\u003e(AngelaScope)\n\nCREATE\n(JessicaThompson)-[:REVIEWED {summary:\u0027An amazing journey\u0027, rating:95}]-\u003e(CloudAtlas),\n(JessicaThompson)-[:REVIEWED {summary:\u0027Silly, but fun\u0027, rating:65}]-\u003e(TheReplacements),\n(JamesThompson)-[:REVIEWED {summary:\u0027The coolest football movie ever\u0027, rating:100}]-\u003e(TheReplacements),\n(AngelaScope)-[:REVIEWED {summary:\u0027Pretty funny at times\u0027, rating:62}]-\u003e(TheReplacements),\n(JessicaThompson)-[:REVIEWED {summary:\u0027Dark, but compelling\u0027, rating:85}]-\u003e(Unforgiven),\n(JessicaThompson)-[:REVIEWED {summary:\"Slapstick redeemed only by the Robin Williams and Gene Hackman\u0027s stellar performances\", rating:45}]-\u003e(TheBirdcage),\n(JessicaThompson)-[:REVIEWED {summary:\u0027A solid romp\u0027, rating:68}]-\u003e(TheDaVinciCode),\n(JamesThompson)-[:REVIEWED {summary:\u0027Fun, but a little far fetched\u0027, rating:65}]-\u003e(TheDaVinciCode),\n(JessicaThompson)-[:REVIEWED {summary:\u0027You had me at Jerry\u0027, rating:92}]-\u003e(JerryMaguire)",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:21.941",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601977051379_-1963492179",
+      "id": "paragraph_1601977051379_-1963492179",
+      "dateCreated": "2020-10-06 09:37:31.379",
+      "dateStarted": "2020-10-06 12:27:21.969",
+      "dateFinished": "2020-10-06 12:27:23.960",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n## Reading labels\n\nYou can read nodes by specifying their labels with the `labels` option.\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:23.969",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eReading labels\u003c/h2\u003e\n\u003cp\u003eYou can read nodes by specifying their labels with the \u003ccode\u003elabels\u003c/code\u003e option.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601978216532_1562948060",
+      "id": "paragraph_1601978216532_1562948060",
+      "dateCreated": "2020-10-06 09:56:56.533",
+      "dateStarted": "2020-10-06 12:27:23.988",
+      "dateFinished": "2020-10-06 12:27:24.006",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"labels\", \"Movie\")\n    .load\n    \ndf.select(\"\u003cid\u003e\", \"title\", \"released\")\n    .where(\"released \u003e\u003d 2000\")\n    .orderBy(\"released\", \"title\")\n    .show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:24.087",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+--------------------+--------+\n|\u003cid\u003e|               title|released|\n+----+--------------------+--------+\n| 150|           Cast Away|    2000|\n|  37|       Jerry Maguire|    2000|\n|  87|    The Replacements|    2000|\n| 154|Something\u0027s Gotta...|    2003|\n|   9| The Matrix Reloaded|    2003|\n|  10|The Matrix Revolu...|    2003|\n| 161|   The Polar Express|    2004|\n|  92|          RescueDawn|    2006|\n| 111|   The Da Vinci Code|    2006|\n| 116|      V for Vendetta|    2006|\n| 159|Charlie Wilson\u0027s War|    2007|\n| 137|         Frost/Nixon|    2008|\n| 121|         Speed Racer|    2008|\n| 128|      Ninja Assassin|    2009|\n| 105|         Cloud Atlas|    2012|\n+----+--------------------+--------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003cid\u003e: bigint, \u003clabels\u003e: array\u003cstring\u003e ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598858773117_-449948507",
+      "id": "paragraph_1598858773117_-449948507",
+      "dateCreated": "2020-08-31 07:26:13.117",
+      "dateStarted": "2020-10-06 12:27:24.106",
+      "dateFinished": "2020-10-06 12:27:36.694",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n## Reading relationship\n\nIn the following example we are going to read all the `Movie` and `Person` nodes that are connected by the `DIRECTED` relationship.\n\nWe then filter just the rows that which `Person`\u0027s name ends with `Wachowski`.",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:36.729",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eReading relationship\u003c/h2\u003e\n\u003cp\u003eIn the following example we are going to read all the \u003ccode\u003eMovie\u003c/code\u003e and \u003ccode\u003ePerson\u003c/code\u003e nodes that are connected by the \u003ccode\u003eDIRECTED\u003c/code\u003e relationship.\u003c/p\u003e\n\u003cp\u003eWe then filter just the rows that which \u003ccode\u003ePerson\u003c/code\u003e\u0026rsquo;s name ends with \u003ccode\u003eWachowski\u003c/code\u003e.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601974756896_1246556117",
+      "id": "paragraph_1601974756896_1246556117",
+      "dateCreated": "2020-10-06 08:59:16.896",
+      "dateStarted": "2020-10-06 12:27:36.748",
+      "dateFinished": "2020-10-06 12:27:36.794",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"DIRECTED\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.where(\"`source.name` LIKE \u0027%Wachowski\u0027\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:36.846",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+-----------+---------------+---------------+-----------+-----------+---------------+--------------------+--------------------+---------------+\n|\u003crel.id\u003e|\u003crel.type\u003e|\u003csource.id\u003e|\u003csource.labels\u003e|    source.name|source.born|\u003ctarget.id\u003e|\u003ctarget.labels\u003e|        target.title|      target.tagline|target.released|\n+--------+----------+-----------+---------------+---------------+-----------+-----------+---------------+--------------------+--------------------+---------------+\n|       5|  DIRECTED|          6|       [Person]| Lana Wachowski|       1965|          0|        [Movie]|          The Matrix|Welcome to the Re...|           1999|\n|       4|  DIRECTED|          5|       [Person]|Lilly Wachowski|       1967|          0|        [Movie]|          The Matrix|Welcome to the Re...|           1999|\n|      13|  DIRECTED|          6|       [Person]| Lana Wachowski|       1965|          9|        [Movie]| The Matrix Reloaded|      Free your mind|           2003|\n|      12|  DIRECTED|          5|       [Person]|Lilly Wachowski|       1967|          9|        [Movie]| The Matrix Reloaded|      Free your mind|           2003|\n|      20|  DIRECTED|          6|       [Person]| Lana Wachowski|       1965|         10|        [Movie]|The Matrix Revolu...|Everything that h...|           2003|\n|      19|  DIRECTED|          5|       [Person]|Lilly Wachowski|       1967|         10|        [Movie]|The Matrix Revolu...|Everything that h...|           2003|\n|     143|  DIRECTED|          6|       [Person]| Lana Wachowski|       1965|        105|        [Movie]|         Cloud Atlas|Everything is con...|           2012|\n|     142|  DIRECTED|          5|       [Person]|Lilly Wachowski|       1967|        105|        [Movie]|         Cloud Atlas|Everything is con...|           2012|\n|     170|  DIRECTED|          6|       [Person]| Lana Wachowski|       1965|        121|        [Movie]|         Speed Racer| Speed has no limits|           2008|\n|     169|  DIRECTED|          5|       [Person]|Lilly Wachowski|       1967|        121|        [Movie]|         Speed Racer| Speed has no limits|           2008|\n+--------+----------+-----------+---------------+---------------+-----------+-----------+---------------+--------------------+--------------------+---------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003crel.id\u003e: bigint, \u003crel.type\u003e: string ... 9 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601978294807_2072327515",
+      "id": "paragraph_1601978294807_2072327515",
+      "dateCreated": "2020-10-06 09:58:14.807",
+      "dateStarted": "2020-10-06 12:27:36.864",
+      "dateFinished": "2020-10-06 12:27:38.714",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n## Reading relationship as a map\n\nWe read the same query, but this time we can use the `source` and `target` fields as a Map by setting the `relationship.nmodes.map` option to `true`.\n\nMore on `relationship.nmodes.map` option [here](http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/reading.html#_node_mapping).",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:38.772",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eReading relationship as a map\u003c/h2\u003e\n\u003cp\u003eWe read the same query, but this time we can use the \u003ccode\u003esource\u003c/code\u003e and \u003ccode\u003etarget\u003c/code\u003e fields as a Map by setting the \u003ccode\u003erelationship.nmodes.map\u003c/code\u003e option to \u003ccode\u003etrue\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eMore on \u003ccode\u003erelationship.nmodes.map\u003c/code\u003e option \u003ca href\u003d\"http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/reading.html#_node_mapping\"\u003ehere\u003c/a\u003e.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601974975080_1791618520",
+      "id": "paragraph_1601974975080_1791618520",
+      "dateCreated": "2020-10-06 09:02:55.080",
+      "dateStarted": "2020-10-06 12:27:38.792",
+      "dateFinished": "2020-10-06 12:27:38.811",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"true\")\n    .option(\"relationship\", \"DIRECTED\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.select(\"\u003csource\u003e\")\n    .collectAsList()\n    .get(0)\n    .getAs[Map[String, AnyRef]](0)\n    .foreach(println)\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:38.889",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(name,\"Lana Wachowski\")\n(born,1965)\n(\u003clabels\u003e,[\"Person\"])\n(\u003cid\u003e,6)\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [\u003crel.id\u003e: bigint, \u003crel.type\u003e: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598868810416_-860533122",
+      "id": "paragraph_1598868810416_-860533122",
+      "dateCreated": "2020-08-31 10:13:30.416",
+      "dateStarted": "2020-10-06 12:27:38.904",
+      "dateFinished": "2020-10-06 12:27:40.558",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n## Reading by Cypher query\n\nYou can write a direct cypher read query using the `query` option.",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:40.608",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eReading by Cypher query\u003c/h2\u003e\n\u003cp\u003eYou can write a direct cypher read query using the \u003ccode\u003equery\u003c/code\u003e option.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601978624238_41727390",
+      "id": "paragraph_1601978624238_41727390",
+      "dateCreated": "2020-10-06 10:03:44.238",
+      "dateStarted": "2020-10-06 12:27:40.627",
+      "dateFinished": "2020-10-06 12:27:40.642",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"query\", \"MATCH (n:Movie {title: \u0027Unforgiven\u0027})-[r]-(p:Person) RETURN labels(p) as labels, type(r) as rel, p.name as name\")\n    .load\n    \ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:40.725",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+--------+----------------+\n|     rel|  labels|            name|\n+--------+--------+----------------+\n|ACTED_IN|[Person]|  Clint Eastwood|\n|ACTED_IN|[Person]|    Gene Hackman|\n|DIRECTED|[Person]|  Clint Eastwood|\n|ACTED_IN|[Person]|  Richard Harris|\n|REVIEWED|[Person]|Jessica Thompson|\n+--------+--------+----------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [rel: string, labels: array\u003cstring\u003e ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598869044668_-473974905",
+      "id": "paragraph_1598869044668_-473974905",
+      "dateCreated": "2020-08-31 10:17:24.668",
+      "dateStarted": "2020-10-06 12:27:40.737",
+      "dateFinished": "2020-10-06 12:27:42.082",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:27:42.140",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598869313533_2059315222",
+      "id": "paragraph_1598869313533_2059315222",
+      "dateCreated": "2020-08-31 10:21:53.533",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "Scala - Basic Reading",
+  "id": "2FKBZ7EWF",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {
+    "isRunning": false
+  }
+}

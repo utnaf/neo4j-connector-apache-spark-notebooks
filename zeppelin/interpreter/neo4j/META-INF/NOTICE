@@ -1,0 +1,37 @@
+// ------------------------------------------------------------------
+// NOTICE file corresponding to the section 4d of The Apache License,                                                                                               
+// Version 2.0, in this case for Zeppelin: Neo4j interpreter                                                                                  
+// ------------------------------------------------------------------
+
+Zeppelin: Neo4j interpreter
+Copyright 2013-2020 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+This product includes software, Jackson-annotations, developed by                                                                                                   
+FasterXML (http://fasterxml.com/).
+This product includes software, Jackson-core, developed by                                                                                                   
+FasterXML (http://fasterxml.com/).
+This product includes software, jackson-databind, developed by                                                                                                   
+FasterXML (http://fasterxml.com/).
+This product includes software, Gson, developed by                                                                                                   
+Google, Inc. (http://www.google.com).
+This product includes software, Commons Lang, developed by                                                                                                   
+The Apache Software Foundation (http://www.apache.org/).
+This product includes software, Commons Logging, developed by                                                                                                   
+The Apache Software Foundation (http://www.apache.org/).
+This product includes software, Apache Log4j, developed by                                                                                                   
+Apache Software Foundation (http://www.apache.org).
+This product includes software, Apache Commons Exec, developed by                                                                                                   
+The Apache Software Foundation (http://www.apache.org/).
+This product includes software, Zeppelin: Interpreter Shaded, developed by                                                                                                   
+The Apache Software Foundation (http://www.apache.org/).
+This product includes software, Neo4j Java Driver, developed by                                                                                                   
+$project.organization.name ($project.organization.url).
+This product includes software, reactive-streams, developed by                                                                                                   
+$project.organization.name ($project.organization.url).
+This product includes software, SLF4J API Module, developed by                                                                                                   
+QOS.ch (http://www.qos.ch).
+This product includes software, SLF4J LOG4J-12 Binding, developed by                                                                                                   
+QOS.ch (http://www.qos.ch).

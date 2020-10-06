@@ -1,0 +1,350 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n# Writing with Neo4j Connector for Apache Spark\n\nDocs [here](http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/writing.html).",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:52:33.872",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eWriting with Neo4j Connector for Apache Spark\u003c/h1\u003e\n\u003cp\u003eDocs \u003ca href\u003d\"http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/writing.html\"\u003ehere\u003c/a\u003e.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601988521241_388338299",
+      "id": "paragraph_1601988521241_388338299",
+      "dateCreated": "2020-10-06 12:48:41.241",
+      "dateStarted": "2020-10-06 12:52:33.138",
+      "dateFinished": "2020-10-06 12:52:33.150",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n## Writing relationship",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 12:52:50.818",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eWriting relationship\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601988757894_819809750",
+      "id": "paragraph_1601988757894_819809750",
+      "dateCreated": "2020-10-06 12:52:37.894",
+      "dateStarted": "2020-10-06 12:52:49.881",
+      "dateFinished": "2020-10-06 12:52:49.897",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val musicDf \u003d Seq(\n      (12, \"John Bonham\", \"Drums\"),\n      (19, \"John Mayer\", \"Guitar\"),\n      (32, \"John Scofield\", \"Guitar\"),\n      (15, \"John Butler\", \"Guitar\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"ErrorIfExists\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:18:38.691",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [experience: int, name: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598874400391_-1735147610",
+      "id": "paragraph_1598874400391_-1735147610",
+      "dateCreated": "2020-08-31 11:46:40.391",
+      "dateStarted": "2020-10-06 13:18:38.712",
+      "dateFinished": "2020-10-06 13:18:40.852",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%neo4j\n\nMATCH (m:Musician)-[p:PLAYS]-\u003e(i:Instrument) RETURN m,p,i",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:18:46.675",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "network",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "label": "string",
+                      "name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "id",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "label",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "NETWORK",
+            "data": "{\"nodes\":[{\"id\":176,\"data\":{\"name\":\"Guitar\"},\"label\":\"Instrument\"},{\"id\":171,\"data\":{\"name\":\"John Bonham\"},\"label\":\"Musician\"},{\"id\":172,\"data\":{\"name\":\"John Mayer\"},\"label\":\"Musician\"},{\"id\":173,\"data\":{\"name\":\"John Scofield\"},\"label\":\"Musician\"},{\"id\":174,\"data\":{\"name\":\"John Butler\"},\"label\":\"Musician\"},{\"id\":175,\"data\":{\"name\":\"Drums\"},\"label\":\"Instrument\"}],\"edges\":[{\"source\":174,\"target\":176,\"id\":256,\"data\":{},\"label\":\"PLAYS\"},{\"source\":171,\"target\":175,\"id\":253,\"data\":{},\"label\":\"PLAYS\"},{\"source\":172,\"target\":176,\"id\":254,\"data\":{},\"label\":\"PLAYS\"},{\"source\":173,\"target\":176,\"id\":255,\"data\":{},\"label\":\"PLAYS\"}],\"labels\":{\"Person\":\"#C5F06C\",\"Musician\":\"#FB7B7F\",\"Instrument\":\"#C26546\",\"Movie\":\"#0CA172\"},\"types\":[\"ACTED_IN\",\"REVIEWED\",\"PLAYS\",\"PRODUCED\",\"WROTE\",\"FOLLOWS\",\"DIRECTED\"],\"directed\":true}"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601988801498_828048611",
+      "id": "paragraph_1601988801498_828048611",
+      "dateCreated": "2020-10-06 12:53:21.498",
+      "dateStarted": "2020-10-06 13:18:42.866",
+      "dateFinished": "2020-10-06 13:18:43.053",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val musicDf \u003d Seq(\n      (1, \"John Bonham\", \"Guitar\"),\n      (8, \"John Bonham\", \"Congas\"),\n      (3, \"John Butler\", \"Double Bass\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .mode(\"Overwrite\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:19:16.708",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [experience: int, name: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1598962718901_-250731872",
+      "id": "paragraph_1598962718901_-250731872",
+      "dateCreated": "2020-09-01 12:18:38.901",
+      "dateStarted": "2020-10-06 13:19:16.721",
+      "dateFinished": "2020-10-06 13:19:17.918",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%neo4j\n\nMATCH (m:Musician)-[p:PLAYS]-\u003e(i:Instrument) RETURN m,p,i",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:19:19.403",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "network",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "label": "string",
+                      "name": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "NETWORK",
+            "data": "{\"nodes\":[{\"id\":176,\"data\":{\"name\":\"Guitar\"},\"label\":\"Instrument\"},{\"id\":177,\"data\":{\"name\":\"Congas\"},\"label\":\"Instrument\"},{\"id\":178,\"data\":{\"name\":\"Double Bass\"},\"label\":\"Instrument\"},{\"id\":171,\"data\":{\"name\":\"John Bonham\"},\"label\":\"Musician\"},{\"id\":172,\"data\":{\"name\":\"John Mayer\"},\"label\":\"Musician\"},{\"id\":173,\"data\":{\"name\":\"John Scofield\"},\"label\":\"Musician\"},{\"id\":174,\"data\":{\"name\":\"John Butler\"},\"label\":\"Musician\"},{\"id\":175,\"data\":{\"name\":\"Drums\"},\"label\":\"Instrument\"}],\"edges\":[{\"source\":174,\"target\":176,\"id\":256,\"data\":{},\"label\":\"PLAYS\"},{\"source\":171,\"target\":176,\"id\":257,\"data\":{},\"label\":\"PLAYS\"},{\"source\":171,\"target\":177,\"id\":258,\"data\":{},\"label\":\"PLAYS\"},{\"source\":174,\"target\":178,\"id\":259,\"data\":{},\"label\":\"PLAYS\"},{\"source\":171,\"target\":175,\"id\":253,\"data\":{},\"label\":\"PLAYS\"},{\"source\":172,\"target\":176,\"id\":254,\"data\":{},\"label\":\"PLAYS\"},{\"source\":173,\"target\":176,\"id\":255,\"data\":{},\"label\":\"PLAYS\"}],\"labels\":{\"Person\":\"#C5F06C\",\"Musician\":\"#FB7B7F\",\"Instrument\":\"#C26546\",\"Movie\":\"#0CA172\"},\"types\":[\"ACTED_IN\",\"REVIEWED\",\"PLAYS\",\"PRODUCED\",\"WROTE\",\"FOLLOWS\",\"DIRECTED\"],\"directed\":true}"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601971024198_-1734110607",
+      "id": "paragraph_1601971024198_-1734110607",
+      "dateCreated": "2020-10-06 07:57:04.199",
+      "dateStarted": "2020-10-06 13:19:19.423",
+      "dateFinished": "2020-10-06 13:19:19.477",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%neo4j\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-06 13:19:04.147",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601990344147_-823611131",
+      "id": "paragraph_1601990344147_-823611131",
+      "dateCreated": "2020-10-06 13:19:04.147",
+      "status": "READY"
+    }
+  ],
+  "name": "Scala - Basic Writing",
+  "id": "2FHU38B34",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
