@@ -1,0 +1,274 @@
+{
+  "paragraphs": [
+    {
+      "title": "Custom Neo4j UDFs and Spark",
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:14:38.001",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602086954178_-84212442",
+      "id": "paragraph_1602086954178_-84212442",
+      "dateCreated": "2020-10-07 16:09:14.178",
+      "status": "READY"
+    },
+    {
+      "text": "// This sample notebook will show you how to create custom UDFs for Spark using Neo4j\n\n// Because the Neo4j Connector for Apache Spark comes with a Neo4j Java driver packaged \n// into it, you can natively use the Neo4j Java driver as part of your spark programs.\nimport org.neo4j.driver.{Driver, GraphDatabase, Session, Result, Record, AuthTokens, Transaction, TransactionWork};\n\nval user \u003d \"neo4j\"\nval password \u003d \"zeppelin\"\nval uri \u003d \"bolt://neo4j\"\n\nval driver \u003d GraphDatabase.driver( uri, AuthTokens.basic( user, password ) );\nval session \u003d driver.session\n\n// Write some sample data for testing purposes, using some simple geneaology data.\nval result \u003d session.run(\"\"\"\n   CREATE (bob:Person { name: \"Bob\" })\n        -[:CHILD]-\u003e(sarah:Person { name: \"Sarah\" })\n            -[:CHILD]-\u003e(kurt:Person { name: \"Kurt\" })\n   CREATE (sarah)-[:CHILD]-\u003e(:Person { name: \"Martha\" })\n   RETURN true\n\"\"\")\n\nprintln(\"Created data: \" + result.single.get(0))",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:15:08.162",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Created data: TRUE\nimport org.neo4j.driver.{Driver, GraphDatabase, Session, Result, Record, AuthTokens, Transaction, TransactionWork}\nimport org.apache.spark.sql.functions.udf\n\u001b[1m\u001b[34muser\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d neo4j\n\u001b[1m\u001b[34mpassword\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d zeppelin\n\u001b[1m\u001b[34muri\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d bolt://neo4j\n\u001b[1m\u001b[34mdriver\u001b[0m: \u001b[1m\u001b[32morg.neo4j.driver.Driver\u001b[0m \u003d org.neo4j.driver.internal.InternalDriver@6ce7b7bd\n\u001b[1m\u001b[34msession\u001b[0m: \u001b[1m\u001b[32morg.neo4j.driver.Session\u001b[0m \u003d org.neo4j.driver.internal.InternalSession@5b3624fc\n\u001b[1m\u001b[34mresult\u001b[0m: \u001b[1m\u001b[32morg.neo4j.driver.Result\u001b[0m \u003d org.neo4j.driver.internal.InternalResult@3ced45cc\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602083886753_382342748",
+      "id": "paragraph_1602083886753_382342748",
+      "dateCreated": "2020-10-07 15:18:06.753",
+      "dateStarted": "2020-10-07 15:18:40.676",
+      "dateFinished": "2020-10-07 15:18:42.438",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Let\u0027s define a function to count descendants!\nimport org.neo4j.driver.Values.parameters;\n\ndef countDescendants(personName: String) : Integer \u003d {\n    val session \u003d driver.session\n    val result \u003d session.run(\"\"\"\n       MATCH (:Person { name: $name })-[:CHILD*]-\u003e(child:Person)\n       RETURN count(distinct(child)) as descendants\n    \"\"\", parameters(\"name\", personName))\n    \n    return result.single.get(0).asInt\n}\n\nprintln(\"Bob\u0027s descendants: \" + countDescendants(\"Bob\"))\n\n// Looking good so far.\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:15:31.850",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Bob\u0027s descendants: 3\nimport org.neo4j.driver.Values.parameters\n\u001b[1m\u001b[34mcountDescendants\u001b[0m: \u001b[1m\u001b[32m(personName: String)Integer\u001b[0m\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602082581879_1592744541",
+      "id": "paragraph_1602082581879_1592744541",
+      "dateCreated": "2020-10-07 14:56:21.879",
+      "dateStarted": "2020-10-07 16:03:56.470",
+      "dateFinished": "2020-10-07 16:03:56.908",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Take this simple function and make it a UDF.\n// Creating scala UDFs for Spark:\n// https://jaceklaskowski.gitbooks.io/mastering-spark-sql/content/spark-sql-udfs.html\nimport org.apache.spark.sql.functions.udf\n\nval countDescendantsUDF \u003d udf(countDescendants _)",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:14:21.680",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.functions.udf\n\u001b[1m\u001b[34mcountDescendantsUDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.UserDefinedFunction\u001b[0m \u003d UserDefinedFunction(\u003cfunction1\u003e,IntegerType,Some(List(StringType)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602082621947_-1897965463",
+      "id": "paragraph_1602082621947_-1897965463",
+      "dateCreated": "2020-10-07 14:57:01.947",
+      "dateStarted": "2020-10-07 16:06:27.561",
+      "dateFinished": "2020-10-07 16:06:28.925",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Let\u0027s make some data in a dataframe.\n\nval dataset \u003d Seq((0, \"Bob\"), (1, \"Sarah\"), (2, \"Kurt\")).toDF(\"id\", \"name\")\ndataset.show()",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:14:21.728",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-----+\n| id| name|\n+---+-----+\n|  0|  Bob|\n|  1|Sarah|\n|  2| Kurt|\n+---+-----+\n\n\u001b[1m\u001b[34mdataset\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: int, name: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602086727973_-414703294",
+      "id": "paragraph_1602086727973_-414703294",
+      "dateCreated": "2020-10-07 16:05:27.973",
+      "dateStarted": "2020-10-07 16:07:10.486",
+      "dateFinished": "2020-10-07 16:07:12.683",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Finally, apply the UDF to our dataset.\n\ndataset.withColumn(\"descendants\", countDescendantsUDF(\u0027name)).show",
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:15:34.042",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-----+-----------+\n| id| name|descendants|\n+---+-----+-----------+\n|  0|  Bob|          3|\n|  1|Sarah|          2|\n|  2| Kurt|          0|\n+---+-----+-----------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602086830483_1984315201",
+      "id": "paragraph_1602086830483_1984315201",
+      "dateCreated": "2020-10-07 16:07:10.484",
+      "dateStarted": "2020-10-07 16:15:34.076",
+      "dateFinished": "2020-10-07 16:15:34.650",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2020-10-07 16:14:21.777",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602086900551_-1781421734",
+      "id": "paragraph_1602086900551_-1781421734",
+      "dateCreated": "2020-10-07 16:08:20.551",
+      "status": "READY"
+    }
+  ],
+  "name": "Scala UDFs",
+  "id": "2FN684XZ7",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
