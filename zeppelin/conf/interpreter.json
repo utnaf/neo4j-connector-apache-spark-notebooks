@@ -182,17 +182,17 @@
           "type": "password",
           "description": "The JDBC user password"
         },
-        "default.completer.ttlInSeconds": {
-          "name": "default.completer.ttlInSeconds",
-          "value": "120",
-          "type": "number",
-          "description": "Time to live sql completer in seconds (-1 to update everytime, 0 to disable update)"
-        },
         "default.driver": {
           "name": "default.driver",
           "value": "org.postgresql.Driver",
           "type": "string",
           "description": "JDBC Driver Name"
+        },
+        "default.completer.ttlInSeconds": {
+          "name": "default.completer.ttlInSeconds",
+          "value": "120",
+          "type": "number",
+          "description": "Time to live sql completer in seconds (-1 to update everytime, 0 to disable update)"
         },
         "default.completer.schemaFilters": {
           "name": "default.completer.schemaFilters",
@@ -211,12 +211,6 @@
           "value": "",
           "type": "textarea",
           "description": "Runs before each run of the paragraph, in the same connection"
-        },
-        "default.splitQueries": {
-          "name": "default.splitQueries",
-          "value": false,
-          "type": "checkbox",
-          "description": "Each query is executed apart and returns the result"
         },
         "common.max_count": {
           "name": "common.max_count",
@@ -271,6 +265,11 @@
           "value": "1000",
           "type": "number",
           "description": "Maximum number of rows fetched from the query."
+        },
+        "default.splitQueries": {
+          "name": "default.splitQueries",
+          "value": false,
+          "type": "checkbox"
         }
       },
       "status": "READY",
@@ -351,6 +350,59 @@
           "class": "org.apache.zeppelin.lens.LensInterpreter",
           "defaultInterpreter": false,
           "editor": {
+            "editOnDblClick": false,
+            "completionSupport": false
+          }
+        }
+      ],
+      "dependencies": [],
+      "option": {
+        "remote": true,
+        "port": -1,
+        "isExistingProcess": false,
+        "setPermission": false,
+        "owners": [],
+        "isUserImpersonate": false
+      }
+    },
+    "influxdb": {
+      "id": "influxdb",
+      "name": "influxdb",
+      "group": "influxdb",
+      "properties": {
+        "influxdb.url": {
+          "name": "influxdb.url",
+          "value": "http://localhost:9999",
+          "type": "string",
+          "description": "The URL for InfluxDB 2.X API"
+        },
+        "influxdb.token": {
+          "name": "influxdb.token",
+          "value": "my-token",
+          "type": "password",
+          "description": "InfluxDB auth token"
+        },
+        "influxdb.org": {
+          "name": "influxdb.org",
+          "value": "my-org",
+          "type": "string",
+          "description": "InfluxDB org name"
+        },
+        "influxdb.logLevel": {
+          "name": "influxdb.logLevel",
+          "value": "NONE",
+          "type": "string",
+          "description": "InfluxDB http client library verbosity level (NONE, BASIC, HEADERS, BODY)"
+        }
+      },
+      "status": "READY",
+      "interpreterGroup": [
+        {
+          "name": "influxdb",
+          "class": "org.apache.zeppelin.influxdb.InfluxDBInterpreter",
+          "defaultInterpreter": false,
+          "editor": {
+            "language": "sql",
             "editOnDblClick": false,
             "completionSupport": false
           }
@@ -904,12 +956,6 @@
           "type": "string",
           "description": "Location of spark distribution"
         },
-        "master": {
-          "name": "master",
-          "value": "local[*]",
-          "type": "string",
-          "description": "Spark master uri. local | yarn-client | yarn-cluster | spark master address of standalone mode, ex) spark://master_host:7077"
-        },
         "spark.app.name": {
           "name": "spark.app.name",
           "value": "Zeppelin",
@@ -986,7 +1032,7 @@
           "name": "zeppelin.spark.uiWebUrl",
           "value": "",
           "type": "string",
-          "description": "Override Spark UI default URL"
+          "description": "Override Spark UI default URL. In Kubernetes mode, value can be Jinja template string with 3 template variables \u0027PORT\u0027, \u0027SERVICE_NAME\u0027 and \u0027SERVICE_DOMAIN\u0027. (ex: http://{{PORT}}-{{SERVICE_NAME}}.{{SERVICE_DOMAIN}})"
         },
         "zeppelin.spark.ui.hidden": {
           "name": "zeppelin.spark.ui.hidden",
@@ -1083,9 +1129,14 @@
           "value": true,
           "type": "checkbox",
           "description": "Show short types instead of full, e.g. List\u003cString\u003e or kotlin.collections.List\u003ckotlin.String\u003e"
+        },
+        "master": {
+          "name": "master",
+          "value": "local[*]",
+          "type": "string"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "spark",
@@ -1902,13 +1953,13 @@
           "name": "flink.udf.jars",
           "value": "",
           "type": "string",
-          "description": "Flink udf jars (comma separated), Zeppelin will register udfs in this jar for user automatically"
+          "description": "Flink udf jars (comma separated), Zeppelin will register udfs in this jar for user automatically, these udf jars could be either local files or hdfs files if you have hadoop installed, the udf name is the class name"
         },
         "flink.execution.jars": {
           "name": "flink.execution.jars",
           "value": "",
           "type": "string",
-          "description": "Additional user jars (comma separated)"
+          "description": "Additional user jars (comma separated), these jars could be either local files or hdfs files if you have hadoop installed"
         },
         "flink.execution.packages": {
           "name": "flink.execution.packages",
@@ -2522,7 +2573,7 @@
           "name": "cassandra.protocol.version",
           "value": "4",
           "type": "string",
-          "description": "Cassandra protocol version. Default \u003d 4"
+          "description": "Cassandra protocol version. Default \u003d auto-detect"
         },
         "cassandra.cluster": {
           "name": "cassandra.cluster",
@@ -2558,25 +2609,25 @@
           "name": "cassandra.load.balancing.policy",
           "value": "DEFAULT",
           "type": "string",
-          "description": "Cassandra Load Balancing Policy. Default \u003d new TokenAwarePolicy(new DCAwareRoundRobinPolicy())"
+          "description": "Class name for Load Balancing Policy. Default \u003d DefaultLoadBalancingPolicy"
         },
         "cassandra.retry.policy": {
           "name": "cassandra.retry.policy",
           "value": "DEFAULT",
           "type": "string",
-          "description": "Cassandra Retry Policy. Default \u003d DefaultRetryPolicy.INSTANCE"
+          "description": "Class name for Retry Policy. Default \u003d DefaultRetryPolicy"
         },
         "cassandra.reconnection.policy": {
           "name": "cassandra.reconnection.policy",
           "value": "DEFAULT",
           "type": "string",
-          "description": "Cassandra Reconnection Policy. Default \u003d new ExponentialReconnectionPolicy(1000, 10 * 60 * 1000)"
+          "description": "Class name for Reconnection Policy. Default \u003d ExponentialReconnectionPolicy"
         },
         "cassandra.speculative.execution.policy": {
           "name": "cassandra.speculative.execution.policy",
           "value": "DEFAULT",
           "type": "string",
-          "description": "Cassandra Speculative Execution Policy. Default \u003d NoSpeculativeExecutionPolicy.INSTANCE"
+          "description": "Class name for Speculative Execution Policy. Default \u003d NoSpeculativeExecutionPolicy"
         },
         "cassandra.interpreter.parallelism": {
           "name": "cassandra.interpreter.parallelism",
@@ -2589,60 +2640,6 @@
           "value": "10",
           "type": "number",
           "description": "Cassandra max schema agreement wait in second.Default \u003d ProtocolOptions.DEFAULT_MAX_SCHEMA_AGREEMENT_WAIT_SECONDS"
-        },
-        "cassandra.pooling.new.connection.threshold.local": {
-          "name": "cassandra.pooling.new.connection.threshold.local",
-          "value": "100",
-          "type": "number",
-          "description": "Cassandra new connection threshold local. Protocol V2 and below default \u003d 100 Protocol V3 and above default \u003d 800"
-        },
-        "cassandra.pooling.new.connection.threshold.remote": {
-          "name": "cassandra.pooling.new.connection.threshold.remote",
-          "value": "100",
-          "type": "number",
-          "description": "Cassandra new connection threshold remove. Protocol V2 and below default \u003d 100 Protocol V3 and above default \u003d 200"
-        },
-        "cassandra.pooling.core.connection.per.host.local": {
-          "name": "cassandra.pooling.core.connection.per.host.local",
-          "value": "2",
-          "type": "number",
-          "description": "Cassandra core connection per host local. Protocol V2 and below default \u003d 2 Protocol V3 and above default \u003d 1"
-        },
-        "cassandra.pooling.core.connection.per.host.remote": {
-          "name": "cassandra.pooling.core.connection.per.host.remote",
-          "value": "1",
-          "type": "number",
-          "description": "Cassandra core connection per host remove. Protocol V2 and below default \u003d 1 Protocol V3 and above default \u003d 1"
-        },
-        "cassandra.pooling.max.connection.per.host.local": {
-          "name": "cassandra.pooling.max.connection.per.host.local",
-          "value": "8",
-          "type": "number",
-          "description": "Cassandra max connection per host local. Protocol V2 and below default \u003d 8 Protocol V3 and above default \u003d 1"
-        },
-        "cassandra.pooling.max.connection.per.host.remote": {
-          "name": "cassandra.pooling.max.connection.per.host.remote",
-          "value": "2",
-          "type": "number",
-          "description": "Cassandra max connection per host remote. Protocol V2 and below default \u003d 2 Protocol V3 and above default \u003d 1"
-        },
-        "cassandra.pooling.max.request.per.connection.local": {
-          "name": "cassandra.pooling.max.request.per.connection.local",
-          "value": "1024",
-          "type": "number",
-          "description": "Cassandra max request per connection local. Protocol V2 and below default \u003d 128 Protocol V3 and above default \u003d 1024"
-        },
-        "cassandra.pooling.max.request.per.connection.remote": {
-          "name": "cassandra.pooling.max.request.per.connection.remote",
-          "value": "256",
-          "type": "number",
-          "description": "Cassandra max request per connection remote. Protocol V2 and below default \u003d 128 Protocol V3 and above default \u003d 256"
-        },
-        "cassandra.pooling.idle.timeout.seconds": {
-          "name": "cassandra.pooling.idle.timeout.seconds",
-          "value": "120",
-          "type": "number",
-          "description": "Cassandra idle time out in seconds. Default \u003d 120"
         },
         "cassandra.pooling.pool.timeout.millisecs": {
           "name": "cassandra.pooling.pool.timeout.millisecs",
@@ -2709,6 +2706,51 @@
           "value": "none",
           "type": "password",
           "description": "Cassandra truststore password. Default \u003d none"
+        },
+        "cassandra.pooling.new.connection.threshold.local": {
+          "name": "cassandra.pooling.new.connection.threshold.local",
+          "value": "100",
+          "type": "number"
+        },
+        "cassandra.pooling.new.connection.threshold.remote": {
+          "name": "cassandra.pooling.new.connection.threshold.remote",
+          "value": "100",
+          "type": "number"
+        },
+        "cassandra.pooling.core.connection.per.host.local": {
+          "name": "cassandra.pooling.core.connection.per.host.local",
+          "value": "2",
+          "type": "number"
+        },
+        "cassandra.pooling.core.connection.per.host.remote": {
+          "name": "cassandra.pooling.core.connection.per.host.remote",
+          "value": "1",
+          "type": "number"
+        },
+        "cassandra.pooling.max.connection.per.host.local": {
+          "name": "cassandra.pooling.max.connection.per.host.local",
+          "value": "8",
+          "type": "number"
+        },
+        "cassandra.pooling.max.connection.per.host.remote": {
+          "name": "cassandra.pooling.max.connection.per.host.remote",
+          "value": "2",
+          "type": "number"
+        },
+        "cassandra.pooling.max.request.per.connection.local": {
+          "name": "cassandra.pooling.max.request.per.connection.local",
+          "value": "1024",
+          "type": "number"
+        },
+        "cassandra.pooling.max.request.per.connection.remote": {
+          "name": "cassandra.pooling.max.request.per.connection.remote",
+          "value": "256",
+          "type": "number"
+        },
+        "cassandra.pooling.idle.timeout.seconds": {
+          "name": "cassandra.pooling.idle.timeout.seconds",
+          "value": "120",
+          "type": "number"
         }
       },
       "status": "READY",

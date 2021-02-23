@@ -1,21 +1,21 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n\n# Writing with Neo4j Connector for Apache Spark\n\nDocs [here](http://5.9.211.195:8000/neo4j-spark-docs/1.0.0/writing.html).",
+      "text": "%md\n\n# Writing with Neo4j Connector for Apache Spark\n\nDocs [here](https://neo4j.com/developer/spark/writing/).",
       "user": "anonymous",
-      "dateUpdated": "2020-10-06 12:52:33.872",
+      "dateUpdated": "2021-02-23 09:58:38.117",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/markdown",
         "editorHide": true
       },
       "settings": {
@@ -32,6 +32,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1601988521241_388338299",
       "id": "paragraph_1601988521241_388338299",
@@ -43,19 +44,19 @@
     {
       "text": "%md\n## Writing nodes",
       "user": "anonymous",
-      "dateUpdated": "2020-10-07 12:44:09.006",
+      "dateUpdated": "2021-02-23 09:58:29.881",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/markdown",
         "editorHide": true
       },
       "settings": {
@@ -72,6 +73,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602074624606_610586440",
       "id": "paragraph_1602074624606_610586440",
@@ -83,7 +85,7 @@
     {
       "text": "val bandDf \u003d Seq(\n      (1, \"Alex Lifeson\"),\n      (2, \"Neil Peart\"),\n      (3, \"Geddy Lee\")\n    ).toDF(\"id\", \"name\")\n    \n    \nbandDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"labels\", \":Person:Musician\")\n    .save\n",
       "user": "anonymous",
-      "dateUpdated": "2020-10-07 12:53:38.282",
+      "dateUpdated": "2021-02-23 10:01:07.376",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -111,18 +113,32 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d4"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602074651022_291658173",
       "id": "paragraph_1602074651022_291658173",
       "dateCreated": "2020-10-07 12:44:11.022",
-      "dateStarted": "2020-10-07 12:53:38.294",
-      "dateFinished": "2020-10-07 12:53:39.421",
+      "dateStarted": "2021-02-23 10:01:07.410",
+      "dateFinished": "2021-02-23 10:01:11.681",
       "status": "FINISHED"
     },
     {
       "text": "%neo4j\n\nMATCH (n:Person:Musician) RETURN n",
       "user": "anonymous",
-      "dateUpdated": "2020-10-07 12:54:09.209",
+      "dateUpdated": "2021-02-23 10:01:59.349",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -140,8 +156,7 @@
                     "names": {
                       "id": "string",
                       "label": "string",
-                      "name": "string",
-                      "born": "string"
+                      "name": "string"
                     },
                     "updated": false
                   },
@@ -165,7 +180,7 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/text"
+        "editorMode": "ace/mode/undefined"
       },
       "settings": {
         "params": {},
@@ -176,17 +191,18 @@
         "msg": [
           {
             "type": "NETWORK",
-            "data": "{\"nodes\":[{\"id\":6,\"data\":{\"name\":\"Alex Lifeson\",\"id\":1,\"born\":1953},\"label\":\"Person\"},{\"id\":7,\"data\":{\"name\":\"Neil Peart\",\"id\":2,\"born\":1952},\"label\":\"Person\"},{\"id\":8,\"data\":{\"name\":\"Geddy Lee\",\"id\":3,\"born\":1953},\"label\":\"Person\"}],\"edges\":[],\"labels\":{\"Person\":\"#A32D26\",\"Musician\":\"#62D4A4\"},\"types\":[],\"directed\":true}"
+            "data": "{\"nodes\":[{\"id\":344,\"data\":{\"name\":\"Alex Lifeson\",\"id\":1},\"label\":\"Person\"},{\"id\":345,\"data\":{\"name\":\"Geddy Lee\",\"id\":3},\"label\":\"Person\"},{\"id\":346,\"data\":{\"name\":\"Neil Peart\",\"id\":2},\"label\":\"Person\"}],\"edges\":[],\"labels\":{\"Person\":\"#BF45B4\",\"Movie\":\"#AAFFB4\",\"Musician\":\"#2176A5\"},\"types\":[\"ACTED_IN\",\"REVIEWED\",\"PRODUCED\",\"WROTE\",\"FOLLOWS\",\"DIRECTED\"],\"directed\":true}"
           }
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602074982164_1428084560",
       "id": "paragraph_1602074982164_1428084560",
       "dateCreated": "2020-10-07 12:49:42.164",
-      "dateStarted": "2020-10-07 12:54:09.023",
-      "dateFinished": "2020-10-07 12:54:09.072",
+      "dateStarted": "2021-02-23 10:01:17.844",
+      "dateFinished": "2021-02-23 10:01:59.224",
       "status": "FINISHED"
     },
     {
@@ -221,6 +237,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602075260174_224259906",
       "id": "paragraph_1602075260174_224259906",
@@ -260,6 +277,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602075073046_2059588553",
       "id": "paragraph_1602075073046_2059588553",
@@ -330,6 +348,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1602075172928_1941136873",
       "id": "paragraph_1602075172928_1941136873",
@@ -341,19 +360,19 @@
     {
       "text": "%md\n\n## Writing relationship",
       "user": "anonymous",
-      "dateUpdated": "2020-10-06 12:52:50.818",
+      "dateUpdated": "2021-02-23 10:13:50.380",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/markdown",
         "editorHide": true
       },
       "settings": {
@@ -370,6 +389,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1601988757894_819809750",
       "id": "paragraph_1601988757894_819809750",
@@ -409,6 +429,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598874400391_-1735147610",
       "id": "paragraph_1598874400391_-1735147610",
@@ -420,7 +441,7 @@
     {
       "text": "%neo4j\n\nMATCH (m:Musician)-[p:PLAYS]-\u003e(i:Instrument) RETURN m,p,i",
       "user": "anonymous",
-      "dateUpdated": "2020-10-06 13:18:46.675",
+      "dateUpdated": "2021-02-23 10:07:36.098",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -484,7 +505,7 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/text"
+        "editorMode": "ace/mode/undefined"
       },
       "settings": {
         "params": {},
@@ -492,26 +513,22 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "NETWORK",
-            "data": "{\"nodes\":[{\"id\":176,\"data\":{\"name\":\"Guitar\"},\"label\":\"Instrument\"},{\"id\":171,\"data\":{\"name\":\"John Bonham\"},\"label\":\"Musician\"},{\"id\":172,\"data\":{\"name\":\"John Mayer\"},\"label\":\"Musician\"},{\"id\":173,\"data\":{\"name\":\"John Scofield\"},\"label\":\"Musician\"},{\"id\":174,\"data\":{\"name\":\"John Butler\"},\"label\":\"Musician\"},{\"id\":175,\"data\":{\"name\":\"Drums\"},\"label\":\"Instrument\"}],\"edges\":[{\"source\":174,\"target\":176,\"id\":256,\"data\":{},\"label\":\"PLAYS\"},{\"source\":171,\"target\":175,\"id\":253,\"data\":{},\"label\":\"PLAYS\"},{\"source\":172,\"target\":176,\"id\":254,\"data\":{},\"label\":\"PLAYS\"},{\"source\":173,\"target\":176,\"id\":255,\"data\":{},\"label\":\"PLAYS\"}],\"labels\":{\"Person\":\"#C5F06C\",\"Musician\":\"#FB7B7F\",\"Instrument\":\"#C26546\",\"Movie\":\"#0CA172\"},\"types\":[\"ACTED_IN\",\"REVIEWED\",\"PLAYS\",\"PRODUCED\",\"WROTE\",\"FOLLOWS\",\"DIRECTED\"],\"directed\":true}"
-          }
-        ]
+        "msg": []
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1601988801498_828048611",
       "id": "paragraph_1601988801498_828048611",
       "dateCreated": "2020-10-06 12:53:21.498",
-      "dateStarted": "2020-10-06 13:18:42.866",
-      "dateFinished": "2020-10-06 13:18:43.053",
+      "dateStarted": "2021-02-23 10:07:36.130",
+      "dateFinished": "2021-02-23 10:07:36.222",
       "status": "FINISHED"
     },
     {
-      "text": "val musicDf \u003d Seq(\n      (1, \"John Bonham\", \"Guitar\"),\n      (8, \"John Bonham\", \"Congas\"),\n      (3, \"John Butler\", \"Double Bass\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .mode(\"Overwrite\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
+      "text": "val musicDf \u003d Seq(\n      (1, \"John Bonham\", \"Guitar\"),\n      (8, \"John Bonham\", \"Congas\"),\n      (3, \"John Butler\", \"Double Bass\")\n    ).toDF(\"experience\", \"name\", \"instrument\")\n    \n    \nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship\", \"PLAYS\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.source.labels\", \":Musician\")\n    .option(\"relationship.source.node.keys\", \"name:name\")\n    .option(\"relationship.target.labels\", \":Instrument\")\n    .option(\"relationship.target.node.keys\", \"instrument:name\")\n    .save",
       "user": "anonymous",
-      "dateUpdated": "2020-10-06 13:19:16.708",
+      "dateUpdated": "2021-02-23 10:28:19.138",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -530,22 +547,23 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [experience: int, name: string ... 1 more field]\n"
+            "data": "Interpreter process is not running\nInterpreter launch command:  /usr/lib/jvm/java-8-openjdk-amd64/bin/java -Dfile.encoding\u003dUTF-8 -Dlog4j.configuration\u003d\u0027file:///zeppelin/conf/log4j.properties\u0027 -Dlog4j.configurationFile\u003d\u0027file:///zeppelin/conf/log4j2.properties\u0027 -Dzeppelin.log.file\u003d\u0027/zeppelin/logs/zeppelin-interpreter-spark-shared_process--be60463f2d5b.log\u0027 -Xms1024m -Xmx2048m -cp \":/zeppelin/local-repo/spark/*:/zeppelin/interpreter/spark/dep/*:/zeppelin/interpreter/spark/*::/zeppelin/interpreter/zeppelin-interpreter-shaded-0.9.0-preview2.jar\" org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer 172.19.0.3 35537 \"spark-shared_process\" :\nSLF4J: Class path contains multiple SLF4J bindings.\nSLF4J: Found binding in [jar:file:/zeppelin/interpreter/spark/dep/zeppelin-spark-dependencies-0.9.0-preview2.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/zeppelin/interpreter/spark/spark-interpreter-0.9.0-preview2.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\nSLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]\n2021-02-23 08:32:39 WARN  ZeppelinConfiguration:161 - Failed to load configuration, proceeding with a default\n2021-02-23 08:32:39 INFO  ZeppelinConfiguration:173 - Server Host: 0.0.0.0\n2021-02-23 08:32:39 INFO  ZeppelinConfiguration:175 - Server Port: 8080\n2021-02-23 08:32:39 INFO  ZeppelinConfiguration:179 - Context Path: /\n2021-02-23 08:32:39 INFO  ZeppelinConfiguration:180 - Zeppelin Version: 0.9.0-preview2\n2021-02-23 08:32:39 INFO  RemoteInterpreterServer:170 - Starting remote interpreter server on port 0, intpEventServerAddress: 172.19.0.3:35537\n2021-02-23 08:32:39 INFO  RemoteInterpreterServer:194 - Launching ThriftServer at 172.19.0.3:36655\n2021-02-23 08:32:39 INFO  RemoteInterpreterServer:232 - Registering interpreter process\n"
           }
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598962718901_-250731872",
       "id": "paragraph_1598962718901_-250731872",
       "dateCreated": "2020-09-01 12:18:38.901",
-      "dateStarted": "2020-10-06 13:19:16.721",
-      "dateFinished": "2020-10-06 13:19:17.918",
-      "status": "FINISHED"
+      "dateStarted": "2021-02-23 10:28:19.160",
+      "dateFinished": "2021-02-23 10:28:19.165",
+      "status": "ERROR"
     },
     {
       "text": "%neo4j\n\nMATCH (m:Musician)-[p:PLAYS]-\u003e(i:Instrument) RETURN m,p,i",
@@ -609,6 +627,7 @@
         ]
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1601971024198_-1734110607",
       "id": "paragraph_1601971024198_-1734110607",
@@ -618,19 +637,184 @@
       "status": "FINISHED"
     },
     {
+      "text": "%md\n\n## Writing with Query",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-23 10:13:57.533",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eWriting with Query\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1601990344147_-823611131",
+      "id": "paragraph_1601990344147_-823611131",
+      "dateCreated": "2020-10-06 13:19:04.147",
+      "dateStarted": "2021-02-23 10:13:57.539",
+      "dateFinished": "2021-02-23 10:13:57.563",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val musicDf \u003d Seq(\n      (\"John Bonham\", \"Bonzo\"),\n      (\"Louis Daniel Armstrong\", \"Pops\"),\n      (\"Sergio Conforti\", \"Rocco Tanica\")\n    ).toDF(\"name\", \"alias\")\n\n\nmusicDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\n        \"query\",\n     \"\"\"|MERGE (m:Musician {name: event.name})\n        |SET m.alias \u003d event.alias\"\"\".stripMargin\n    )\n    .save",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-23 10:30:24.669",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmusicDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: string, alias: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d0"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614075220423_932824853",
+      "id": "paragraph_1614075220423_932824853",
+      "dateCreated": "2021-02-23 10:13:40.434",
+      "dateStarted": "2021-02-23 10:30:24.733",
+      "dateFinished": "2021-02-23 10:30:56.575",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%neo4j\n\nMATCH (m:Musician) WHERE m.alias IS NOT NULL RETURN m.name, m.alias",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-23 10:31:46.660",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "m.name": "string",
+                      "m.alias": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "m.name\tm.alias\n\"Louis Daniel Armstrong\"\t\"Pops\"\n\"John Bonham\"\t\"Bonzo\"\n\"Sergio Conforti\"\t\"Rocco Tanica\"\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614075871213_1757481143",
+      "id": "paragraph_1614075871213_1757481143",
+      "dateCreated": "2021-02-23 10:24:31.213",
+      "dateStarted": "2021-02-23 10:31:46.687",
+      "dateFinished": "2021-02-23 10:31:47.327",
+      "status": "FINISHED"
+    },
+    {
       "text": "%neo4j\n",
       "user": "anonymous",
-      "dateUpdated": "2020-10-06 13:19:04.147",
+      "dateUpdated": "2021-02-23 10:31:06.439",
       "config": {},
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1601990344147_-823611131",
-      "id": "paragraph_1601990344147_-823611131",
-      "dateCreated": "2020-10-06 13:19:04.147",
+      "jobName": "paragraph_1614076266435_1487027216",
+      "id": "paragraph_1614076266435_1487027216",
+      "dateCreated": "2021-02-23 10:31:06.436",
       "status": "READY"
     }
   ],
