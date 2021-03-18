@@ -150,20 +150,7 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d0"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598858773117_-449948507",
       "id": "paragraph_1598858773117_-449948507",
@@ -245,20 +232,6 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d1"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1601978294807_2072327515",
       "id": "paragraph_1601978294807_2072327515",
@@ -339,20 +312,7 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d2"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598868810416_-860533122",
       "id": "paragraph_1598868810416_-860533122",
@@ -433,20 +393,7 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://be60463f2d5b:4040/jobs/job?id\u003d3"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": { },
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1598869044668_-473974905",
       "id": "paragraph_1598869044668_-473974905",

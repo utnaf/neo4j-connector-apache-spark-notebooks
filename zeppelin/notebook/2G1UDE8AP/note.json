@@ -1,0 +1,177 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\n# This example is intended to be run against a Neo4j Sandbox instance of the \"Graph Data Science\" example dataset.\n#\n# Before running this code, create your own GDS sandbox here: \n#\n# https://sandbox.neo4j.com/\n# \n# *And make sure to adjust your host, username, and port to your sandbox*\n#\n# By using a sandbox, we can skip over the data loading \u0026 GDS installation steps.",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 10:40:27.917",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1615887220476_-1174415860",
+      "id": "paragraph_1601992256462_-109224611",
+      "dateCreated": "2021-03-16 09:33:40.476",
+      "dateStarted": "2021-03-18 10:40:28.065",
+      "dateFinished": "2021-03-18 10:40:57.314",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nhost\u003d\"bolt://100.26.227.192:36133\"\nuser\u003d\"neo4j\"\npassword\u003d\"pastes-cures-thunder\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 10:40:57.341",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1615887220477_476195926",
+      "id": "paragraph_1601992351821_954320774",
+      "dateCreated": "2021-03-16 09:33:40.477",
+      "dateStarted": "2021-03-18 10:40:57.691",
+      "dateFinished": "2021-03-18 10:40:57.834",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Let\u0027s create a virtual GDS graph.\n\nquery \u003d \"\"\"\n    CALL gds.graph.create(\u0027got-interactions\u0027, \u0027Person\u0027, {\n      INTERACTS: {\n        orientation: \u0027UNDIRECTED\u0027\n      }\n    })\n    YIELD graphName\n    RETURN graphName\n\"\"\"\n\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", host) \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", user) \\\n    .option(\"authentication.basic.password\", password) \\\n    .option(\"query\", query) \\\n    .option(\"partitions\", \"1\") \\\n    .load()\n\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 10:40:57.890",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m\u001b[0m\n\u001b[0;31mPy4JJavaError\u001b[0mTraceback (most recent call last)\n\u001b[0;32m\u003cipython-input-8-6214efcde53b\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m()\u001b[0m\n\u001b[1;32m     11\u001b[0m \"\"\"\n\u001b[1;32m     12\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 13\u001b[0;31m \u001b[0mdf\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mformat\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"org.neo4j.spark.DataSource\"\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"url\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mhost\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"authentication.type\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"basic\"\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"authentication.basic.username\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0muser\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"authentication.basic.password\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mpassword\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"query\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mquery\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0moption\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"partitions\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"1\"\u001b[0m\u001b[0;34m)\u001b[0m     \u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     14\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     15\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshow\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/spark-2.4.5-bin-hadoop2.7/python/lib/pyspark.zip/pyspark/sql/readwriter.py\u001b[0m in \u001b[0;36mload\u001b[0;34m(self, path, format, schema, **options)\u001b[0m\n\u001b[1;32m    170\u001b[0m             \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_df\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jreader\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_spark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_sc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jvm\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPythonUtils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtoSeq\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    171\u001b[0m         \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 172\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_df\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jreader\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    173\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    174\u001b[0m     \u001b[0;34m@\u001b[0m\u001b[0msince\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m1.4\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/spark-2.4.5-bin-hadoop2.7/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1255\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1256\u001b[0m         return_value \u003d get_return_value(\n\u001b[0;32m-\u003e 1257\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1258\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1259\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/spark-2.4.5-bin-hadoop2.7/python/lib/pyspark.zip/pyspark/sql/utils.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m     61\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     62\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 63\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     64\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mpy4j\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprotocol\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     65\u001b[0m             \u001b[0ms\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtoString\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/spark-2.4.5-bin-hadoop2.7/python/lib/py4j-0.10.7-src.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    326\u001b[0m                 raise Py4JJavaError(\n\u001b[1;32m    327\u001b[0m                     \u001b[0;34m\"An error occurred while calling {0}{1}{2}.\\n\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 328\u001b[0;31m                     format(target_id, \".\", name), value)\n\u001b[0m\u001b[1;32m    329\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    330\u001b[0m                 raise Py4JError(\n\n\u001b[0;31mPy4JJavaError\u001b[0m: An error occurred while calling o65.load.\n: org.neo4j.driver.exceptions.ServiceUnavailableException: Unable to connect to 100.26.227.192:36133, ensure the database is running and that there is a working network connection to it.\n\tat org.neo4j.driver.internal.util.Futures.blockingGet(Futures.java:143)\n\tat org.neo4j.driver.internal.InternalSession.run(InternalSession.java:69)\n\tat org.neo4j.driver.internal.InternalSession.run(InternalSession.java:51)\n\tat org.neo4j.driver.internal.AbstractQueryRunner.run(AbstractQueryRunner.java:37)\n\tat org.neo4j.driver.internal.AbstractQueryRunner.run(AbstractQueryRunner.java:55)\n\tat org.neo4j.spark.util.Validations$.validateConnection(Validations.scala:203)\n\tat org.neo4j.spark.util.Validations$$anonfun$6.apply(Validations.scala:116)\n\tat org.neo4j.spark.util.Validations$$anonfun$6.apply(Validations.scala:112)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$1.apply(Neo4jDataSourceReader.scala:24)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader$$anonfun$1.apply(Neo4jDataSourceReader.scala:24)\n\tat org.neo4j.spark.util.Neo4jOptions.validate(Neo4jOptions.scala:182)\n\tat org.neo4j.spark.reader.Neo4jDataSourceReader.\u003cinit\u003e(Neo4jDataSourceReader.scala:24)\n\tat org.neo4j.spark.DataSource.createReader(DataSource.scala:19)\n\tat org.neo4j.spark.DataSource.createReader(DataSource.scala:13)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2Relation$SourceHelpers.createReader(DataSourceV2Relation.scala:155)\n\tat org.apache.spark.sql.execution.datasources.v2.DataSourceV2Relation$.create(DataSourceV2Relation.scala:172)\n\tat org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:204)\n\tat org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:167)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\n\tSuppressed: org.neo4j.driver.internal.util.ErrorUtil$InternalExceptionCause\n\t\tat org.neo4j.driver.internal.async.connection.ChannelConnectedListener.databaseUnavailableError(ChannelConnectedListener.java:76)\n\t\tat org.neo4j.driver.internal.async.connection.ChannelConnectedListener.operationComplete(ChannelConnectedListener.java:70)\n\t\tat org.neo4j.driver.internal.async.connection.ChannelConnectedListener.operationComplete(ChannelConnectedListener.java:37)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:578)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:571)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:550)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:491)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:616)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:609)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:117)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:262)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:170)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\t\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\t\t... 1 more\nCaused by: org.neo4j.driver.internal.shaded.io.netty.channel.ConnectTimeoutException: connection timed out: /100.26.227.192:36133\n\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:170)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)\n\tat org.neo4j.driver.internal.shaded.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\tat org.neo4j.driver.internal.shaded.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\t... 1 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1615887220477_1533364984",
+      "id": "paragraph_1601993382895_1120574972",
+      "dateCreated": "2021-03-16 09:33:40.477",
+      "dateStarted": "2021-03-18 10:40:58.196",
+      "dateFinished": "2021-03-18 10:41:31.066",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\nquery \u003d \"\"\"\nCALL gds.pageRank.stream(\u0027got-interactions\u0027) YIELD nodeId, score\nRETURN gds.util.asNode(nodeId).name AS name, score\n\"\"\"\n\ndf \u003d spark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", host) \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", user) \\\n    .option(\"authentication.basic.password\", password) \\\n    .option(\"query\", query) \\\n    .option(\"partitions\", \"1\") \\\n    .load()\n\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-16 09:33:40.478",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-------------------+\n|                name|              score|\n+--------------------+-------------------+\n| Gunthor son of Gurn| 0.2155574555537896|\n|High Septon (fat_...| 0.3390608486835846|\n|     Jaime Lannister| 13.522417121008036|\n|      Gregor Clegane|  4.224368686974048|\n|         Andros Brax|0.15000000000000002|\n|        Roose Bolton| 2.9989159699529404|\n|      Wylis Manderly| 0.2766475385229569|\n|       Medger Cerwyn|0.15000000000000002|\n|    Harrion Karstark|0.15000000000000002|\n|      Halys Hornwood|0.22117681563831867|\n|          Robb Stark| 10.819953513145444|\n|       Brynden Tully|   2.34719781531021|\n|     Tytos Blackwood| 0.5989176101633349|\n|   Victarion Greyjoy|   4.77652440359816|\n|        Asha Greyjoy| 4.0371349356137225|\n|       Theon Greyjoy|  9.386687170155348|\n|       Rodrik Cassel| 3.1201196020469064|\n|         Cley Cerwyn| 0.3871685551595873|\n|     Dagmer Cleftjaw|0.15000000000000002|\n|         Ramsay Snow| 2.8007921248674394|\n+--------------------+-------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1615887220478_-719058539",
+      "id": "paragraph_1601992586562_1919175203",
+      "dateCreated": "2021-03-16 09:33:40.478",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-16 09:33:40.478",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1615887220478_2009202859",
+      "id": "paragraph_1601997618703_-686996120",
+      "dateCreated": "2021-03-16 09:33:40.478",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Graph Data Science Example",
+  "id": "2G1UDE8AP",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
