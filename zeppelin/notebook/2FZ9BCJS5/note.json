@@ -365,8 +365,48 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "text": "val stream \u003d spark.readStream.format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"labels\", \"Movie\")\n    .load()\n    \nval query \u003d stream.where(\"title LIKE \u0027movie %\u0027\").writeStream.format(\"console\").start()\nquery.awaitTermination(60*1000)",
       "user": "anonymous",
-      "dateUpdated": "2021-03-17 13:22:01.599",
+      "dateUpdated": "2021-04-21 10:29:23.972",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "-------------------------------------------\nBatch: 0\n-------------------------------------------\n+----+--------+-------+\n|\u003cid\u003e|\u003clabels\u003e|  title|\n+----+--------+-------+\n|   0| [Movie]|movie 1|\n|   1| [Movie]|movie 2|\n+----+--------+-------+\n\n-------------------------------------------\nBatch: 1\n-------------------------------------------\n+----+--------+-------+\n|\u003cid\u003e|\u003clabels\u003e|  title|\n+----+--------+-------+\n|   2| [Movie]|movie 3|\n+----+--------+-------+\n\n-------------------------------------------\nBatch: 2\n-------------------------------------------\n+----+--------+-----+\n|\u003cid\u003e|\u003clabels\u003e|title|\n+----+--------+-----+\n+----+--------+-----+\n\n-------------------------------------------\nBatch: 3\n-------------------------------------------\n+----+--------+--------+\n|\u003cid\u003e|\u003clabels\u003e|   title|\n+----+--------+--------+\n|   4| [Movie]|movie zz|\n+----+--------+--------+\n\nstream: org.apache.spark.sql.DataFrame \u003d [\u003cid\u003e: bigint, \u003clabels\u003e: array\u003cstring\u003e ... 1 more field]\nquery: org.apache.spark.sql.streaming.StreamingQuery \u003d org.apache.spark.sql.execution.streaming.StreamingQueryWrapper@1ddb155a\nres1: Boolean \u003d false\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1618991697631_85775239",
+      "id": "20210421-075457_885159361",
+      "dateCreated": "2021-04-21 07:54:57.631",
+      "dateStarted": "2021-04-21 10:29:24.093",
+      "dateFinished": "2021-04-21 10:30:48.011",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "query.stop()",
+      "user": "anonymous",
+      "dateUpdated": "2021-04-21 10:23:30.123",
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -386,12 +426,36 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cconsole\u003e:24: error: not found: value query\n       query.stop()\n       ^\n"
+          }
+        ]
+      },
       "apps": [],
       "jobName": "paragraph_1615827631864_-783052989",
       "id": "paragraph_1598869313533_2059315222",
       "dateCreated": "2021-03-15 17:00:31.864",
-      "status": "FINISHED",
-      "errorMessage": "",
+      "dateStarted": "2021-04-21 10:23:30.397",
+      "dateFinished": "2021-04-21 10:26:08.779",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1618992004449_2069815963",
+      "id": "20210421-080004_23387579",
+      "dateCreated": "2021-04-21 08:00:04.452",
+      "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
@@ -401,7 +465,6 @@
   "noteForms": {},
   "angularObjects": {
     "md:shared_process": [],
-    "neo4j:shared_process": [],
     "spark:shared_process": []
   },
   "config": {

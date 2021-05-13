@@ -1,0 +1,69 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\n\nfrom pyspark.sql import SparkSession\n\nspark \u003d SparkSession.builder.master(\"local[1]\") \\\n    .appName(\"Neo4jConnection\")\\\n    .getOrCreate()\nquery \u003d \"\"\"\nMATCH (m:Movie) RETURN m\n\"\"\"\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://127.0.0.1:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"query\", \"MATCH (m:Movie) RETURN m\") \\\n    .option(\"partitions\", \"1\") \\\n    .load() \\\n    .show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-05-13 08:24:28.682",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+\n|                   m|\n+--------------------+\n|[5, [Movie], The ...|\n|[14, [Movie], The...|\n|[15, [Movie], The...|\n|[16, [Movie], The...|\n|[20, [Movie], A F...|\n|[34, [Movie], Top...|\n|[42, [Movie], Jer...|\n|[51, [Movie], Sta...|\n|[57, [Movie], As ...|\n|[61, [Movie], Wha...|\n|[67, [Movie], Sno...|\n|[72, [Movie], You...|\n|[78, [Movie], Sle...|\n|[83, [Movie], Joe...|\n|[86, [Movie], Whe...|\n|[90, [Movie], Tha...|\n|[92, [Movie], The...|\n|[97, [Movie], Res...|\n|[100, [Movie], Th...|\n|[102, [Movie], Un...|\n+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1620889222939_828514314",
+      "id": "20210513-070022_353211704",
+      "dateCreated": "2021-05-13 07:00:22.939",
+      "dateStarted": "2021-05-13 07:05:01.458",
+      "dateFinished": "2021-05-13 07:05:02.056",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1620889371185_2020710907",
+      "id": "20210513-070251_2051549385",
+      "dateCreated": "2021-05-13 07:02:51.185",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Pyspark",
+  "id": "2G4RVA2W7",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "python:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
