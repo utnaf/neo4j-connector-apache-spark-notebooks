@@ -12,6 +12,6 @@ Visit [localhost:8080](http://localhost:8080)
 
 ## Neo4j Instance
 
-By default, the username/password is `neo4j/zeppelin`
+By default, the username/password is `neo4j/password`
 
 Visit [localhost:7474](http://localhost:7474)
