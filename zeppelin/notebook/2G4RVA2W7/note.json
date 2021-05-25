@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%spark.pyspark\n\nfrom pyspark.sql import SparkSession\n\nspark \u003d SparkSession.builder.master(\"local[1]\") \\\n    .appName(\"Neo4jConnection\")\\\n    .getOrCreate()\nquery \u003d \"\"\"\nMATCH (m:Movie) RETURN m\n\"\"\"\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://127.0.0.1:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"query\", \"MATCH (m:Movie) RETURN m\") \\\n    .option(\"partitions\", \"1\") \\\n    .load() \\\n    .show()",
+      "text": "%spark.pyspark\n\nfrom pyspark.sql import SparkSession\n\nspark \u003d SparkSession.builder.master(\"local[1]\") \\\n    .appName(\"Neo4jConnection\")\\\n    .getOrCreate()\nquery \u003d \"\"\"\nMATCH (m:Movie) RETURN m\n\"\"\"\n\nspark.read.format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"query\", \"MATCH (m:Movie) RETURN m\") \\\n    .option(\"partitions\", \"1\") \\\n    .load() \\\n    .show()",
       "user": "anonymous",
-      "dateUpdated": "2021-05-13 08:24:28.682",
+      "dateUpdated": "2021-05-25 07:12:21.939",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -40,26 +40,29 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "text": "%spark.pyspark\n",
       "user": "anonymous",
+      "dateUpdated": "2021-05-25 03:57:23.933",
       "config": {},
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1620889371185_2020710907",
-      "id": "20210513-070251_2051549385",
-      "dateCreated": "2021-05-13 07:02:51.185",
+      "jobName": "paragraph_1621915043928_-1496725844",
+      "id": "20210525-035723_217503153",
+      "dateCreated": "2021-05-25 03:57:23.929",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Pyspark",
+  "name": "Python - Simple Reading",
   "id": "2G4RVA2W7",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {
     "python:shared_process": [],
+    "neo4j:shared_process": [],
     "spark:shared_process": []
   },
   "config": {

@@ -1,0 +1,168 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\n\n# Create DataFrame representing the stream of input lines from connection to localhost:9999\ndf \u003d spark.readStream \\\n    .format(\"rate\") \\\n    .option(\"rowsPerSecond\", 10) \\\n    .load()\n\n# Write the streaming DataFrame to a table\nquery \u003d df.writeStream \\\n    .format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"save.mode\", \"Append\") \\\n    .option(\"labels\", \"Timestamp\") \\\n    .option(\"checkpointLocation\", \"/tmp/checkpoint/mycheckpoint\") \\\n    .option(\"node.keys\", \"value\") \\\n    .start()",
+      "user": "anonymous",
+      "dateUpdated": "2021-05-25 07:16:13.950",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1621926363970_-1657603175",
+      "id": "20210525-070603_1083608898",
+      "dateCreated": "2021-05-25 07:06:03.970",
+      "dateStarted": "2021-05-25 07:16:13.972",
+      "dateFinished": "2021-05-25 07:16:14.159",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\n# Run this one to make the stream stop\n\nquery.stop()",
+      "user": "anonymous",
+      "dateUpdated": "2021-05-25 07:17:40.383",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1621927002140_133213975",
+      "id": "20210525-071642_75803339",
+      "dateCreated": "2021-05-25 07:16:42.140",
+      "dateStarted": "2021-05-25 07:16:46.401",
+      "dateFinished": "2021-05-25 07:16:46.589",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j\n\n// here you can see the progress of your Neo4j sink\n\nMATCH (n:Timestamp) RETURN COUNT(n) AS count",
+      "user": "anonymous",
+      "dateUpdated": "2021-05-25 07:18:01.640",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "count": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "count\n1018\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1621926854681_-952017660",
+      "id": "20210525-071414_610002622",
+      "dateCreated": "2021-05-25 07:14:14.681",
+      "dateStarted": "2021-05-25 07:17:20.552",
+      "dateFinished": "2021-05-25 07:17:20.572",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-05-25 07:14:28.145",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1621926868143_-1083584277",
+      "id": "20210525-071428_331674204",
+      "dateCreated": "2021-05-25 07:14:28.143",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Python - Simple Streaming",
+  "id": "2G9518P7P",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "python:shared_process": [],
+    "neo4j:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
