@@ -1327,7 +1327,7 @@
           "type": "textarea"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "spark",
