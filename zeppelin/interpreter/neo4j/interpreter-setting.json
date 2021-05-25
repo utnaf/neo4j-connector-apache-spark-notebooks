@@ -31,7 +31,7 @@
       "neo4j.auth.password": {
         "envName": null,
         "propertyName": "neo4j.auth.password",
-        "defaultValue": "zeppelin",
+        "defaultValue": "password",
         "description": "The Neo4j user password."
       },
       "neo4j.max.concurrency": {
