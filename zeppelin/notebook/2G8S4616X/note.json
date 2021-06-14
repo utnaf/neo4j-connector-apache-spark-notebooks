@@ -1,0 +1,185 @@
+{
+  "paragraphs": [
+    {
+      "text": "val stream \u003d spark.readStream\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"labels\", \"Movie\")\n    .option(\"streaming.property.name\", \"timestamp\")\n    .option(\"streaming.from\", \"ALL\")\n    .load()",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-14 14:43:18.425",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "stream: org.apache.spark.sql.DataFrame \u003d [\u003cid\u003e: bigint, \u003clabels\u003e: array\u003cstring\u003e ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1623655866027_88287501",
+      "id": "20210614-073106_834937465",
+      "dateCreated": "2021-06-14 07:31:06.027",
+      "dateStarted": "2021-06-14 14:43:18.451",
+      "dateFinished": "2021-06-14 14:43:18.629",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val query \u003d stream.writeStream\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"database\", \"backup\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"labels\", \"Movie_Copy\")\n    .option(\"save.mode\", \"Overwrite\")\n    .option(\"checkpointLocation\", \"/tmp/checkpoint/mycheckpoint\")\n    .option(\"node.keys\", \"title\")\n    .start()",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-14 14:48:03.054",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "query: org.apache.spark.sql.streaming.StreamingQuery \u003d org.apache.spark.sql.execution.streaming.StreamingQueryWrapper@7d5075c4\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1623669560933_-302028996",
+      "id": "20210614-111920_1142670737",
+      "dateCreated": "2021-06-14 11:19:20.933",
+      "dateStarted": "2021-06-14 14:48:03.080",
+      "dateFinished": "2021-06-14 14:48:03.291",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "if (query.isActive) {\n    query.stop    \n    println(\"Stopping query\")\n}\nelse {\n    println(\"Query already stopped\")\n}\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-14 14:47:59.377",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Stopping query\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1623662265186_-1408493915",
+      "id": "20210614-091745_369740287",
+      "dateCreated": "2021-06-14 09:17:45.186",
+      "dateStarted": "2021-06-14 14:47:59.400",
+      "dateFinished": "2021-06-14 14:47:59.528",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "query.lastProgress",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-14 14:04:38.073",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res4: org.apache.spark.sql.streaming.StreamingQueryProgress \u003d\n{\n  \"id\" : \"9ae90d34-7a1a-40c1-8e32-1ee5986d6297\",\n  \"runId\" : \"f405ac34-75b8-4c59-a54b-1cbea4f9ae34\",\n  \"name\" : null,\n  \"timestamp\" : \"2021-06-14T14:04:32.462Z\",\n  \"batchId\" : 2962,\n  \"numInputRows\" : 0,\n  \"inputRowsPerSecond\" : 0.0,\n  \"durationMs\" : {\n    \"getEndOffset\" : 0,\n    \"setOffsetRange\" : 0,\n    \"triggerExecution\" : 0\n  },\n  \"stateOperators\" : [ ],\n  \"sources\" : [ {\n    \"description\" : \"org.neo4j.spark.stream.Neo4jMicroBatchReader@870ecbb\",\n    \"startOffset\" : 1623679194095,\n    \"endOffset\" : 1623679194095,\n    \"numInputRows\" : 0,\n    \"inputRowsPerSecond\" : 0.0\n  } ],\n  \"sink\" : {\n    \"description\" : \"org.neo4j.spark.DataSource@bc2bdc1\"\n  }\n}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1623662657584_-1903395249",
+      "id": "20210614-092417_684653944",
+      "dateCreated": "2021-06-14 09:24:17.584",
+      "dateStarted": "2021-06-14 14:04:38.098",
+      "dateFinished": "2021-06-14 14:04:38.341",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1623679461184_1887591305",
+      "id": "20210614-140421_1459146276",
+      "dateCreated": "2021-06-14 14:04:21.184",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Scala - Source Streaming Tests",
+  "id": "2G8S4616X",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
