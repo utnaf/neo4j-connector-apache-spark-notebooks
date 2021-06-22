@@ -1,9 +1,91 @@
 {
   "paragraphs": [
     {
-      "text": "%spark.pyspark\n\n# Create DataFrame representing the stream of input lines from connection to localhost:9999\ndf \u003d spark.readStream \\\n    .format(\"rate\") \\\n    .option(\"rowsPerSecond\", 10) \\\n    .load()\n\n# Write the streaming DataFrame to a table\nquery \u003d df.writeStream \\\n    .format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"save.mode\", \"Append\") \\\n    .option(\"labels\", \"Timestamp\") \\\n    .option(\"checkpointLocation\", \"/tmp/checkpoint/mycheckpoint\") \\\n    .option(\"node.keys\", \"value\") \\\n    .start()",
+      "text": "%md\n\n# Structured Streaming API wit Neo4j Connector for Apache Spark\n\n[put link to docs here]",
       "user": "anonymous",
-      "dateUpdated": "2021-05-25 07:16:13.950",
+      "dateUpdated": "2021-06-22 15:55:24.173",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eStructured Streaming API wit Neo4j Connector for Apache Spark\u003c/h1\u003e\n\u003cp\u003e[put link to docs here]\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1624377052657_-1799780291",
+      "id": "20210622-155052_1458277611",
+      "dateCreated": "2021-06-22 15:50:52.657",
+      "dateStarted": "2021-06-22 15:55:24.173",
+      "dateFinished": "2021-06-22 15:55:24.181",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n## Sink\n\nWe will use the [rate source](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#input-sources) from Spark and we are going to write the streamed data into Neo4j.",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:55:22.641",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSink\u003c/h2\u003e\n\u003cp\u003eWe will use the \u003ca href\u003d\"https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#input-sources\"\u003erate source\u003c/a\u003e from Spark and we are going to write the streamed data into Neo4j.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373338267_-1560008402",
+      "id": "20210622-144858_1765824348",
+      "dateCreated": "2021-06-22 14:48:58.267",
+      "dateStarted": "2021-06-22 15:55:22.641",
+      "dateFinished": "2021-06-22 15:55:22.656",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\ndf \u003d spark.readStream \\\n    .format(\"rate\") \\\n    .option(\"rowsPerSecond\", 10) \\\n    .load()\n\n# Write the streaming DataFrame to a table\nquery \u003d df.writeStream \\\n    .format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"save.mode\", \"Append\") \\\n    .option(\"labels\", \"Timestamp\") \\\n    .option(\"checkpointLocation\", \"/tmp/checkpoint/mycheckpoint\") \\\n    .option(\"node.keys\", \"value\") \\\n    .start()",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:40:49.962",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -69,9 +151,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%neo4j\n\n// here you can see the progress of your Neo4j sink\n\nMATCH (n:Timestamp) RETURN COUNT(n) AS count",
+      "text": "%neo4j\n\nMATCH (n:Timestamp) RETURN COUNT(n) AS count",
       "user": "anonymous",
-      "dateUpdated": "2021-05-25 07:18:01.640",
+      "dateUpdated": "2021-06-22 15:47:03.337",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -136,18 +218,349 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%neo4j\n",
+      "text": "%md\n\n## Source\n\nWe want to copy to a backup db all the `:Movie` nodes that are inserted on the main db.\n\nSo we first create a new DB and a couple of indexes and constraints.\n\n**Note**: `%neo4j_backup` is just a connection to the backup db\n\nWe also need to insert one item into the db for *schema reasons*, meaning there is a bug we are fixing, more on this soon on the documentation.\n",
       "user": "anonymous",
-      "dateUpdated": "2021-05-25 07:14:28.145",
-      "config": {},
+      "dateUpdated": "2021-06-22 15:53:48.790",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSource\u003c/h2\u003e\n\u003cp\u003eWe want to copy to a backup db all the \u003ccode\u003e:Movie\u003c/code\u003e nodes that are inserted on the main db.\u003c/p\u003e\n\u003cp\u003eSo we first create a new DB and a couple of indexes and constraints.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eNote\u003c/strong\u003e: \u003ccode\u003e%neo4j_backup\u003c/code\u003e is just a connection to the backup db\u003c/p\u003e\n\u003cp\u003eWe also need to insert one item into the db for \u003cem\u003eschema reasons\u003c/em\u003e, meaning there is a bug we are fixing, more on this soon on the documentation.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
       },
       "apps": [],
       "jobName": "paragraph_1621926868143_-1083584277",
       "id": "20210525-071428_331674204",
       "dateCreated": "2021-05-25 07:14:28.143",
+      "dateStarted": "2021-06-22 15:51:32.257",
+      "dateFinished": "2021-06-22 15:51:32.282",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\n\n# Reading the :Movie nodes from the neo4j db...\nstream \u003d spark.readStream \\\n    .format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"labels\", \"Movie\") \\\n    .option(\"streaming.property.name\", \"timestamp\") \\\n    .option(\"streaming.from\", \"NOW\") \\\n    .load()",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:38:19.311",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373370416_-2074967375",
+      "id": "20210622-144930_1941061641",
+      "dateCreated": "2021-06-22 14:49:30.417",
+      "dateStarted": "2021-06-22 15:38:19.347",
+      "dateFinished": "2021-06-22 15:38:19.924",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j\n\nCREATE DATABASE moviesbkp IF NOT EXISTS;\nCREATE INDEX IF NOT EXISTS FOR (n:Movie) ON (n.timestamp);\nCREATE (n:Move {title: \"Movie 0\", timestamp: timestamp()})",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:38:09.117",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373499888_-1535359548",
+      "id": "20210622-145139_119431619",
+      "dateCreated": "2021-06-22 14:51:39.888",
+      "dateStarted": "2021-06-22 15:38:09.148",
+      "dateFinished": "2021-06-22 15:38:09.390",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j_backup\n\nCREATE INDEX IF NOT EXISTS FOR (n:Movie) ON (n.timestamp);\nCREATE CONSTRAINT IF NOT EXISTS ON (n:Movie) ASSERT n.title IS UNIQUE",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:27:15.748",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined",
+        "tableHide": false,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1624374781152_85617496",
+      "id": "20210622-151301_640262672",
+      "dateCreated": "2021-06-22 15:13:01.152",
+      "dateStarted": "2021-06-22 15:27:15.930",
+      "dateFinished": "2021-06-22 15:27:21.564",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\n# ...and copy them to the moviesbkp db.\nquery \u003d stream.writeStream \\\n    .format(\"org.neo4j.spark.DataSource\") \\\n    .option(\"database\", \"moviesbkp\") \\\n    .option(\"url\", \"bolt://neo4j:7687\") \\\n    .option(\"authentication.type\", \"basic\") \\\n    .option(\"authentication.basic.username\", \"neo4j\") \\\n    .option(\"authentication.basic.password\", \"password\") \\\n    .option(\"labels\", \":Movie:Copy\") \\\n    .option(\"save.mode\", \"Overwrite\") \\\n    .option(\"checkpointLocation\", \"/tmp/checkpoint/mycheckpoint\") \\\n    .option(\"node.keys\", \"title\") \\\n    .start()",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:38:22.682",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373417502_1193619186",
+      "id": "20210622-145017_1447251644",
+      "dateCreated": "2021-06-22 14:50:17.502",
+      "dateStarted": "2021-06-22 15:38:22.717",
+      "dateFinished": "2021-06-22 15:38:22.862",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\n# Stop the query\n\nif (query.isActive):\n    print(\"Query is ACTIVE\\n\")\nelse:\n    print(\"Query is NOT ACTIVE\\n\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:47:04.188",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query is ACTIVE\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1624375981613_-1891732621",
+      "id": "20210622-153301_493448190",
+      "dateCreated": "2021-06-22 15:33:01.613",
+      "dateStarted": "2021-06-22 15:47:04.213",
+      "dateFinished": "2021-06-22 15:47:04.266",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j\n\nUNWIND range(1, 1000000) AS id\nCREATE (m:Movie {title: \"Movie \" + id, timestamp: timestamp()})",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:39:36.306",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373643501_705528114",
+      "id": "20210622-145403_1982363252",
+      "dateCreated": "2021-06-22 14:54:03.501",
+      "dateStarted": "2021-06-22 15:39:36.361",
+      "dateFinished": "2021-06-22 15:39:47.946",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%neo4j_backup\n\nMATCH (n:Movie:Copy) RETURN count(n)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:40:10.084",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "count(n)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "count(n)\n265000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1624375663998_-133720697",
+      "id": "20210622-152743_617024450",
+      "dateCreated": "2021-06-22 15:27:43.998",
+      "dateStarted": "2021-06-22 15:40:10.119",
+      "dateFinished": "2021-06-22 15:40:10.166",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark.pyspark\n\n# Stop the query\n\nif (query.isActive):\n    query.stop()    \n    print(\"Stopping query\\n\")\nelse\n    print(\"Query already stopped\\n\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-22 15:35:57.363",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1624373568674_-1814909429",
+      "id": "20210622-145248_582581022",
+      "dateCreated": "2021-06-22 14:52:48.674",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
@@ -157,8 +570,9 @@
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {
-    "python:shared_process": [],
+    "md:shared_process": [],
     "neo4j:shared_process": [],
+    "neo4j_backup:shared_process": [],
     "spark:shared_process": []
   },
   "config": {

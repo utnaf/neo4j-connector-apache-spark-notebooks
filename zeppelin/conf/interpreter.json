@@ -204,7 +204,7 @@
           "type": "string"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "universe",
@@ -221,6 +221,65 @@
       "option": {
         "remote": true,
         "port": -1,
+        "isExistingProcess": false,
+        "setPermission": false,
+        "owners": [],
+        "isUserImpersonate": false
+      }
+    },
+    "neo4j_backup": {
+      "id": "neo4j_backup",
+      "name": "neo4j_backup",
+      "group": "neo4j",
+      "properties": {
+        "neo4j.auth.user": {
+          "name": "neo4j.auth.user",
+          "value": "neo4j",
+          "type": "string"
+        },
+        "neo4j.auth.password": {
+          "name": "neo4j.auth.password",
+          "value": "password",
+          "type": "string"
+        },
+        "neo4j.auth.type": {
+          "name": "neo4j.auth.type",
+          "value": "basic",
+          "type": "string"
+        },
+        "neo4j.max.concurrency": {
+          "name": "neo4j.max.concurrency",
+          "value": "50",
+          "type": "string"
+        },
+        "neo4j.url": {
+          "name": "neo4j.url",
+          "value": "bolt://neo4j:7687",
+          "type": "string"
+        },
+        "neo4j.database": {
+          "name": "neo4j.database",
+          "value": "moviesbkp",
+          "type": "textarea"
+        }
+      },
+      "status": "READY",
+      "interpreterGroup": [
+        {
+          "name": "neo4j",
+          "class": "org.apache.zeppelin.graph.neo4j.Neo4jCypherInterpreter",
+          "defaultInterpreter": false,
+          "editor": {
+            "editOnDblClick": false
+          }
+        }
+      ],
+      "dependencies": [],
+      "option": {
+        "remote": true,
+        "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -487,7 +546,7 @@
           "type": "number"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "flink",
@@ -514,7 +573,7 @@
       "name": "angular",
       "group": "angular",
       "properties": {},
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "angular",
@@ -652,7 +711,7 @@
           "type": "number"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "spark",
@@ -748,7 +807,7 @@
           "type": "number"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "hdfs",
@@ -781,7 +840,7 @@
           "type": "textarea"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "groovy",
@@ -839,7 +898,7 @@
           "type": "string"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "neo4j",
@@ -1685,7 +1744,8 @@
       "pig",
       "groovy",
       "neo4j",
-      "sap"
+      "sap",
+      "neo4j_backup"
     ],
     "2G8S4616X": [
       "spark",
