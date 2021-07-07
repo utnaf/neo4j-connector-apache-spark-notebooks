@@ -120,7 +120,7 @@
       "status": "FINISHED"
     },
     {
-      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"labels\", \"Movie\")\n    .load\n    \ndf.show()",
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"labels\", \"Movie\")\n    .load\n    \ndf.show()",
       "user": "anonymous",
       "dateUpdated": "2021-02-23 08:32:37.861",
       "config": {
@@ -201,7 +201,7 @@
       "status": "FINISHED"
     },
     {
-      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"ACTED_IN\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.show()",
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"relationship.nodes.map\", \"false\")\n    .option(\"relationship\", \"ACTED_IN\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.show()",
       "user": "anonymous",
       "dateUpdated": "2021-02-23 08:41:31.978",
       "config": {
@@ -282,7 +282,7 @@
       "status": "FINISHED"
     },
     {
-      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"relationship.nodes.map\", \"true\")\n    .option(\"relationship\", \"DIRECTED\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.select(\"\u003csource\u003e\")\n    .collectAsList()\n    .get(0)\n    .getAs[Map[String, AnyRef]](0)\n    .foreach(println)\n",
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"relationship.nodes.map\", \"true\")\n    .option(\"relationship\", \"DIRECTED\")\n    .option(\"relationship.source.labels\", \"Person\")\n    .option(\"relationship.target.labels\", \"Movie\")\n    .load\n    \ndf.select(\"\u003csource\u003e\")\n    .collectAsList()\n    .get(0)\n    .getAs[Map[String, AnyRef]](0)\n    .foreach(println)\n",
       "user": "anonymous",
       "dateUpdated": "2021-02-23 08:50:49.776",
       "config": {
@@ -363,7 +363,7 @@
       "status": "FINISHED"
     },
     {
-      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"zeppelin\")\n    .option(\"query\", \"MATCH (n:Movie {title: \u0027Unforgiven\u0027})-[r]-(p:Person) RETURN labels(p) as labels, type(r) as rel, p.name as name\")\n    .load\n    \ndf.show()",
+      "text": "val df \u003d spark.read\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"query\", \"MATCH (n:Movie {title: \u0027Unforgiven\u0027})-[r]-(p:Person) RETURN labels(p) as labels, type(r) as rel, p.name as name\")\n    .load\n    \ndf.show()",
       "user": "anonymous",
       "dateUpdated": "2021-02-23 09:45:03.108",
       "config": {
