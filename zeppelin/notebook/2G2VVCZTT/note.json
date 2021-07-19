@@ -83,7 +83,7 @@
     {
       "text": "val bandDf \u003d Seq(\n      (1, \"Alex Lifeson\"),\n      (2, \"Neil Peart\"),\n      (3, \"Geddy Lee\")\n    ).toDF(\"id\", \"name\")\n    \n    \nbandDf.write\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"labels\", \":Person:Musician\")\n    .save\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-17 09:46:47.941",
+      "dateUpdated": "2021-07-07 10:50:22.621",
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -117,7 +117,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://fd3587d4db8a:4040/jobs/job?id\u003d5"
+            "http://96c2e4cb66c6:4040/jobs/job?id\u003d0"
           ],
           "interpreterSettingId": "spark"
         }
@@ -126,15 +126,15 @@
       "jobName": "paragraph_1615827654004_-1221077700",
       "id": "paragraph_1602074651022_291658173",
       "dateCreated": "2021-03-15 17:00:54.004",
-      "dateStarted": "2021-03-17 09:46:48.038",
-      "dateFinished": "2021-03-17 09:46:49.458",
+      "dateStarted": "2021-07-07 10:50:22.862",
+      "dateFinished": "2021-07-07 10:50:53.544",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%neo4j\n\nMATCH (n:Person:Musician) RETURN n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-16 14:23:54.974",
+      "dateUpdated": "2021-07-07 10:51:53.596",
       "config": {
         "editorSetting": {
           "language": "text",
@@ -209,7 +209,7 @@
         "msg": [
           {
             "type": "NETWORK",
-            "data": "{\"nodes\":[{\"id\":0,\"data\":{\"name\":\"Neil Peart\",\"id\":2},\"label\":\"Person\"},{\"id\":1,\"data\":{\"name\":\"Geddy Lee\",\"id\":3},\"label\":\"Person\"},{\"id\":2,\"data\":{\"name\":\"Alex Lifeson\",\"id\":1},\"label\":\"Person\"}],\"edges\":[],\"labels\":{\"Person\":\"#66C481\",\"Musician\":\"#B71005\"},\"types\":[],\"directed\":true}"
+            "data": "{\"nodes\":[{\"id\":0,\"data\":{\"name\":\"Neil Peart\",\"id\":2},\"label\":\"Person\"},{\"id\":1,\"data\":{\"name\":\"Alex Lifeson\",\"id\":1},\"label\":\"Person\"},{\"id\":2,\"data\":{\"name\":\"Geddy Lee\",\"id\":3},\"label\":\"Person\"}],\"edges\":[],\"labels\":{\"Person\":\"#8EF7D3\",\"Movie\":\"#FE075B\",\"Musician\":\"#E6DDB6\",\"Movie:Copy\":\"#E86262\"},\"types\":[],\"directed\":true}"
           }
         ]
       },
@@ -217,8 +217,8 @@
       "jobName": "paragraph_1615827654005_-136614082",
       "id": "paragraph_1602074982164_1428084560",
       "dateCreated": "2021-03-15 17:00:54.005",
-      "dateStarted": "2021-03-16 14:18:44.825",
-      "dateFinished": "2021-03-16 14:18:51.039",
+      "dateStarted": "2021-07-07 10:51:53.690",
+      "dateFinished": "2021-07-07 10:51:58.189",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
