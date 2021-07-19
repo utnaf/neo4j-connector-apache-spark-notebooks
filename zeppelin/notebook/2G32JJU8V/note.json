@@ -257,13 +257,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Scala UDFs",
+  "name": "UDF/Scala Example",
   "id": "2G32JJU8V",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

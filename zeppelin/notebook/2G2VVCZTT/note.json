@@ -110,18 +110,6 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://96c2e4cb66c6:4040/jobs/job?id\u003d0"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1615827654004_-1221077700",
       "id": "paragraph_1602074651022_291658173",
@@ -829,15 +817,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Scala - Basic Writing",
+  "name": "Basic Examples/Writing with Scala",
   "id": "2G2VVCZTT",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "md:shared_process": [],
-    "neo4j:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

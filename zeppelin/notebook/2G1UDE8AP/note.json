@@ -163,13 +163,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Graph Data Science Example",
+  "name": "GDS/Graph Data Science Example",
   "id": "2G1UDE8AP",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
