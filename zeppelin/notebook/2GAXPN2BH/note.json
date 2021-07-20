@@ -127,7 +127,7 @@
       "title": "Read the Kinesis Data Stream",
       "text": "val kinesisStream \u003d spark.readStream\n    .format(\"kinesis\")\n    .option(\"streamName\", z.textbox(\"StreamName\").toString)\n    .option(\"endpointUrl\",  z.textbox(\"KinesisEndpoint\").toString)\n    .option(\"awsAccessKeyId\", z.textbox(\"AwsAccessKeyId\").toString)\n    .option(\"awsSecretKey\", z.textbox(\"AwsSecretAccessKey\").toString)\n    .option(\"startingPosition\", \"LATEST\")\n    .load",
       "user": "anonymous",
-      "dateUpdated": "2021-07-20 08:46:41.420",
+      "dateUpdated": "2021-07-20 09:32:56.552",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -141,14 +141,15 @@
         },
         "editorMode": "ace/mode/scala",
         "title": true,
-        "lineNumbers": true
+        "lineNumbers": true,
+        "editorHide": false
       },
       "settings": {
         "params": {
-          "StreamName": "Kinesis2Neo4j",
-          "KinesisEndpoint": "https://kinesis.eu-central-1.amazonaws.com",
-          "AwsAccessKeyId": "AKIA35LXJ2BHUUDZRAFS",
-          "AwsSecretAccessKey": "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"
+          "StreamName": "",
+          "KinesisEndpoint": "",
+          "AwsAccessKeyId": "",
+          "AwsSecretAccessKey": ""
         },
         "forms": {
           "StreamName": {
@@ -182,11 +183,11 @@
         }
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
             "type": "TEXT",
-            "data": "kinesisStream: org.apache.spark.sql.DataFrame \u003d [data: binary, streamName: string ... 3 more fields]\n"
+            "data": "java.lang.IllegalArgumentException: Stream name is a required field\n  at org.apache.spark.sql.kinesis.KinesisSourceProvider.validateStreamOptions(KinesisSourceProvider.scala:124)\n  at org.apache.spark.sql.kinesis.KinesisSourceProvider.sourceSchema(KinesisSourceProvider.scala:59)\n  at org.apache.spark.sql.execution.datasources.DataSource.sourceSchema(DataSource.scala:209)\n  at org.apache.spark.sql.execution.datasources.DataSource.sourceInfo$lzycompute(DataSource.scala:95)\n  at org.apache.spark.sql.execution.datasources.DataSource.sourceInfo(DataSource.scala:95)\n  at org.apache.spark.sql.execution.streaming.StreamingRelation$.apply(StreamingRelation.scala:33)\n  at org.apache.spark.sql.streaming.DataStreamReader.load(DataStreamReader.scala:171)\n  ... 47 elided\n"
           }
         ]
       },
@@ -194,9 +195,9 @@
       "jobName": "paragraph_1626688999901_-387861054",
       "id": "20210719-100319_1772697111",
       "dateCreated": "2021-07-19 10:03:19.901",
-      "dateStarted": "2021-07-20 08:41:33.658",
-      "dateFinished": "2021-07-20 08:41:33.825",
-      "status": "FINISHED",
+      "dateStarted": "2021-07-20 09:32:18.599",
+      "dateFinished": "2021-07-20 09:32:29.809",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
