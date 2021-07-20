@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md \n# From Kinesis to Neo4j \n\nThis notebook is related to the article [(from:Kinesis)-[:VIA_SPARK]-\u003e(to:Neo4j)](https://medium.com/p/97d564562b61/edit). \n\nPlease follow the article for a more in depth explenation on what\u0027s happening here!",
+      "text": "%md \n# From Kinesis to Neo4j \n\n\u003cimg src\u003d\"https://cdn-images-1.medium.com/max/800/1*4h-eTNATcjq-5ZSOhQeARQ.jpeg\" style\u003d\"display:block; margin: 30px auto; width: 500px\" /\u003e\n\nThis notebook is related to the article [(from:Kinesis)-[:VIA_SPARK]-\u003e(to:Neo4j)](https://medium.com/@utnaf/from-kinesis-via-spark-to-neo4j-97d564562b61). \n\nPlease follow the article for a more in depth explenation on what\u0027s happening here!",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:16:39.775",
+      "dateUpdated": "2021-07-20 07:41:03.915",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -28,7 +28,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eFrom Kinesis to Neo4j\u003c/h1\u003e\n\u003cp\u003eThis notebook is related to the article \u003ca href\u003d\"https://medium.com/p/97d564562b61/edit\"\u003e(from:Kinesis)-[:VIA_SPARK]-\u0026gt;(to:Neo4j)\u003c/a\u003e. \u003c/p\u003e\n\u003cp\u003ePlease follow the article for a more in depth explenation on what\u0026rsquo;s happening here!\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eFrom Kinesis to Neo4j\u003c/h1\u003e\n\u003cimg src\u003d\"https://cdn-images-1.medium.com/max/800/1*4h-eTNATcjq-5ZSOhQeARQ.jpeg\" style\u003d\"display:block; margin: 30px auto; width: 500px\" /\u003e\n\u003cp\u003eThis notebook is related to the article \u003ca href\u003d\"https://medium.com/@utnaf/from-kinesis-via-spark-to-neo4j-97d564562b61\"\u003e(from:Kinesis)-[:VIA_SPARK]-\u0026gt;(to:Neo4j)\u003c/a\u003e. \u003c/p\u003e\n\u003cp\u003ePlease follow the article for a more in depth explenation on what\u0026rsquo;s happening here!\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -36,15 +36,15 @@
       "jobName": "paragraph_1626691934905_1930189400",
       "id": "20210719-105214_358314212",
       "dateCreated": "2021-07-19 10:52:14.905",
-      "dateStarted": "2021-07-19 15:16:39.850",
-      "dateFinished": "2021-07-19 15:16:41.716",
+      "dateStarted": "2021-07-20 07:41:03.915",
+      "dateFinished": "2021-07-20 07:41:03.929",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\nFirst we need to setup some variables frist, these are needed in order to make Spark reading from the correct Kinesis stream.\n\n* **Stream Name**: is the name given to the stream when it has been created\n* **Kinesis Endpoint**: is the endpoint URL for the stream\n* **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY**: are the access keys for the IAM user§",
+      "text": "%md\n\nFirst we need to setup some variables frist, these are needed in order to make Spark reading from the correct Kinesis stream.\n\n* **Stream Name**: is the name given to the stream when it has been created\n* **Kinesis Endpoint**: is the endpoint URL for the stream\n* **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY**: are the access keys for the IAM user",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:16:41.754",
+      "dateUpdated": "2021-07-20 07:37:13.806",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -69,7 +69,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFirst we need to setup some variables frist, these are needed in order to make Spark reading from the correct Kinesis stream.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003cstrong\u003eStream Name\u003c/strong\u003e: is the name given to the stream when it has been created\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eKinesis Endpoint\u003c/strong\u003e: is the endpoint URL for the stream\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eAWS_ACCESS_KEY_ID\u003c/strong\u003e and \u003cstrong\u003eAWS_SECRET_ACCESS_KEY\u003c/strong\u003e: are the access keys for the IAM user§\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFirst we need to setup some variables frist, these are needed in order to make Spark reading from the correct Kinesis stream.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003cstrong\u003eStream Name\u003c/strong\u003e: is the name given to the stream when it has been created\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eKinesis Endpoint\u003c/strong\u003e: is the endpoint URL for the stream\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eAWS_ACCESS_KEY_ID\u003c/strong\u003e and \u003cstrong\u003eAWS_SECRET_ACCESS_KEY\u003c/strong\u003e: are the access keys for the IAM user\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -77,54 +77,15 @@
       "jobName": "paragraph_1626692324463_1440067344",
       "id": "20210719-105844_1205926805",
       "dateCreated": "2021-07-19 10:58:44.463",
-      "dateStarted": "2021-07-19 15:16:41.831",
-      "dateFinished": "2021-07-19 15:16:41.851",
+      "dateStarted": "2021-07-20 07:37:13.808",
+      "dateFinished": "2021-07-20 07:37:13.849",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "// This is the Kinesis Data Stream name you set when creating the stream\nval streamName \u003d /* your stream name */\n// Kinesis endpoint, can be found here https://docs.aws.amazon.com/general/latest/gr/ak.html\nval kinesisEndpoint \u003d /* your stream endpoint */\n\n// AWS Connection keys\nval AWS_ACCESS_KEY_ID \u003d /* your AWS access key id */\nval AWS_SECRET_ACCESS_KEY \u003d /* your AWS secret access key */",
+      "text": "%md \n\nTo be able to read from Kinesis we leverage the [Kinesis Connector for Spark](https://github.com/qubole/kinesis-sql)\n     \nBasic Kinesis configuration:\n\n* **StreamName**: this is the Kinesis Data Stream name you set when creating the stream\n* **KinesisEndpoint**: can be found [here](https://docs.aws.amazon.com/general/latest/gr/ak.html)\n* **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY**: IAM user connection keys\n     \n**NOTE**: `startingPosition` is the starting position in Kinesis to fetch data from.\nIn our case we want just the new data. \n\nReference to the [Kinesis Connector docs](https://github.com/qubole/kinesis-sql/blob/master/README.md#kinesis-source-configuration) for other possible values.",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:16:41.930",
-      "config": {
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "editorMode": "ace/mode/scala"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "ERROR",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "\u003cconsole\u003e:4: error: illegal start of simple expression\nval kinesisEndpoint \u003d /* your stream endpoint */\n^\n"
-          }
-        ]
-      },
-      "apps": [],
-      "jobName": "paragraph_1626689960963_-352890850",
-      "id": "20210719-101920_435396588",
-      "dateCreated": "2021-07-19 10:19:20.963",
-      "dateStarted": "2021-07-19 15:16:41.981",
-      "dateFinished": "2021-07-19 15:16:53.958",
-      "status": "ERROR",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "%md \n\nTo be able to read from Kinesis we leverage the [Kinesis Connector for Spark](https://github.com/qubole/kinesis-sql)\n     \n     \n**NOTE**: startingPosition is the starting position in Kinesis to fetch data from.\nWe want just the new data, reference to the Kinesis Connector docs for other possible values.\n     ",
-      "user": "anonymous",
-      "dateUpdated": "2021-07-19 12:28:02.825",
+      "dateUpdated": "2021-07-20 08:49:56.921",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -149,7 +110,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eTo be able to read from Kinesis we leverage the \u003ca href\u003d\"https://github.com/qubole/kinesis-sql\"\u003eKinesis Connector for Spark\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eNOTE\u003c/strong\u003e: startingPosition is the starting position in Kinesis to fetch data from.\u003cbr/\u003eWe want just the new data, reference to the Kinesis Connector docs for other possible values.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eTo be able to read from Kinesis we leverage the \u003ca href\u003d\"https://github.com/qubole/kinesis-sql\"\u003eKinesis Connector for Spark\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eBasic Kinesis configuration:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003cstrong\u003eStreamName\u003c/strong\u003e: this is the Kinesis Data Stream name you set when creating the stream\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eKinesisEndpoint\u003c/strong\u003e: can be found \u003ca href\u003d\"https://docs.aws.amazon.com/general/latest/gr/ak.html\"\u003ehere\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eAWS_ACCESS_KEY_ID\u003c/strong\u003e and \u003cstrong\u003eAWS_SECRET_ACCESS_KEY\u003c/strong\u003e: IAM user connection keys\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eNOTE\u003c/strong\u003e: \u003ccode\u003estartingPosition\u003c/code\u003e is the starting position in Kinesis to fetch data from.\u003cbr/\u003eIn our case we want just the new data. \u003c/p\u003e\n\u003cp\u003eReference to the \u003ca href\u003d\"https://github.com/qubole/kinesis-sql/blob/master/README.md#kinesis-source-configuration\"\u003eKinesis Connector docs\u003c/a\u003e for other possible values.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -157,15 +118,16 @@
       "jobName": "paragraph_1626692690664_619901924",
       "id": "20210719-110450_903499867",
       "dateCreated": "2021-07-19 11:04:50.664",
-      "dateStarted": "2021-07-19 12:28:02.825",
-      "dateFinished": "2021-07-19 12:28:02.841",
+      "dateStarted": "2021-07-20 08:49:56.922",
+      "dateFinished": "2021-07-20 08:49:56.943",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "/**\n * Starting the kinesis stream\n */\nval kinesisStream \u003d spark.readStream\n    .format(\"kinesis\")\n    .option(\"streamName\", streamName)\n    .option(\"endpointUrl\", kinesisEndpoint)\n    .option(\"awsAccessKeyId\", AWS_ACCESS_KEY_ID)\n    .option(\"awsSecretKey\", AWS_SECRET_ACCESS_KEY)\n    .option(\"startingPosition\", \"LATEST\")\n    .load",
+      "title": "Read the Kinesis Data Stream",
+      "text": "val kinesisStream \u003d spark.readStream\n    .format(\"kinesis\")\n    .option(\"streamName\", z.textbox(\"StreamName\").toString)\n    .option(\"endpointUrl\",  z.textbox(\"KinesisEndpoint\").toString)\n    .option(\"awsAccessKeyId\", z.textbox(\"AwsAccessKeyId\").toString)\n    .option(\"awsSecretKey\", z.textbox(\"AwsSecretAccessKey\").toString)\n    .option(\"startingPosition\", \"LATEST\")\n    .load",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 16:03:42.425",
+      "dateUpdated": "2021-07-20 08:46:41.420",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -177,11 +139,47 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "lineNumbers": true
       },
       "settings": {
-        "params": {},
-        "forms": {}
+        "params": {
+          "StreamName": "Kinesis2Neo4j",
+          "KinesisEndpoint": "https://kinesis.eu-central-1.amazonaws.com",
+          "AwsAccessKeyId": "AKIA35LXJ2BHUUDZRAFS",
+          "AwsSecretAccessKey": "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"
+        },
+        "forms": {
+          "StreamName": {
+            "type": "TextBox",
+            "name": "StreamName",
+            "displayName": "StreamName",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "KinesisEndpoint": {
+            "type": "TextBox",
+            "name": "KinesisEndpoint",
+            "displayName": "KinesisEndpoint",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "AwsAccessKeyId": {
+            "type": "TextBox",
+            "name": "AwsAccessKeyId",
+            "displayName": "AwsAccessKeyId",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "AwsSecretAccessKey": {
+            "type": "TextBox",
+            "name": "AwsSecretAccessKey",
+            "displayName": "AwsSecretAccessKey",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
       },
       "results": {
         "code": "SUCCESS",
@@ -196,15 +194,16 @@
       "jobName": "paragraph_1626688999901_-387861054",
       "id": "20210719-100319_1772697111",
       "dateCreated": "2021-07-19 10:03:19.901",
-      "dateStarted": "2021-07-19 16:03:42.619",
-      "dateFinished": "2021-07-19 16:03:44.775",
+      "dateStarted": "2021-07-20 08:41:33.658",
+      "dateFinished": "2021-07-20 08:41:33.825",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "// Let\u0027s look at the schema\nkinesisStream.printSchema()",
+      "title": "Let\u0027s look at the schema",
+      "text": "kinesisStream.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 16:01:02.263",
+      "dateUpdated": "2021-07-20 08:42:52.319",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -216,7 +215,8 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -235,15 +235,16 @@
       "jobName": "paragraph_1626706765490_925435866",
       "id": "20210719-145925_1851357896",
       "dateCreated": "2021-07-19 14:59:25.490",
-      "dateStarted": "2021-07-19 16:01:02.315",
-      "dateFinished": "2021-07-19 16:01:02.584",
+      "dateStarted": "2021-07-20 08:29:18.038",
+      "dateFinished": "2021-07-20 08:29:18.275",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.sql.types.{DataTypes, StructField, StructType}\n\n/**\n * Create the schema of the messages we\u0027ll be receving from Kinesis\n */ \nval kinesisStreamDataSchema \u003d StructType(Seq(\n    StructField(\"user_name\", DataTypes.StringType, nullable \u003d false),\n    StructField(\"user_checkin_time\", DataTypes.TimestampType, nullable \u003d false),\n    StructField(\"event_name\", DataTypes.StringType, nullable \u003d false)\n))",
+      "title": "Create the schema of the messages we\u0027ll be receving from Kinesis",
+      "text": "import org.apache.spark.sql.types.{DataTypes, StructField, StructType}\n\nval kinesisStreamDataSchema \u003d StructType(Seq(\n    StructField(\"user_name\", DataTypes.StringType, nullable \u003d false),\n    StructField(\"user_checkin_time\", DataTypes.TimestampType, nullable \u003d false),\n    StructField(\"event_name\", DataTypes.StringType, nullable \u003d false)\n))",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 16:03:50.111",
+      "dateUpdated": "2021-07-20 08:46:31.733",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -255,7 +256,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "lineNumbers": true
       },
       "settings": {
         "params": {},
@@ -274,15 +277,16 @@
       "jobName": "paragraph_1626691715316_-1731584791",
       "id": "20210719-104835_393416536",
       "dateCreated": "2021-07-19 10:48:35.316",
-      "dateStarted": "2021-07-19 16:03:50.154",
-      "dateFinished": "2021-07-19 16:03:50.707",
+      "dateStarted": "2021-07-20 08:29:47.191",
+      "dateFinished": "2021-07-20 08:29:47.797",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.sql.functions._\n\n/**\n * Get the `data` field from Kinesis stream and cast it to Json according to the specified schema\n */ \nval kinesisData \u003d kinesisStream\n    .selectExpr(\"CAST(data AS STRING)\").as[String]\n    .withColumn(\"jsonData\", from_json(col(\"data\"), kinesisStreamDataSchema))\n    .select(\"jsonData.*\")",
+      "title": "Get the `data` field from Kinesis stream and cast it to JSON according to the specified schema",
+      "text": "import org.apache.spark.sql.functions._\n\nval kinesisData \u003d kinesisStream\n    .selectExpr(\"CAST(data AS STRING)\").as[String]\n    .withColumn(\"jsonData\", from_json(col(\"data\"), kinesisStreamDataSchema))\n    .select(\"jsonData.*\")",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 16:03:53.505",
+      "dateUpdated": "2021-07-20 08:46:19.217",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -294,7 +298,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "lineNumbers": true
       },
       "settings": {
         "params": {},
@@ -313,15 +319,16 @@
       "jobName": "paragraph_1626689913153_-1417501963",
       "id": "20210719-101833_1686249824",
       "dateCreated": "2021-07-19 10:18:33.153",
-      "dateStarted": "2021-07-19 16:03:53.544",
-      "dateFinished": "2021-07-19 16:03:54.826",
+      "dateStarted": "2021-07-20 08:29:55.711",
+      "dateFinished": "2021-07-20 08:29:57.121",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
+      "title": "Look at the new DataFrame schema",
       "text": "kinesisData.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:18:00.030",
+      "dateUpdated": "2021-07-20 08:44:41.383",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -333,7 +340,8 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -352,15 +360,16 @@
       "jobName": "paragraph_1626707871725_-1705012598",
       "id": "20210719-151751_493485953",
       "dateCreated": "2021-07-19 15:17:51.725",
-      "dateStarted": "2021-07-19 15:18:00.063",
-      "dateFinished": "2021-07-19 15:18:00.283",
+      "dateStarted": "2021-07-20 08:29:59.613",
+      "dateFinished": "2021-07-20 08:29:59.846",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "/**\n * Start writing to Neo4j!\n */\nval kinesisQuery \u003d kinesisData\n    .writeStream\n    // connection options\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"checkpointLocation\", \"/tmp/kinesis2Neo4jCheckpoint\")\n    // actual writing setup\n    .option(\"save.mode\", \"Append\")\n    .option(\"relationship\", \"CHECKED_IN\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.properties\", \"user_checkin_time:at\")\n    .option(\"relationship.source.labels\", \":Attendee\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.source.node.keys\", \"user_name:name\")\n    .option(\"relationship.target.labels\", \":Event\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.node.keys\", \"event_name:name\")\n    .start()",
+      "title": "Start writing to Neo4j!",
+      "text": "val kinesisQuery \u003d kinesisData\n    .writeStream\n    // connection options\n    .format(\"org.neo4j.spark.DataSource\")\n    .option(\"url\", \"bolt://neo4j:7687\")\n    .option(\"authentication.type\", \"basic\")\n    .option(\"authentication.basic.username\", \"neo4j\")\n    .option(\"authentication.basic.password\", \"password\")\n    .option(\"checkpointLocation\", \"/tmp/kinesis2Neo4jCheckpoint\")\n    // actual writing setup\n    .option(\"save.mode\", \"Append\")\n    .option(\"relationship\", \"CHECKED_IN\")\n    .option(\"relationship.save.strategy\", \"keys\")\n    .option(\"relationship.properties\", \"user_checkin_time:at\")\n    .option(\"relationship.source.labels\", \":Attendee\")\n    .option(\"relationship.source.save.mode\", \"Overwrite\")\n    .option(\"relationship.source.node.keys\", \"user_name:name\")\n    .option(\"relationship.target.labels\", \":Event\")\n    .option(\"relationship.target.save.mode\", \"Overwrite\")\n    .option(\"relationship.target.node.keys\", \"event_name:name\")\n    .start()",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 16:03:58.004",
+      "dateUpdated": "2021-07-20 08:46:00.729",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -372,7 +381,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "lineNumbers": true
       },
       "settings": {
         "params": {},
@@ -383,7 +394,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "kinesisQuery: org.apache.spark.sql.streaming.StreamingQuery \u003d org.apache.spark.sql.execution.streaming.StreamingQueryWrapper@4194c7dd\n"
+            "data": "kinesisQuery: org.apache.spark.sql.streaming.StreamingQuery \u003d org.apache.spark.sql.execution.streaming.StreamingQueryWrapper@64f293e5\n"
           }
         ]
       },
@@ -391,15 +402,16 @@
       "jobName": "paragraph_1626690685966_2101602033",
       "id": "20210719-103125_936226219",
       "dateCreated": "2021-07-19 10:31:25.967",
-      "dateStarted": "2021-07-19 16:03:58.047",
-      "dateFinished": "2021-07-19 16:03:58.527",
+      "dateStarted": "2021-07-20 08:30:24.238",
+      "dateFinished": "2021-07-20 08:30:24.738",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "// Check if the query is running\nif (kinesisQuery.isActive) {\n    println(\"Query is ACTIVE\")\n}\nelse {\n    println(\"Query is NOT ACTIVE\")\n}\n\nkinesisQuery.lastProgress",
+      "title": "Check if the query is running",
+      "text": "if (kinesisQuery.isActive) {\n    println(\"Query is ACTIVE\")\n}\nelse {\n    println(\"Query is NOT ACTIVE\")\n}",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:54:08.006",
+      "dateUpdated": "2021-07-20 08:45:22.645",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -411,7 +423,8 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -422,7 +435,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Query is ACTIVE\nres5: org.apache.spark.sql.streaming.StreamingQueryProgress \u003d\n{\n  \"id\" : \"55a4f045-9d2b-44ee-a345-9a96c67a622a\",\n  \"runId\" : \"d2109173-4693-44f5-9f7e-39f403cc0e25\",\n  \"name\" : null,\n  \"timestamp\" : \"2021-07-19T15:54:06.276Z\",\n  \"batchId\" : 1635,\n  \"numInputRows\" : 0,\n  \"inputRowsPerSecond\" : 0.0,\n  \"processedRowsPerSecond\" : 0.0,\n  \"durationMs\" : {\n    \"addBatch\" : 1208,\n    \"getBatch\" : 3,\n    \"getOffset\" : 152,\n    \"queryPlanning\" : 39,\n    \"triggerExecution\" : 1656,\n    \"walCommit\" : 21\n  },\n  \"stateOperators\" : [ ],\n  \"sources\" : [ {\n    \"description\" : \"KinesisSource[Kinesis2Neo4j]\",\n    \"startOffset\" : {\n      \"metadata\" : {\n        \"streamName\" : \"Kinesis2Neo4j\",\n        \"batchId\" : \"1634\"\n      },\n      \"shardId-000000000000\" : {\n        \"iteratorType\" : \"AFTER_SEQUENCE_NUMBER\",..."
+            "data": "Query is NOT ACTIVE\n"
           }
         ]
       },
@@ -430,15 +443,16 @@
       "jobName": "paragraph_1626709968538_740145701",
       "id": "20210719-155248_223566072",
       "dateCreated": "2021-07-19 15:52:48.538",
-      "dateStarted": "2021-07-19 15:54:08.055",
-      "dateFinished": "2021-07-19 15:54:08.269",
+      "dateStarted": "2021-07-20 08:45:08.611",
+      "dateFinished": "2021-07-20 08:45:08.755",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "// Stop the query!\nkinesisQuery.stop()",
+      "title": "Stop the query!",
+      "text": "kinesisQuery.stop()",
       "user": "anonymous",
-      "dateUpdated": "2021-07-19 15:38:31.270",
+      "dateUpdated": "2021-07-20 08:45:54.883",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -450,7 +464,8 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -464,23 +479,9 @@
       "jobName": "paragraph_1626690837788_1585839893",
       "id": "20210719-103357_651776862",
       "dateCreated": "2021-07-19 10:33:57.788",
-      "dateStarted": "2021-07-19 15:37:59.163",
-      "dateFinished": "2021-07-19 15:37:59.348",
+      "dateStarted": "2021-07-20 08:31:04.191",
+      "dateFinished": "2021-07-20 08:31:04.530",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "user": "anonymous",
-      "config": {},
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "jobName": "paragraph_1626708199737_-1120896759",
-      "id": "20210719-152319_1916138393",
-      "dateCreated": "2021-07-19 15:23:19.737",
-      "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
