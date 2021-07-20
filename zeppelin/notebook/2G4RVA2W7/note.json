@@ -56,15 +56,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Python - Simple Reading",
+  "name": "Basic Examples/Reading with Python",
   "id": "2G4RVA2W7",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "python:shared_process": [],
-    "neo4j:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

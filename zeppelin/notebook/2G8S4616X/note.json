@@ -717,16 +717,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Scala - Simple Streaming",
+  "name": "Streaming/Scala Basic Example",
   "id": "2G8S4616X",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "md:shared_process": [],
-    "python:shared_process": [],
-    "neo4j:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

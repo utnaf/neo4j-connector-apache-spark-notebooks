@@ -426,15 +426,6 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "ERROR",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "\u003cconsole\u003e:24: error: not found: value query\n       query.stop()\n       ^\n"
-          }
-        ]
-      },
       "apps": [],
       "jobName": "paragraph_1615827631864_-783052989",
       "id": "paragraph_1598869313533_2059315222",
@@ -442,6 +433,7 @@
       "dateStarted": "2021-04-21 10:23:30.397",
       "dateFinished": "2021-04-21 10:26:08.779",
       "status": "ERROR",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -459,12 +451,13 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Scala - Basic Reading",
+  "name": "Basic Examples/Reading with Scala",
   "id": "2FZ9BCJS5",
   "noteParams": {},
   "noteForms": {},
   "angularObjects": {
     "md:shared_process": [],
+    "neo4j:shared_process": [],
     "spark:shared_process": []
   },
   "config": {

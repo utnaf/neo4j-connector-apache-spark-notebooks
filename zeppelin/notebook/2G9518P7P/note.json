@@ -757,17 +757,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Python - Simple Streaming",
+  "name": "Streaming/Python Basic Example",
   "id": "2G9518P7P",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "md:shared_process": [],
-    "python:shared_process": [],
-    "neo4j:shared_process": [],
-    "neo4j_backup:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
